@@ -1,0 +1,449 @@
+/* ========================================
+   BASIC
+======================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+
+    background-image: url("./Home/Background_Pattern.png");
+    background-color: aliceblue;
+
+    background-repeat: repeat;
+    background-position: 0 0;
+
+    animation: moveBackground 20s linear infinite;
+}
+
+
+/* ========================================
+   SCREEN
+======================================== */
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ========================================
+   MAIN GAME AREA
+======================================== */
+
+.game-area {
+
+    /*
+       اندازه اصلی تصویر
+
+       این مقدار را می‌توانی تغییر بدهی.
+
+       مثال:
+
+       900px
+       1000px
+       1200px
+    */
+
+    width: 900px;
+
+    /*
+       نسبت تصویر اصلی
+
+       اگر Box_Small.png مثلاً 1600 × 900 باشد:
+
+       aspect-ratio: 16 / 9;
+    */
+
+    aspect-ratio: 16 / 9;
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   MAIN IMAGE
+======================================== */
+
+.main-image {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   BUTTON BASE
+======================================== */
+
+.button {
+
+    position: absolute;
+
+    display: block;
+
+    /*
+       نقطه مرکزی دکمه روی مختصات
+       left و top قرار می‌گیرد.
+    */
+
+    transform: translate(-50%, -50%);
+
+    z-index: 10;
+}
+
+
+.button img {
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* ========================================
+   BUTTON HOVER
+======================================== */
+
+.button:hover img {
+
+    transform: scale(1.05);
+}
+
+
+/* ========================================
+   BUTTON POSITIONS & SIZES
+======================================== */
+
+
+/*
+   BUTTON 1
+*/
+
+.button-1 {
+
+    left: 20%;
+    top: 23%;
+
+    /*
+       اندازه دکمه نسبت به game-area
+    */
+
+    width: 7%;
+}
+
+
+/*
+   BUTTON 2
+*/
+
+.button-2 {
+
+    left: 32%;
+    top: 23%;
+
+    width: 17%;
+}
+
+
+/*
+   BUTTON 3
+*/
+
+.button-3 {
+
+    left: 66%;
+    top: 23%;
+
+    width: 7%;
+}
+
+
+/*
+   BUTTON 4
+*/
+
+.button-4 {
+
+    left: 75%;
+    top: 23%;
+
+    width: 10%;
+}
+
+
+/* ========================================
+   MOVING IMAGES
+======================================== */
+
+.moving-image {
+
+    position: absolute;
+
+    display: block;
+
+    /*
+       اندازه تصویر نسبت به game-area
+    */
+
+    width: 10%;
+
+    height: auto;
+
+    /*
+       مختصات X و Y توسط JavaScript
+       تعیین می‌شوند.
+    */
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   MOVING IMAGE 1 SIZE
+======================================== */
+
+.moving-image-1 {
+
+    /*
+       اندازه تصویر اول
+    */
+
+    width: 30%;
+}
+
+
+/* ========================================
+   MOVING IMAGE 2 SIZE
+======================================== */
+
+.moving-image-2 {
+
+    /*
+       اندازه تصویر دوم
+    */
+
+    width: 89.5%;
+}
+
+/* ========================================
+   MOVING IMAGE 3 SIZE
+======================================== */
+
+.moving-image-3 {
+
+    /*
+       اندازه تصویر سوم
+    */
+
+    width: 30%;
+}
+
+/* ========================================
+   MOVING IMAGE 4 SIZE
+======================================== */
+
+.moving-image-4 {
+
+    /*
+       اندازه تصویر چهارم
+    */
+
+    width: 20%;
+}
+
+
+/* ========================================
+   TEXT BLOCK
+======================================== */
+
+.text-block {
+
+    position: absolute;
+
+    /*
+       مرکز Text Block
+       توسط left و top تعیین می‌شود.
+    */
+
+    transform: translate(-50%, -50%);
+
+    /*
+       عرض متن نسبت به Game Area
+    */
+
+    width: 55%;
+
+    /*
+       لایه متن
+    */
+
+    z-index: 12;
+
+    /*
+       فونت
+    */
+
+    font-family: "Unixel", sans-serif;
+
+    /*
+       راست‌چین برای فارسی
+    */
+
+    direction: rtl;
+
+    text-align: right;
+
+    /*
+       جلوگیری از انتخاب متن در صورت نیاز
+    */
+
+    user-select: none;
+
+    /*
+       ارتفاع خطوط
+    */
+
+    line-height: 1.6;
+
+    /*
+       حذف رفتار inline
+    */
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT TITLE
+======================================== */
+
+.text-title {
+
+    /*
+       عنوان بزرگ‌تر
+    */
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 0.1;
+
+    margin: 0 0 12px 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT CONTENT
+======================================== */
+
+.text-content {
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: normal;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT BLOCK POSITION
+======================================== */
+
+.text-block-1 {
+
+    /*
+       مختصات مرکز متن
+
+       دقیقاً مانند Button:
+
+       left = X
+       top  = Y
+    */
+
+    left: 45%;
+
+    top: 90%;
+
+}
+
+/* ========================================
+   MOBILE / SMALL SCREENS
+======================================== */
+
+@media (max-width: 900px) {
+
+    .game-area {
+
+        /*
+           تصویر اصلی حداکثر 90٪
+           عرض صفحه را می‌گیرد.
+        */
+
+        width: 90vw;
+    }
+
+}
+
+/* ========================================
+   MOVING BACKGROUND
+======================================== */
+
+@keyframes moveBackground {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 500px 500px;
+    }
+
+}
