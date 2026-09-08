@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        شاه کار آب : یک پدیدآور بازی افزار مستقل | Shah Kaar Ab : An Independent Game Auteur
+    </title>
+
+    <link
+        rel="preload"
+        href="Fonts/unixel-Regular.ttf"
+        as="font"
+        type="font/ttf"
+        crossorigin
+    >
+
+    <link
+        rel="stylesheet"
+        href="Home_Fa_style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================
+         LOADER
+    ====================================== -->
+
+    <div id="loader">
+
+        <div id="loader-content">
+
+            <div id="loader-percent">
+                0%
+            </div>
+
+            <div id="loader-bar">
+
+                <div id="loader-progress"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         MAIN SCREEN
+    ====================================== -->
+
+    <main class="screen">
+
+        <div class="game-area">
+
+
+            <!-- =====================================
+                 MAIN IMAGE
+            ====================================== -->
+
+            <img
+                class="main-image"
+                src="Boxes/Box.png"
+                alt="شاه کار آب"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 6
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-6"
+                src="Shah_ab/Body_2.png"
+                data-start-x="20"
+                data-start-y="50"
+                data-end-x="70"
+                data-end-y="30"
+                data-mode="pingpong"
+                data-speed="100"
+                alt="Body_2"
+            >
+
+
+            <!-- =====================================
+                 STAR 1
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-7"
+                src="Shah_ab/Star.png"
+                data-start-x="20"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="25"
+                alt="Stars_1"
+            >
+
+
+            <!-- =====================================
+                 STAR 2
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-8"
+                src="Shah_ab/Star.png"
+                data-start-x="30"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="50"
+                alt="Stars_2"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 2
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-2"
+                src="Seas/IndependentGameAuteur_Fa.png"
+                data-start-x="50"
+                data-start-y="33"
+                data-end-x="50"
+                data-end-y="40"
+                data-mode="pingpong"
+                data-speed="100"
+                alt="Independent Game Auteur"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 5
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-5"
+                src="Shah_ab/Body_1.png"
+                data-start-x="69"
+                data-start-y="60"
+                data-end-x="69"
+                data-end-y="45"
+                data-mode="pingpong"
+                data-speed="100"
+                alt="Body_1"
+            >
+
+
+            <!-- =====================================
+                 STAR 3
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-9"
+                src="Shah_ab/Star.png"
+                data-start-x="40"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="100"
+                alt="Stars_3"
+            >
+
+
+            <!-- =====================================
+                 STAR 4
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-10"
+                src="Shah_ab/Star.png"
+                data-start-x="50"
+                data-start-y="15"
+                data-end-x="50"
+                data-y="50"
+                data-end-x="50"
+                data-mode="once"
+                data-speed="150"
+                alt="Stars_4"
+            >
+
+
+            <!-- =====================================
+                 STAR 7
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-13"
+                src="Shah_ab/Star.png"
+                data-start-x="80"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="300"
+                alt="Stars_7"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 4
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-4"
+                src="Seas/Since2000_Fa.png"
+                data-start-x="49"
+                data-start-y="40"
+                data-end-x="49"
+                data-end-y="45"
+                data-mode="pingpong"
+                data-speed="120"
+                alt="Since 2000"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 1
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-1"
+                src="Logo/Logo.png"
+                data-start-x="19"
+                data-start-y="12"
+                data-end-x="19"
+                data-end-y="20"
+                data-mode="pingpong"
+                data-speed="50"
+                alt="Shah Kaar Ab Logo"
+            >
+
+
+            <!-- =====================================
+                 STAR 5
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-11"
+                src="Shah_ab/Star.png"
+                data-start-x="60"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="200"
+                alt="Stars_5"
+            >
+
+
+            <!-- =====================================
+                 STAR 6
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-12"
+                src="Shah_ab/Star.png"
+                data-start-x="70"
+                data-start-y="15"
+                data-end-x="50"
+                data-end-y="50"
+                data-mode="once"
+                data-speed="250"
+                alt="Stars_6"
+            >
+
+
+            <!-- =====================================
+                 MOVING IMAGE 3
+            ====================================== -->
+
+            <img
+                class="moving-image moving-image-3"
+                src="Seas/Games.png"
+                data-start-x="49"
+                data-start-y="70"
+                data-end-x="49"
+                data-end-y="70"
+                data-mode="pingpong"
+                data-speed="70"
+                alt="Games"
+            >
+
+
+            <!-- =====================================
+                 BUTTON 1
+            ====================================== -->
+
+            <a
+                href="Museum/Museum_Fa.html"
+                class="button button-1"
+            >
+                <img
+                    src="Buttons/A_Up.png"
+                    data-normal="Buttons/A_Up.png"
+                    data-hover="Buttons/A_Down.png"
+                    alt="Persian Museum"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 2
+            ====================================== -->
+
+            <a
+                href="Museum/Museum_Fa.html"
+                class="button button-2"
+            >
+                <img
+                    src="Frames/Frame_Museum_Fa.png"
+                    alt="Persian Museum"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 3
+            ====================================== -->
+
+            <a
+                class="button button-3"
+                href="ArticlesAndBooks/ArticlesAndBooks_Fa.html"
+            >
+                <img
+                    src="Buttons/B_Up.png"
+                    data-normal="Buttons/B_Up.png"
+                    data-hover="Buttons/B_Down.png"
+                    alt="صفحه اصلی فارسی"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 4
+            ====================================== -->
+
+            <a
+                class="button button-4"
+                href="ArticlesAndBooks/ArticlesAndBooks_Fa.html"
+            >
+                <img
+                    src="Frames/Frame_Articles_Fa.png"
+                    alt="فارسی"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 5
+            ====================================== -->
+
+            <a
+                href="Meets/Meets_Fa.html"
+                class="button button-5"
+            >
+                <img
+                    src="Buttons/Circle_Up.png"
+                    data-normal="Buttons/Circle_Up.png"
+                    data-hover="Buttons/Circle_Down.png"
+                    alt="Persian Meets"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 6
+            ====================================== -->
+
+            <a
+                href="Meets/Meets_Fa.html"
+                class="button button-6"
+            >
+                <img
+                    src="Frames/Frame_MeetsAndExhibitions_Fa.png"
+                    alt="دیدارها و نمایشگاه ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 7
+            ====================================== -->
+
+            <a
+                href="Lectures/Lectures_Fa.html"
+                class="button button-7"
+            >
+                <img
+                    src="Buttons/Triangle_Up.png"
+                    data-normal="Buttons/Triangle_Up.png"
+                    data-hover="Buttons/Triangle_Down.png"
+                    alt="سخنرانی ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 8
+            ====================================== -->
+
+            <a
+                href="Lectures/Lectures_Fa.html"
+                class="button button-8"
+            >
+                <img
+                    src="Frames/Frame_Lecture_Fa.png"
+                    alt="سخنرانی ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 9
+            ====================================== -->
+
+            <a
+                href="Merch/Merch_Fa.html"
+                class="button button-9"
+            >
+                <img
+                    src="Buttons/Square_Up.png"
+                    data-normal="Buttons/Square_Up.png"
+                    data-hover="Buttons/Square_Down.png"
+                    alt="مرچ"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 10
+            ====================================== -->
+
+            <a
+                href="Merch/Merch_Fa.html"
+                class="button button-10"
+            >
+                <img
+                    src="Frames/Frame_Merch_Fa.png"
+                    alt="مرچ"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 11
+            ====================================== -->
+
+            <a
+                href="NewsAgencies/NewsAgencies_Fa.html"
+                class="button button-11"
+            >
+                <img
+                    src="Buttons/x_Up.png"
+                    data-normal="Buttons/x_Up.png"
+                    data-hover="Buttons/x_Down.png"
+                    alt="خبرگزاری ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 12
+            ====================================== -->
+
+            <a
+                href="NewsAgencies/NewsAgencies_Fa.html"
+                class="button button-12"
+            >
+                <img
+                    src="Frames/Frame_NewsAgencies_Fa.png"
+                    alt="خبرگزاری ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 13
+            ====================================== -->
+
+            <a
+                href="Games/Sialk_Fa.html"
+                class="button button-13"
+            >
+                <img
+                    src="Games/Sialk/Sialk_Icon_Fa.png"
+                    data-normal="Games/Sialk/Sialk_Icon_Normal_Fa.png"
+                    data-hover="Games/Sialk/Sialk_Icon_Hover_Fa_ESRA.png"
+                    alt="پنجاه و هشت خانه سیلک"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 14
+            ====================================== -->
+
+            <a
+                href="Games/Bahram_Fa.html"
+                class="button button-14"
+            >
+                <img
+                    src="Games/Bahram/Bahram_Icon_Fa.png"
+                    data-normal="Games/Bahram/Bahram_Icon_Normal_Fa.png"
+                    data-hover="Games/Bahram/Bahram_Icon_Hover_Fa_ESRA.png"
+                    alt="بهرام"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 15
+            ====================================== -->
+
+            <a
+                href="Games/Yoosht_Fa.html"
+                class="button button-15"
+            >
+                <img
+                    src="Games/Yoosht/Yoosht_Icon_Fa.png"
+                    data-normal="Games/Yoosht/Yoosht_Icon_Normal_Fa.png"
+                    data-hover="Games/Yoosht/Yoosht_Icon_Hover_Fa_ESRA.png"
+                    alt="یوشت"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 16 Main place: button-16
+           
+            <a
+                href="Games/Ana_Fa.html"
+                class="button button-20" 
+            >
+                <img
+                    src="Games/Ana/Anahid_Icon_Fa.png"
+                    data-normal="Games/Ana/Anahid_Icon_Normal_Fa.png"
+                    data-hover="Games/Ana/Anahid_Icon_Hover_Fa.png"
+                    alt="آنا"
+                >
+            </a>
+ ====================================== -->
+
+
+            <!-- =====================================
+                 BUTTON 17 Main: 17
+            ====================================== -->
+
+            <a
+                href="Games/Sialk_1_Fa.html"
+                class="button button-21"
+            >
+                <img
+                    src="Games/Sialk_1/Sialk_Icon_Fa.png"
+                    data-normal="Games/Sialk_1/Sialk_Icon_Normal_Fa.png"
+                    data-hover="Games/Sialk_1/Sialk_Icon_Hover_Fa_ESRA.png"
+                    alt="سیلک"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 18
+            ====================================== -->
+
+            <a
+                href="Games/ALadderToLiberty_Fa.html"
+                class="button button-18"
+            >
+                <img
+                    src="Games/Sialk_1/Sialk_Icon_Fa.png"
+                    data-normal="Games/Sialk_1/Sialk_Icon_Normal_Fa.png"
+                    data-hover="Games/Sialk_1/Sialk_Icon_Hover_Fa.png"
+                    alt="نردبانی به آزادی"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 19
+            ====================================== -->
+
+            <a
+                href="Games/UnderTheSea_Fa.html"
+                class="button button-19"
+            >
+                <img
+                    src="Games/UnderTheSea/UnderTheSea_Icon_Fa.png"
+                    data-normal="Games/UnderTheSea/UnderTheSea_Icon_Normal_Fa.png"
+                    data-hover="Games/UnderTheSea/UnderTheSea_Icon_Hover_Fa.png"
+                    alt="زیر دریا"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 20
+            
+
+            <a
+                href="Games/KhoozanPuzzle_Fa.html"
+                class="button button-20"
+            >
+                <img
+                    src="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_Fa.png"
+                    data-normal="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_Normal_Fa.png"
+                    data-hover="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_Hover_Fa.png"
+                    alt="پازل خوزان"
+                >
+            </a>
+====================================== -->
+
+            <!-- =====================================
+                 BUTTON 21
+            ====================================== -->
+
+            <a
+                href="Games/SanctionsAreHere_Fa.html"
+                class="button button-22"
+            >
+                <img
+                    src="Games/SanctionsAreHere/SanctionsAreHere_Icon_Fa.png"
+                    data-normal="Games/SanctionsAreHere/SanctionsAreHere_Icon_Normal_Fa.png"
+                    data-hover="Games/SanctionsAreHere/SanctionsAreHere_Icon_Hover_Fa.png"
+                    alt="تحریم ها اینجاست"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 22
+            ====================================== -->
+
+            <a
+                href="Games/ShahabTheClever_Fa.html"
+                class="button button-23"
+            >
+                <img
+                    src="Games/ShahabTheClever/ShahabTheClever_Icon_Fa.png"
+                    data-normal="Games/ShahabTheClever/ShahabTheClever_Icon_Normal_Fa.png"
+                    data-hover="Games/ShahabTheClever/ShahabTheClever_Icon_Hover_Fa.png"
+                    alt="شهاب باهوش"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 23
+            
+
+            <a
+                href="Games/Shotsekball_Fa.html"
+                class="button button-23"
+            >
+                <img
+                    src="Games/Shotsekball/Shotsekball_Icon_Fa.png"
+                    data-normal="Games/Shotsekball/Shotsekball_Icon_Normal_Fa.png"
+                    data-hover="Games/Shotsekball/Shotsekball_Icon_Hover_Fa.png"
+                    alt="شوتسکبال"
+                >
+            </a>
+====================================== -->
+
+            <!-- =====================================
+                 BUTTON 24
+            ====================================== -->
+
+            <a
+                href="Games/Revolution_Fa.html"
+                class="button button-24"
+            >
+                <img
+                    src="Games/Revolution/Revolution_Icon_Fa.png"
+                    data-normal="Games/Revolution/Revolution_Icon_Normal_Fa.png"
+                    data-hover="Games/Revolution/Revolution_Icon_Hover_Fa.png"
+                    alt="انقلاب"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 25
+            ====================================== -->
+
+            <a
+                href="Games/SmartHouse_Fa.html"
+                class="button button-25"
+            >
+                <img
+                    src="Games/SmartHouse/SmartHouse_Icon_Fa.png"
+                    data-normal="Games/SmartHouse/SmartHouse_Icon_Normal_Fa.png"
+                    data-hover="Games/SmartHouse/SmartHouse_Icon_Hover_Fa.png"
+                    alt="خانه هوشمند"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 26
+            ====================================== -->
+
+            <a
+                href="Games/TheTrojanHorse_Fa.html"
+                class="button button-26"
+            >
+                <img
+                    src="Games/TheTrojanHorse/TheTrojanHorse_Icon_Fa.png"
+                    data-normal="Games/TheTrojanHorse/TheTrojanHorse_Icon_Normal_Fa.png"
+                    data-hover="Games/TheTrojanHorse/TheTrojanHorse_Icon_Hover_Fa.png"
+                    alt="اسب تروا"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 27
+            ====================================== -->
+
+            <a
+                href="Games/Gaps_Fa.html"
+                class="button button-27"
+            >
+                <img
+                    src="Games/Gaps/Gaps_Icon_Fa.png"
+                    data-normal="Games/Gaps/Gaps_Icon_Normal_Fa.png"
+                    data-hover="Games/Gaps/Gaps_Icon_Hover_Fa.png"
+                    alt="درزها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 28
+            ====================================== -->
+
+            <a
+                href="Games/GameOfNeurones_Fa.html"
+                class="button button-28"
+            >
+                <img
+                    src="Games/GameOfNeurones/GameOfNeurones_Icon_Fa.png"
+                    data-normal="Games/GameOfNeurones/GameOfNeurones_Icon_Normal_Fa.png"
+                    data-hover="Games/GameOfNeurones/GameOfNeurones_Icon_Hover_Fa.png"
+                    alt="بازی نورون ها"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 29
+            ====================================== -->
+
+            <a
+                href="Games/TomorrowsWorld_Fa.html"
+                class="button button-29"
+            >
+                <img
+                    src="Games/TomorrowsWorld/TomorrowsWorld_Icon_Fa.png"
+                    data-normal="Games/TomorrowsWorld/TomorrowsWorld_Icon_Normal_Fa.png"
+                    data-hover="Games/TomorrowsWorld/TomorrowsWorld_Icon_Hover_Fa.png"
+                    alt="دنیای فردا"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 30
+            ====================================== -->
+
+            <a
+                href="Games/Watermelon_Fa.html"
+                class="button button-30"
+            >
+                <img
+                    src="Games/Watermelon/Watermelon_Icon_Fa.png"
+                    data-normal="Games/Watermelon/Watermelon_Icon_Normal_Fa.png"
+                    data-hover="Games/Watermelon/Watermelon_Icon_Hover_Fa.png"
+                    alt="هندوانه"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 31
+            ====================================== -->
+
+            <a
+                href="Games/RunRunnRunn_Fa.html"
+                class="button button-31"
+            >
+                <img
+                    src="Games/RunRunnRunn/RunRunnRunn_Icon_Fa.png"
+                    data-normal="Games/RunRunnRunn/RunRunnRunn_Icon_Normal_Fa.png"
+                    data-hover="Games/RunRunnRunn/RunRunnRunn_Icon_Hover_Fa.png"
+                    alt="بدو بدوو بدوو"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 32
+            ====================================== -->
+
+            <a
+                href="Games/LetThereBeLight_Fa.html"
+                class="button button-32"
+            >
+                <img
+                    src="Games/LetThereBeLight/LTBL_Icon_Fa.png"
+                    data-normal="Games/LetThereBeLight/LTBL_Icon_Normal_Fa.png"
+                    data-hover="Games/LetThereBeLight/LTBL_Icon_Hover_Fa.png"
+                    alt="بگذار آنجا روشن باشد"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 33
+            ====================================== -->
+
+            <a
+                href="Games/DesertStars_Fa.html"
+                class="button button-33"
+            >
+                <img
+                    src="Games/DesertStars/DesertStars_Icon_Fa.png"
+                    data-normal="Games/DesertStars/DesertStars_Icon_Normal_Fa.png"
+                    data-hover="Games/DesertStars/DesertStars_Icon_Hover_Fa.png"
+                    alt="ستارگان کویر"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 34
+            ====================================== -->
+
+            <a
+                href="Games/Pazyryk_Fa.html"
+                class="button button-34"
+            >
+                <img
+                    src="Games/Pazyryk/Pazyryk_Icon_Fa.png"
+                    data-normal="Games/Pazyryk/Pazyryk_Icon_Normal_Fa.png"
+                    data-hover="Games/Pazyryk/Pazyryk_Icon_Hover_Fa.png"
+                    alt="فرش پازیریک"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 35
+            ====================================== -->
+
+            <a
+                href="Games/Ceasefire_Fa.html"
+                class="button button-35"
+            >
+                <img
+                    src="Games/Ceasefire/Ceasefire_Icon_Fa.png"
+                    data-normal="Games/Ceasefire/Ceasefire_Icon_Normal_Fa.png"
+                    data-hover="Games/Ceasefire/Ceasefire_Icon_Hover_Fa.png"
+                    alt="آتش بس"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 36
+            ====================================== -->
+
+            <a
+                href="Games/bebei_Fa.html"
+                class="button button-36"
+            >
+                <img
+                    src="Games/Bebei/Bebei_Icon_Fa.png"
+                    data-normal="Games/Bebei/Bebei_Icon_Normal_Fa.png"
+                    data-hover="Games/Bebei/Bebei_Icon_Hover_Fa.png"
+                    alt="ببعی"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 37
+            ====================================== -->
+
+            <a
+                href="Games/Savak_Fa.html"
+                class="button button-37"
+            >
+                <img
+                    src="Games/Savak/Savak_Icon_Fa.png"
+                    data-normal="Games/Savak/Savak_Icon_Normal_Fa.png"
+                    data-hover="Games/Savak/Savak_Icon_Hover_Fa.png"
+                    alt="ساواک"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 38
+            ====================================== -->
+
+            <a
+                href="Games/Bingo_Fa.html"
+                class="button button-38"
+            >
+                <img
+                    src="Games/Bingo/Bingo_Icon_Fa.png"
+                    data-normal="Games/Bingo/Bingo_Icon_Normal_Fa.png"
+                    data-hover="Games/Bingo/Bingo_Icon_Hover_Fa.png"
+                    alt="بینگو: جادوی نهان"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 39
+            ====================================== -->
+
+            <a
+                href="Games/QBasicGames_Fa.html"
+                class="button button-39"
+            >
+                <img
+                    src="Games/QBasicGames/QBasicGames_Icon_Fa.png"
+                    data-normal="Games/QBasicGames/QBasicGames_Icon_Normal_Fa.png"
+                    data-hover="Games/QBasicGames/QBasicGames_Icon_Hover_Fa.png"
+                    alt="بازی های ساخته شده با کیو بیسیک"
+                >
+            </a>
+
+
+            <!-- =====================================
+                 TEXT BLOCK
+            ====================================== -->
+
+            <div class="text-block text-block-1">
+
+                <div class="text-title">
+                    مالکیت معنوی
+                </div>
+
+                <div class="text-content">
+                    حق "نشر، عرضه، اجرا، بهره برداری" طبق
+                    "قانون حمایت از حقوق پدید آورندگان نرم افزارهای رایانه ای"
+                    محفوظ است
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 IMAGE FADE SLIDER
+            ====================================== -->
+
+            <div class="image-slider">
+
+                <img
+                    src="Slide/Slide_1.png"
+                    alt="Slide 1"
+                >
+
+                <img
+                    src="Slide/Slide_2.png"
+                    alt="Slide 2"
+                >
+
+                <img
+                    src="Slide/Slide_3.png"
+                    alt="Slide 3"
+                >
+
+                <img
+                    src="Slide/Slide_4.png"
+                    alt="Slide 4"
+                >
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="Home_Fa_script.js"></script>
+
+</body>
+
+</html>
