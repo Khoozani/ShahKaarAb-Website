@@ -43,6 +43,7 @@ body {
 ======================================== */
 
 @font-face {
+
     font-family: "Unixel";
 
     src: url("Fonts/unixel-Regular.ttf")
@@ -59,19 +60,10 @@ body {
    LOADING STATE
 ======================================== */
 
-/*
-   تا پایان Loading، انیمیشن پس‌زمینه
-   نیز متوقف می‌ماند.
-*/
-
 body:not(.loaded) {
     animation-play-state: paused;
 }
 
-
-/*
-   محتوای اصلی تا پایان Loading دیده نمی‌شود.
-*/
 
 .screen {
     visibility: hidden;
@@ -246,17 +238,29 @@ body.loaded .screen {
 
 .game-area {
 
-    width: 900px;
+    /*
+       Desktop:
+       maximum width = 900px
+
+       Mobile:
+       automatically shrinks to available width.
+    */
+
+    width: min(900px, 100%);
+
+    max-width: 900px;
 
     height: auto;
 
     position: relative;
 
-    flex-shrink: 0;
+    flex-shrink: 1;
 
     overflow: visible;
 
     line-height: 0;
+
+    margin: 0 auto;
 
 }
 
@@ -840,13 +844,26 @@ body.loaded .screen {
 
     .screen {
 
-        justify-content: flex-start;
+        width: 100%;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        padding-top: 15px;
+
+        padding-bottom: 15px;
 
     }
 
+
     .game-area {
 
-        width: 900px;
+        width: 100%;
+
+        max-width: 900px;
+
+        margin: 0 auto;
 
     }
 
