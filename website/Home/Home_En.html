@@ -32,996 +32,786 @@
 
 <body>
 
-    <!-- =====================================
-         LOADER
-    ====================================== -->
 
-    <div id="loader">
+<!-- ========================================
+     LOADER
+======================================== -->
 
-        <div id="loader-content">
+<div id="loader">
 
-            <div id="loader-percent">
-                0%
-            </div>
+    <div id="loader-content">
 
-            <div id="loader-bar">
+        <div id="loader-percent">
+            0%
+        </div>
 
-                <div id="loader-progress"></div>
+        <div id="loader-bar">
 
-            </div>
+            <div id="loader-progress"></div>
 
         </div>
 
     </div>
 
-
-    <!-- =====================================
-         MAIN SCREEN
-    ====================================== -->
-
-    <main class="screen">
-
-        <div class="game-area">
+</div>
 
 
-            <!-- =====================================
-                 MAIN IMAGE
-            ====================================== -->
+<!-- ========================================
+     SCREEN
+======================================== -->
 
+<main class="screen">
+
+
+    <!-- ====================================
+         GAME AREA
+    ===================================== -->
+
+    <div class="game-area">
+
+
+        <!-- ==================================
+             MAIN IMAGE
+        =================================== -->
+
+        <img
+            class="main-image"
+            src="Boxes/Box.png"
+            alt="شاه کار آب"
+        >
+
+
+        <!-- ==================================
+             MOVING IMAGES
+        =================================== -->
+
+
+        <img
+            class="moving-image moving-image-6"
+            src="Shah_ab/Body_2.png"
+            data-start-x="20"
+            data-start-y="50"
+            data-end-x="70"
+            data-end-y="30"
+            data-mode="pingpong"
+            data-speed="100"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-7"
+            src="Shah_ab/Star.png"
+            data-start-x="20"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="25"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-8"
+            src="Shah_ab/Star.png"
+            data-start-x="30"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="50"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-2"
+            src="IGEA_En.png"
+            data-start-x="50"
+            data-start-y="33"
+            data-end-x="50"
+            data-end-y="40"
+            data-mode="pingpong"
+            data-speed="100"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-5"
+            src="Shah_ab/Body_1.png"
+            data-start-x="69"
+            data-start-y="60"
+            data-end-x="69"
+            data-end-y="45"
+            data-mode="pingpong"
+            data-speed="100"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-9"
+            src="Shah_ab/Star.png"
+            data-start-x="40"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="100"
+            alt=""
+        >
+
+
+        <!-- FIXED: moving-image-10 -->
+
+        <img
+            class="moving-image moving-image-10"
+            src="Shah_ab/Star.png"
+            data-start-x="50"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="150"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-13"
+            src="Shah_ab/Star.png"
+            data-start-x="80"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="300"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-4"
+            src="Seas/Since2000_En.png"
+            data-start-x="49"
+            data-start-y="40"
+            data-end-x="49"
+            data-end-y="45"
+            data-mode="pingpong"
+            data-speed="120"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-1"
+            src="Logo/Logo.png"
+            data-start-x="19"
+            data-start-y="12"
+            data-end-x="19"
+            data-end-y="20"
+            data-mode="pingpong"
+            data-speed="50"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-11"
+            src="Shah_ab/Star.png"
+            data-start-x="60"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="200"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-12"
+            src="Shah_ab/Star.png"
+            data-start-x="70"
+            data-start-y="15"
+            data-end-x="50"
+            data-end-y="50"
+            data-mode="once"
+            data-speed="250"
+            alt=""
+        >
+
+
+        <img
+            class="moving-image moving-image-3"
+            src="Seas/Games.png"
+            data-start-x="49"
+            data-start-y="70"
+            data-end-x="49"
+            data-end-y="70"
+            data-mode="pingpong"
+            data-speed="70"
+            alt=""
+        >
+
+
+        <!-- ==================================
+             TOP BUTTONS
+        =================================== -->
+
+
+        <a
+            class="button button-1"
+            href="Museum/Museum_En.html"
+        >
             <img
-                class="main-image"
-                src="Boxes/Box.png"
-                alt="شاه کار آب"
+                src="Buttons/A_Up.png"
+                data-normal="Buttons/A_Up.png"
+                data-hover="Buttons/A_Down.png"
+                alt="Museum"
             >
+        </a>
 
 
-            <!-- =====================================
-                 MOVING IMAGE 6
-            ====================================== -->
+        <img
+            class="button button-2"
+            src="Frames/Frame_Museum_En.png"
+            alt=""
+        >
 
+
+        <a
+            class="button button-3"
+            href="ArticlesAndBooks/ArticlesAndBooks_En.html"
+        >
             <img
-                class="moving-image moving-image-6"
-                src="Shah_ab/Body_2.png"
-                data-start-x="20"
-                data-start-y="50"
-                data-end-x="70"
-                data-end-y="30"
-                data-mode="pingpong"
-                data-speed="100"
-                alt="Body_2"
+                src="Buttons/B_Up.png"
+                data-normal="Buttons/B_Up.png"
+                data-hover="Buttons/B_Down.png"
+                alt="Articles and Books"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 1
-            ====================================== -->
+        <img
+            class="button button-4"
+            src="Frames/Frame_Articles_En.png"
+            alt=""
+        >
 
+
+        <a
+            class="button button-5"
+            href="Meets/Meets_En.html"
+        >
             <img
-                class="moving-image moving-image-7"
-                src="Shah_ab/Star.png"
-                data-start-x="20"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="25"
-                alt="Stars_1"
+                src="Buttons/Circle_Up.png"
+                data-normal="Buttons/Circle_Up.png"
+                data-hover="Buttons/Circle_Down.png"
+                alt="Meets and Exhibitions"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 2
-            ====================================== -->
+        <img
+            class="button button-6"
+            src="Frames/Frame_MeetsAndExhibitions_En.png"
+            alt=""
+        >
 
+
+        <a
+            class="button button-7"
+            href="Lectures/Lectures_En.html"
+        >
             <img
-                class="moving-image moving-image-8"
-                src="Shah_ab/Star.png"
-                data-start-x="30"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="50"
-                alt="Stars_2"
+                src="Buttons/Triangle_Up.png"
+                data-normal="Buttons/Triangle_Up.png"
+                data-hover="Buttons/Triangle_Down.png"
+                alt="Lectures"
             >
+        </a>
 
 
-            <!-- =====================================
-                 MOVING IMAGE 2
-            ====================================== -->
+        <img
+            class="button button-8"
+            src="Frames/Frame_Lecture_En.png"
+            alt=""
+        >
 
+
+        <a
+            class="button button-9"
+            href="Merch/Merch_En.html"
+        >
             <img
-                class="moving-image moving-image-2"
-                src="IGEA_EN.png"
-                data-start-x="50"
-                data-start-y="33"
-                data-end-x="50"
-                data-end-y="40"
-                data-mode="pingpong"
-                data-speed="100"
-                alt="Independent Game Auteur"
+                src="Buttons/Square_Up.png"
+                data-normal="Buttons/Square_Up.png"
+                data-hover="Buttons/Square_Down.png"
+                alt="Merch"
             >
+        </a>
 
 
-            <!-- =====================================
-                 MOVING IMAGE 5
-            ====================================== -->
+        <img
+            class="button button-10"
+            src="Frames/Frame_Merch_En.png"
+            alt=""
+        >
 
+
+        <a
+            class="button button-11"
+            href="NewsAgencies/NewsAgencies_En.html"
+        >
             <img
-                class="moving-image moving-image-5"
-                src="Shah_ab/Body_1.png"
-                data-start-x="69"
-                data-start-y="60"
-                data-end-x="69"
-                data-end-y="45"
-                data-mode="pingpong"
-                data-speed="100"
-                alt="Body_1"
+                src="Buttons/x_Up.png"
+                data-normal="Buttons/x_Up.png"
+                data-hover="Buttons/x_Down.png"
+                alt="News Agencies"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 3
-            ====================================== -->
+        <img
+            class="button button-12"
+            src="Frames/Frame_NewsAgencies_En.png"
+            alt=""
+        >
 
+
+        <!-- ==================================
+             GAMES
+        =================================== -->
+
+
+        <a
+            class="button button-13"
+            href="Games/Sialk_En.html"
+        >
             <img
-                class="moving-image moving-image-9"
-                src="Shah_ab/Star.png"
-                data-start-x="40"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="100"
-                alt="Stars_3"
+                src="Games/Sialk/Sialk_Icon_En.png"
+                data-normal="Games/Sialk/Sialk_Icon_Normal_Fa.png"
+                data-hover="Games/Sialk/Sialk_Icon_Hover_En.png"
+                alt="Sialk"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 4
-            ====================================== -->
-
+        <a
+            class="button button-14"
+            href="Games/Bahram_En.html"
+        >
             <img
-                class="moving-image moving-image-10"
-                src="Shah_ab/Star.png"
-                data-start-x="50"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="150"
-                alt="Stars_4"
+                src="Games/Bahram/Bahram_Icon_En.png"
+                data-normal="Games/Bahram/Bahram_Icon_Normal_Fa.png"
+                data-hover="Games/Bahram/Bahram_Icon_Hover_En.png"
+                alt="Bahram"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 7
-            ====================================== -->
-
+        <a
+            class="button button-15"
+            href="Games/Yoosht_En.html"
+        >
             <img
-                class="moving-image moving-image-13"
-                src="Shah_ab/Star.png"
-                data-start-x="80"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="300"
-                alt="Stars_7"
+                src="Games/Yoosht/Yoosht_Icon_En.png"
+                data-normal="Games/Yoosht/Yoosht_Icon_Normal_Fa.png"
+                data-hover="Games/Yoosht/Yoosht_Icon_Hover_En.png"
+                alt="Yoosht"
             >
+        </a>
 
 
-            <!-- =====================================
-                 MOVING IMAGE 4
-            ====================================== -->
-
+        <!-- Ana
+        <a
+            class="button button-16"
+            href="Games/Ana_En.html"
+        >
             <img
-                class="moving-image moving-image-4"
-                src="Seas/Since2000_En.png"
-                data-start-x="49"
-                data-start-y="40"
-                data-end-x="49"
-                data-end-y="45"
-                data-mode="pingpong"
-                data-speed="120"
-                alt="Since 2000"
+                src="Games/Ana/Ana_Icon_En.png"
+                data-normal="Games/Ana/Ana_Icon_Normal_Fa.png"
+                data-hover="Games/Ana/Ana_Icon_Hover_En.png"
+                alt="Ana"
             >
+        </a>
+        -->
 
 
-            <!-- =====================================
-                 MOVING IMAGE 1
-            ====================================== -->
-
+        <a
+            class="button button-17"
+            href="Games/Sialk_1_En.html"
+        >
             <img
-                class="moving-image moving-image-1"
-                src="Logo/Logo.png"
-                data-start-x="19"
-                data-start-y="12"
-                data-end-x="19"
-                data-end-y="20"
-                data-mode="pingpong"
-                data-speed="50"
-                alt="Shah Kaar Ab Logo"
+                src="Games/Sialk_1/Sialk_1_Icon_En.png"
+                data-normal="Games/Sialk_1/Sialk_1_Icon_Normal_Fa.png"
+                data-hover="Games/Sialk_1/Sialk_1_Icon_Hover_En.png"
+                alt="Sialk"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 5
-            ====================================== -->
-
+        <a
+            class="button button-18"
+            href="Games/ALadderToLiberty_En.html"
+        >
             <img
-                class="moving-image moving-image-11"
-                src="Shah_ab/Star.png"
-                data-start-x="60"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="200"
-                alt="Stars_5"
+                src="Games/Sialk_1/Sialk_1_Icon_En.png"
+                data-normal="Games/Sialk_1/Sialk_1_Icon_Normal_Fa.png"
+                data-hover="Games/Sialk_1/Sialk_1_Icon_Hover_En.png"
+                alt="A Ladder to Liberty"
             >
+        </a>
 
 
-            <!-- =====================================
-                 STAR 6
-            ====================================== -->
-
+        <a
+            class="button button-19"
+            href="Games/UnderTheSea_En.html"
+        >
             <img
-                class="moving-image moving-image-12"
-                src="Shah_ab/Star.png"
-                data-start-x="70"
-                data-start-y="15"
-                data-end-x="50"
-                data-end-y="50"
-                data-mode="once"
-                data-speed="250"
-                alt="Stars_6"
+                src="Games/UnderTheSea/UnderTheSea_Icon_En.png"
+                data-normal="Games/UnderTheSea/UnderTheSea_Icon_Normal_Fa.png"
+                data-hover="Games/UnderTheSea/UnderTheSea_Icon_Hover_En.png"
+                alt="Under the Sea"
             >
+        </a>
 
 
-            <!-- =====================================
-                 MOVING IMAGE 3
-            ====================================== -->
-
+        <!-- Khoozan Puzzle
+        <a
+            class="button button-20"
+            href="Games/KhoozanPuzzle_En.html"
+        >
             <img
-                class="moving-image moving-image-3"
-                src="Seas/Games.png"
-                data-start-x="49"
-                data-start-y="70"
-                data-end-x="49"
-                data-end-y="70"
-                data-mode="pingpong"
-                data-speed="70"
-                alt="Games"
+                src="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_En.png"
+                alt="Khoozan Puzzle"
             >
+        </a>
+        -->
 
 
-            <!-- =====================================
-                 BUTTON 1
-            ====================================== -->
-
-            <a
-                href="Museum/Museum_En.html"
-                class="button button-1"
+        <a
+            class="button button-21"
+            href="Games/SanctionsAreHere_En.html"
+        >
+            <img
+                src="Games/SanctionsAreHere/SanctionsAreHere_Icon_En.png"
+                data-normal="Games/SanctionsAreHere/SanctionsAreHere_Icon_Normal_Fa.png"
+                data-hover="Games/SanctionsAreHere/SanctionsAreHere_Icon_Hover_En.png"
+                alt="Sanctions Are Here"
             >
-                <img
-                    src="Buttons/A_Up.png"
-                    data-normal="Buttons/A_Up.png"
-                    data-hover="Buttons/A_Down.png"
-                    alt="Persian Museum"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 2
-            ====================================== -->
-
-            <a
-                href="Museum/Museum_En.html"
-                class="button button-2"
+        <a
+            class="button button-22"
+            href="Games/ShahabTheClever_En.html"
+        >
+            <img
+                src="Games/ShahabTheClever/ShahabTheClever_Icon_En.png"
+                data-normal="Games/ShahabTheClever/ShahabTheClever_Icon_Normal_Fa.png"
+                data-hover="Games/ShahabTheClever/ShahabTheClever_Icon_Hover_En.png"
+                alt="Shahab the Clever"
             >
-                <img
-                    src="Frames/Frame_Museum_En.png"
-                    alt="Persian Museum"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 3
-            ====================================== -->
-
-            <a
-                class="button button-3"
-                href="ArticlesAndBooks/ArticlesAndBooks_En.html"
+        <!-- Shotsekball
+        <a
+            class="button button-23"
+            href="Games/Shotsekball_En.html"
+        >
+            <img
+                src="Games/Shotsekball/Shotsekball_Icon_En.png"
+                alt="Shotsekball"
             >
-                <img
-                    src="Buttons/B_Up.png"
-                    data-normal="Buttons/B_Up.png"
-                    data-hover="Buttons/B_Down.png"
-                    alt="Articles and Books"
-                >
-            </a>
+        </a>
+        -->
 
 
-            <!-- =====================================
-                 BUTTON 4
-            ====================================== -->
-
-            <a
-                class="button button-4"
-                href="ArticlesAndBooks/ArticlesAndBooks_En.html"
+        <a
+            class="button button-24"
+            href="Games/Revolution_En.html"
+        >
+            <img
+                src="Games/Revolution/Revolution_Icon_En.png"
+                data-normal="Games/Revolution/Revolution_Icon_Normal_Fa.png"
+                data-hover="Games/Revolution/Revolution_Icon_Hover_En.png"
+                alt="Revolution"
             >
-                <img
-                    src="Frames/Frame_Articles_En.png"
-                    alt="Articles and Books"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 5
-            ====================================== -->
-
-            <a
-                href="Meets/Meets_En.html"
-                class="button button-5"
+        <a
+            class="button button-25"
+            href="Games/SmartHouse_En.html"
+        >
+            <img
+                src="Games/SmartHouse/SmartHouse_Icon_En.png"
+                data-normal="Games/SmartHouse/SmartHouse_Icon_Normal_Fa.png"
+                data-hover="Games/SmartHouse/SmartHouse_Icon_Hover_En.png"
+                alt="Smart House"
             >
-                <img
-                    src="Buttons/Circle_Up.png"
-                    data-normal="Buttons/Circle_Up.png"
-                    data-hover="Buttons/Circle_Down.png"
-                    alt="Meets"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 6
-            ====================================== -->
-
-            <a
-                href="Meets/Meets_En.html"
-                class="button button-6"
+        <a
+            class="button button-26"
+            href="Games/TrojanHorse_En.html"
+        >
+            <img
+                src="Games/TrojanHorse/TrojanHorse_Icon_En.png"
+                data-normal="Games/TrojanHorse/TrojanHorse_Icon_Normal_Fa.png"
+                data-hover="Games/TrojanHorse/TrojanHorse_Icon_Hover_En.png"
+                alt="Trojan Horse"
             >
-                <img
-                    src="Frames/Frame_MeetsAndExhibitions_En.png"
-                    alt="Meets and Exhibitions"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 7
-            ====================================== -->
-
-            <a
-                href="Lectures/Lectures_En.html"
-                class="button button-7"
+        <a
+            class="button button-27"
+            href="Games/Gaps_En.html"
+        >
+            <img
+                src="Games/Gaps/Gaps_Icon_En.png"
+                data-normal="Games/Gaps/Gaps_Icon_Normal_Fa.png"
+                data-hover="Games/Gaps/Gaps_Icon_Hover_En.png"
+                alt="Gaps"
             >
-                <img
-                    src="Buttons/Triangle_Up.png"
-                    data-normal="Buttons/Triangle_Up.png"
-                    data-hover="Buttons/Triangle_Down.png"
-                    alt="Lectures"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 8
-            ====================================== -->
-
-            <a
-                href="Lectures/Lectures_En.html"
-                class="button button-8"
+        <a
+            class="button button-28"
+            href="Games/GameOfNeurones_En.html"
+        >
+            <img
+                src="Games/GameOfNeurones/GameOfNeurones_Icon_En.png"
+                data-normal="Games/GameOfNeurones/GameOfNeurones_Icon_Normal_Fa.png"
+                data-hover="Games/GameOfNeurones/GameOfNeurones_Icon_Hover_En.png"
+                alt="Game of Neurones"
             >
-                <img
-                    src="Frames/Frame_Lecture_En.png"
-                    alt="Lectures"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 9
-            ====================================== -->
-
-            <a
-                href="Merch/Merch_En.html"
-                class="button button-9"
+        <a
+            class="button button-31"
+            href="Games/TomorrowsWorld_En.html"
+        >
+            <img
+                src="Games/TomorrowsWorld/TomorrowsWorld_Icon_En.png"
+                data-normal="Games/TomorrowsWorld/TomorrowsWorld_Icon_Normal_Fa.png"
+                data-hover="Games/TomorrowsWorld/TomorrowsWorld_Icon_Hover_En.png"
+                alt="Tomorrow's World"
             >
-                <img
-                    src="Buttons/Square_Up.png"
-                    data-normal="Buttons/Square_Up.png"
-                    data-hover="Buttons/Square_Down.png"
-                    alt="Merch"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 10
-            ====================================== -->
-
-            <a
-                href="Merch/Merch_En.html"
-                class="button button-10"
+        <a
+            class="button button-30"
+            href="Games/Watermelon_En.html"
+        >
+            <img
+                src="Games/Watermelon/Watermelon_Icon_En.png"
+                data-normal="Games/Watermelon/Watermelon_Icon_Normal_Fa.png"
+                data-hover="Games/Watermelon/Watermelon_Icon_Hover_En.png"
+                alt="Watermelon"
             >
-                <img
-                    src="Frames/Frame_Merch_En.png"
-                    alt="Merch"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 11
-            ====================================== -->
-
-            <a
-                href="NewsAgencies/NewsAgencies_En.html"
-                class="button button-11"
+        <a
+            class="button button-29"
+            href="Games/RunRunnRunn_En.html"
+        >
+            <img
+                src="Games/RunRunnRunn/RunRunnRunn_Icon_En.png"
+                data-normal="Games/RunRunnRunn/RunRunnRunn_Icon_Normal_Fa.png"
+                data-hover="Games/RunRunnRunn/RunRunnRunn_Icon_Hover_En.png"
+                alt="Run Runn Runn"
             >
-                <img
-                    src="Buttons/x_Up.png"
-                    data-normal="Buttons/x_Up.png"
-                    data-hover="Buttons/x_Down.png"
-                    alt="News Agencies"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 12
-            ====================================== -->
-
-            <a
-                href="NewsAgencies/NewsAgencies_En.html"
-                class="button button-12"
+        <a
+            class="button button-32"
+            href="Games/LetThereBeLight_En.html"
+        >
+            <img
+                src="Games/LetThereBeLight/LetThereBeLight_Icon_En.png"
+                data-normal="Games/LetThereBeLight/LetThereBeLight_Icon_Normal_Fa.png"
+                data-hover="Games/LetThereBeLight/LetThereBeLight_Icon_Hover_En.png"
+                alt="Let There Be Light"
             >
-                <img
-                    src="Frames/Frame_NewsAgencies_En.png"
-                    alt="News Agencies"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 13
-            ====================================== -->
-
-            <a
-                href="Games/Sialk_En.html"
-                class="button button-13"
+        <a
+            class="button button-33"
+            href="Games/DesertStars_En.html"
+        >
+            <img
+                src="Games/DesertStars/DesertStars_Icon_En.png"
+                data-normal="Games/DesertStars/DesertStars_Icon_Normal_Fa.png"
+                data-hover="Games/DesertStars/DesertStars_Icon_Hover_En.png"
+                alt="Desert Stars"
             >
-                <img
-                    src="Games/Sialk/Sialk_Icon_En.png"
-                    data-normal="Games/Sialk/Sialk_Icon_Normal_Fa.png"
-                    data-hover="Games/Sialk/Sialk_Icon_Hover_En.png"
-                    alt="58 Houses of Sialk"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 14
-            ====================================== -->
-
-            <a
-                href="Games/Bahram_En.html"
-                class="button button-14"
+        <a
+            class="button button-34"
+            href="Games/Pazyryk_En.html"
+        >
+            <img
+                src="Games/Pazyryk/Pazyryk_Icon_En.png"
+                data-normal="Games/Pazyryk/Pazyryk_Icon_Normal_Fa.png"
+                data-hover="Games/Pazyryk/Pazyryk_Icon_Hover_En.png"
+                alt="Pazyryk"
             >
-                <img
-                    src="Games/Bahram/Bahram_Icon_En.png"
-                    data-normal="Games/Bahram/Bahram_Icon_Normal_Fa.png"
-                    data-hover="Games/Bahram/Bahram_Icon_Hover_En.png"
-                    alt="Bahram"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 15
-            ====================================== -->
-
-            <a
-                href="Games/Yoosht_En.html"
-                class="button button-15"
+        <a
+            class="button button-35"
+            href="Games/Ceasefire_En.html"
+        >
+            <img
+                src="Games/Ceasefire/Ceasefire_Icon_En.png"
+                data-normal="Games/Ceasefire/Ceasefire_Icon_Normal_Fa.png"
+                data-hover="Games/Ceasefire/Ceasefire_Icon_Hover_En.png"
+                alt="Ceasefire"
             >
-                <img
-                    src="Games/Yoosht/Yoosht_Icon_En.png"
-                    data-normal="Games/Yoosht/Yoosht_Icon_Normal_Fa.png"
-                    data-hover="Games/Yoosht/Yoosht_Icon_Hover_En.png"
-                    alt="Yoosht"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 16 / ANA
-            ======================================
-
-            <a
-                href="Games/Ana_En.html"
-                class="button button-20"
+        <a
+            class="button button-36"
+            href="Games/Bebei_En.html"
+        >
+            <img
+                src="Games/Bebei/Bebei_Icon_En.png"
+                data-normal="Games/Bebei/Bebei_Icon_Normal_Fa.png"
+                data-hover="Games/Bebei/Bebei_Icon_Hover_En.png"
+                alt="Bebei"
             >
-                <img
-                    src="Games/Ana/Anahid_Icon_En.png"
-                    data-normal="Games/Ana/Anahid_Icon_Normal_Fa.png"
-                    data-hover="Games/Ana/Anahid_Icon_Hover_En.png"
-                    alt="Ana"
-                >
-            </a>
-
-            ====================================== -->
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 17
-            ====================================== -->
-
-            <a
-                href="Games/Sialk_1_En.html"
-                class="button button-21"
+        <a
+            class="button button-37"
+            href="Games/Savak_En.html"
+        >
+            <img
+                src="Games/Savak/Savak_Icon_En.png"
+                data-normal="Games/Savak/Savak_Icon_Normal_Fa.png"
+                data-hover="Games/Savak/Savak_Icon_Hover_En.png"
+                alt="Savak"
             >
-                <img
-                    src="Games/Sialk_1/Sialk_Icon_En.png"
-                    data-normal="Games/Sialk_1/Sialk_Icon_Normal_Fa.png"
-                    data-hover="Games/Sialk_1/Sialk_Icon_Hover_En.png"
-                    alt="Sialk"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 18
-            ====================================== -->
-
-            <a
-                href="Games/ALadderToLiberty_En.html"
-                class="button button-18"
+        <a
+            class="button button-38"
+            href="Games/Bingo_En.html"
+        >
+            <img
+                src="Games/Bingo/Bingo_Icon_En.png"
+                data-normal="Games/Bingo/Bingo_Icon_Normal_Fa.png"
+                data-hover="Games/Bingo/Bingo_Icon_Hover_En.png"
+                alt="Bingo"
             >
-                <img
-                    src="Games/Sialk_1/Sialk_Icon_En.png"
-                    data-normal="Games/Sialk_1/Sialk_Icon_Normal_Fa.png"
-                    data-hover="Games/Sialk_1/Sialk_Icon_Hover_En.png"
-                    alt="A Ladder to Liberty"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 19
-            ====================================== -->
-
-            <a
-                href="Games/UnderTheSea_En.html"
-                class="button button-19"
+        <a
+            class="button button-39"
+            href="Games/QBasicGames_En.html"
+        >
+            <img
+                src="Games/QBasicGames/QBasicGames_Icon_En.png"
+                data-normal="Games/QBasicGames/QBasicGames_Icon_Normal_Fa.png"
+                data-hover="Games/QBasicGames/QBasicGames_Icon_Hover_En.png"
+                alt="QBasic Games"
             >
-                <img
-                    src="Games/UnderTheSea/UnderTheSea_Icon_En.png"
-                    data-normal="Games/UnderTheSea/UnderTheSea_Icon_Normal_Fa.png"
-                    data-hover="Games/UnderTheSea/UnderTheSea_Icon_Hover_En.png"
-                    alt="Under the Sea"
-                >
-            </a>
+        </a>
 
 
-            <!-- =====================================
-                 BUTTON 20 / KHOOZAN PUZZLE
-            ======================================
+        <!-- ==================================
+             TEXT
+        =================================== -->
 
-            <a
-                href="Games/KhoozanPuzzle_En.html"
-                class="button button-20"
-            >
-                <img
-                    src="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_En.png"
-                    data-normal="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_Normal_Fa.png"
-                    data-hover="Games/KhoozanPuzzle/KhoozanPuzzle_Icon_Hover_En.png"
-                    alt="Khoozan Puzzle"
-                >
-            </a>
+        <div class="text-block text-block-1">
 
-            ====================================== -->
-
-
-            <!-- =====================================
-                 BUTTON 22
-            ====================================== -->
-
-            <a
-                href="Games/SanctionsAreHere_En.html"
-                class="button button-22"
-            >
-                <img
-                    src="Games/SanctionsAreHere/SanctionsAreHere_Icon_En.png"
-                    data-normal="Games/SanctionsAreHere/SanctionsAreHere_Icon_Normal_Fa.png"
-                    data-hover="Games/SanctionsAreHere/SanctionsAreHere_Icon_Hover_En.png"
-                    alt="Sanctions Are Here"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 23
-            ====================================== -->
-
-            <a
-                href="Games/ShahabTheClever_En.html"
-                class="button button-23"
-            >
-                <img
-                    src="Games/ShahabTheClever/ShahabTheClever_Icon_En.png"
-                    data-normal="Games/ShahabTheClever/ShahabTheClever_Icon_Normal_Fa.png"
-                    data-hover="Games/ShahabTheClever/ShahabTheClever_Icon_Hover_En.png"
-                    alt="Shahab the Clever"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 23 / SHOTSEKBALL
-            ======================================
-
-            <a
-                href="Games/Shotsekball_En.html"
-                class="button button-23"
-            >
-                <img
-                    src="Games/Shotsekball/Shotsekball_Icon_En.png"
-                    data-normal="Games/Shotsekball/Shotsekball_Icon_Normal_Fa.png"
-                    data-hover="Games/Shotsekball/Shotsekball_Icon_Hover_En.png"
-                    alt="Shotsekball"
-                >
-            </a>
-
-            ====================================== -->
-
-
-            <!-- =====================================
-                 BUTTON 24
-            ====================================== -->
-
-            <a
-                href="Games/Revolution_En.html"
-                class="button button-24"
-            >
-                <img
-                    src="Games/Revolution/Revolution_Icon_En.png"
-                    data-normal="Games/Revolution/Revolution_Icon_Normal_Fa.png"
-                    data-hover="Games/Revolution/Revolution_Icon_Hover_En.png"
-                    alt="Revolution"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 25
-            ====================================== -->
-
-            <a
-                href="Games/SmartHouse_En.html"
-                class="button button-25"
-            >
-                <img
-                    src="Games/SmartHouse/SmartHouse_Icon_En.png"
-                    data-normal="Games/SmartHouse/SmartHouse_Icon_Normal_Fa.png"
-                    data-hover="Games/SmartHouse/SmartHouse_Icon_Hover_En.png"
-                    alt="Smart House"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 26
-            ====================================== -->
-
-            <a
-                href="Games/TheTrojanHorse_En.html"
-                class="button button-26"
-            >
-                <img
-                    src="Games/TheTrojanHorse/TheTrojanHorse_Icon_En.png"
-                    data-normal="Games/TheTrojanHorse/TheTrojanHorse_Icon_Normal_Fa.png"
-                    data-hover="Games/TheTrojanHorse/TheTrojanHorse_Icon_Hover_En.png"
-                    alt="The Trojan Horse"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 27
-            ====================================== -->
-
-            <a
-                href="Games/Gaps_En.html"
-                class="button button-27"
-            >
-                <img
-                    src="Games/Gaps/Gaps_Icon_En.png"
-                    data-normal="Games/Gaps/Gaps_Icon_Normal_Fa.png"
-                    data-hover="Games/Gaps/Gaps_Icon_Hover_En.png"
-                    alt="Gaps"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 28
-            ====================================== -->
-
-            <a
-                href="Games/GameOfNeurones_En.html"
-                class="button button-28"
-            >
-                <img
-                    src="Games/GameOfNeurones/GameOfNeurones_Icon_En.png"
-                    data-normal="Games/GameOfNeurones/GameOfNeurones_Icon_Normal_Fa.png"
-                    data-hover="Games/GameOfNeurones/GameOfNeurones_Icon_Hover_En.png"
-                    alt="Game of Neurones"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 29
-            ====================================== -->
-
-            <a
-                href="Games/TomorrowsWorld_En.html"
-                class="button button-31"
-            >
-                <img
-                    src="Games/TomorrowsWorld/TomorrowsWorld_Icon_En.png"
-                    data-normal="Games/TomorrowsWorld/TomorrowsWorld_Icon_Normal_Fa.png"
-                    data-hover="Games/TomorrowsWorld/TomorrowsWorld_Icon_Hover_En.png"
-                    alt="Tomorrow's World"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 30
-            ====================================== -->
-
-            <a
-                href="Games/Watermelon_En.html"
-                class="button button-30"
-            >
-                <img
-                    src="Games/Watermelon/Watermelon_Icon_En.png"
-                    data-normal="Games/Watermelon/Watermelon_Icon_Normal_Fa.png"
-                    data-hover="Games/Watermelon/Watermelon_Icon_Hover_En.png"
-                    alt="Watermelon"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 31
-            ====================================== -->
-
-            <a
-                href="Games/RunRunnRunn_En.html"
-                class="button button-29"
-            >
-                <img
-                    src="Games/RunRunnRunn/RunRunnRunn_Icon_En.png"
-                    data-normal="Games/RunRunnRunn/RunRunnRunn_Icon_Normal_Fa.png"
-                    data-hover="Games/RunRunnRunn/RunRunnRunn_Icon_Hover_En.png"
-                    alt="Run Runn Runn"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 32
-            ====================================== -->
-
-            <a
-                href="Games/LetThereBeLight_En.html"
-                class="button button-32"
-            >
-                <img
-                    src="Games/LetThereBeLight/LTBL_Icon_En.png"
-                    data-normal="Games/LetThereBeLight/LTBL_Icon_Normal_Fa.png"
-                    data-hover="Games/LetThereBeLight/LTBL_Icon_Hover_En.png"
-                    alt="Let There Be Light"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 33
-            ====================================== -->
-
-            <a
-                href="Games/DesertStars_En.html"
-                class="button button-33"
-            >
-                <img
-                    src="Games/DesertStars/DesertStars_Icon_En.png"
-                    data-normal="Games/DesertStars/DesertStars_Icon_Normal_Fa.png"
-                    data-hover="Games/DesertStars/DesertStars_Icon_Hover_En.png"
-                    alt="Desert Stars"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 34
-            ====================================== -->
-
-            <a
-                href="Games/Pazyryk_En.html"
-                class="button button-34"
-            >
-                <img
-                    src="Games/Pazyryk/Pazyryk_Icon_En.png"
-                    data-normal="Games/Pazyryk/Pazyryk_Icon_Normal_Fa.png"
-                    data-hover="Games/Pazyryk/Pazyryk_Icon_Hover_En.png"
-                    alt="Pazyryk Carpet"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 35
-            ====================================== -->
-
-            <a
-                href="Games/Ceasefire_En.html"
-                class="button button-35"
-            >
-                <img
-                    src="Games/Ceasefire/Ceasefire_Icon_En.png"
-                    data-normal="Games/Ceasefire/Ceasefire_Icon_Normal_Fa.png"
-                    data-hover="Games/Ceasefire/Ceasefire_Icon_Hover_En.png"
-                    alt="Ceasefire"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 36
-            ====================================== -->
-
-            <a
-                href="Games/bebei_En.html"
-                class="button button-36"
-            >
-                <img
-                    src="Games/Bebei/Bebei_Icon_En.png"
-                    data-normal="Games/Bebei/Bebei_Icon_Normal_Fa.png"
-                    data-hover="Games/Bebei/Bebei_Icon_Hover_En.png"
-                    alt="Bebei"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 37
-            ====================================== -->
-
-            <a
-                href="Games/Savak_En.html"
-                class="button button-37"
-            >
-                <img
-                    src="Games/Savak/Savak_Icon_En.png"
-                    data-normal="Games/Savak/Savak_Icon_Normal_Fa.png"
-                    data-hover="Games/Savak/Savak_Icon_Hover_En.png"
-                    alt="Savak"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 38
-            ====================================== -->
-
-            <a
-                href="Games/Bingo_En.html"
-                class="button button-38"
-            >
-                <img
-                    src="Games/Bingo/Bingo_Icon_En.png"
-                    data-normal="Games/Bingo/Bingo_Icon_Normal_Fa.png"
-                    data-hover="Games/Bingo/Bingo_Icon_Hover_En.png"
-                    alt="Bingo: The Hidden Magic"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 39
-            ====================================== -->
-
-            <a
-                href="Games/QBasicGames_En.html"
-                class="button button-39"
-            >
-                <img
-                    src="Games/QBasicGames/QBasicGames_Icon_En.png"
-                    data-normal="Games/QBasicGames/QBasicGames_Icon_Normal_Fa.png"
-                    data-hover="Games/QBasicGames/QBasicGames_Icon_Hover_En.png"
-                    alt="QBasic Games"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 TEXT BLOCK
-            ====================================== -->
-
-            <div class="text-block text-block-1">
-
-                <div class="text-title">
-                    مالکیت معنوی
-                </div>
-
-                <div class="text-content">
-                    حق "نشر، عرضه، اجرا، بهره برداری" طبق
-                    "قانون حمایت از حقوق پدید آورندگان نرم افزارهای رایانه ای"
-                    محفوظ است
-                </div>
-
+            <div class="text-title">
+                مالکیت معنوی
             </div>
 
+            <div class="text-content">
 
-            <!-- =====================================
-                 IMAGE FADE SLIDER
-            ====================================== -->
-
-            <div class="image-slider">
-
-                <img
-                    src="Slide/Slide_1_En.png"
-                    alt="Slide 1"
-                >
-
-                <img
-                    src="Slide/Slide_2_En.png"
-                    alt="Slide 2"
-                >
-
-                <img
-                    src="Slide/Slide_3_En.png"
-                    alt="Slide 3"
-                >
-
-                <img
-                    src="Slide/Slide_4_En.png"
-                    alt="Slide 4"
-                >
-
-                <img
-                    src="Slide/Slide_5_En.png"
-                    alt="Slide 5"
-                >
-
-                <img
-                    src="Slide/Slide_6_En.png"
-                    alt="Slide 6"
-                >
-
-                <img
-                    src="Slide/Slide_7_En.png"
-                    alt="Slide 7"
-                >
+                حق "نشر، عرضه، اجرا، بهره برداری" طبق
+                "قانون حمایت از حقوق پدید آورندگان نرم افزارهای رایانه ای"
+                محفوظ است
 
             </div>
-
 
         </div>
 
-    </main>
+
+        <!-- ==================================
+             IMAGE SLIDER
+        =================================== -->
+
+        <div class="image-slider">
+
+            <img
+                src="Slide/Slide_1_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_2_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_3_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_4_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_5_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_6_En.png"
+                alt=""
+            >
+
+            <img
+                src="Slide/Slide_7_En.png"
+                alt=""
+            >
+
+        </div>
 
 
-    <script src="Home_En_script.js"></script>
+    </div>
+
+
+</main>
+
+
+<script src="Home_En_script.js"></script>
 
 </body>
 
