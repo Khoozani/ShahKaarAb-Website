@@ -2,15 +2,26 @@
    GLOBAL VARIABLES
 ======================================== */
 
-var mainImage = document.querySelector(".main-image");
-var gameArea = document.querySelector(".game-area");
+var mainImage =
+    document.querySelector(".main-image");
 
-var loader = document.getElementById("loader");
-var loaderPercent = document.getElementById("loader-percent");
-var loaderProgress = document.getElementById("loader-progress");
+var gameArea =
+    document.querySelector(".game-area");
+
+var loader =
+    document.getElementById("loader");
+
+var loaderPercent =
+    document.getElementById("loader-percent");
+
+var loaderProgress =
+    document.getElementById("loader-progress");
+
 
 var imagesLoaded = 0;
+
 var totalImages = 0;
+
 var websiteStarted = false;
 
 
@@ -31,8 +42,11 @@ function addResource(src) {
         return;
     }
 
+
     if (resources.indexOf(src) === -1) {
+
         resources.push(src);
+
     }
 
 }
@@ -42,17 +56,25 @@ function addResource(src) {
    COLLECT IMAGE RESOURCES
 ======================================== */
 
-var allImages = document.querySelectorAll("img");
+var allImages =
+    document.querySelectorAll("img");
 
-for (var i = 0; i < allImages.length; i++) {
+
+for (
+    var i = 0;
+    i < allImages.length;
+    i++
+) {
 
     addResource(
         allImages[i].getAttribute("src")
     );
 
+
     addResource(
         allImages[i].getAttribute("data-normal")
     );
+
 
     addResource(
         allImages[i].getAttribute("data-hover")
@@ -74,7 +96,8 @@ addResource(
    TOTAL RESOURCES
 ======================================== */
 
-totalImages = resources.length;
+totalImages =
+    resources.length;
 
 
 /* ========================================
@@ -85,11 +108,13 @@ function updateProgress() {
 
     var percent = 0;
 
+
     if (totalImages > 0) {
 
-        percent = Math.round(
-            (imagesLoaded / totalImages) * 100
-        );
+        percent =
+            Math.round(
+                (imagesLoaded / totalImages) * 100
+            );
 
     } else {
 
@@ -195,6 +220,7 @@ function startWebsite() {
     setTimeout(
         function () {
 
+
             document.body.classList.add(
                 "loaded"
             );
@@ -205,32 +231,41 @@ function startWebsite() {
             );
 
 
-            /* ==============================
-               SET GAME AREA SIZE
-            ============================== */
+            /*
+             * ==================================
+             * SET GAME AREA SIZE
+             * ==================================
+             */
 
             setGameAreaSize();
 
 
-            /* ==============================
-               START MOVING IMAGES
-            ============================== */
+            /*
+             * ==================================
+             * START MOVING IMAGES
+             * ==================================
+             */
 
             startMovingImages();
 
 
-            /* ==============================
-               START BUTTON HOVER
-            ============================== */
+            /*
+             * ==================================
+             * START BUTTON HOVER
+             * ==================================
+             */
 
             startButtonHover();
 
 
-            /* ==============================
-               START IMAGE SLIDER
-            ============================== */
+            /*
+             * ==================================
+             * START IMAGE SLIDER
+             * ==================================
+             */
 
             startImageSlider();
+
 
         },
         400
@@ -248,6 +283,7 @@ if (totalImages === 0) {
     waitForFont();
 
 } else {
+
 
     for (
         var j = 0;
@@ -276,12 +312,15 @@ if (totalImages === 0) {
 
 
 /* ========================================
-   MAIN IMAGE / GAME AREA SIZE
+   MAIN IMAGE SIZE
 ======================================== */
 
 function setGameAreaSize() {
 
-    if (!mainImage || !gameArea) {
+    if (
+        !mainImage ||
+        !gameArea
+    ) {
 
         return;
 
@@ -299,9 +338,9 @@ function setGameAreaSize() {
 
 
     /*
-       getBoundingClientRect() در حالت
-       responsive عرض واقعی game-area
-       را برمی‌گرداند.
+       مهم:
+       به‌جای offsetWidth از عرض واقعی
+       responsive عنصر استفاده می‌کنیم.
     */
 
     var width =
@@ -328,58 +367,37 @@ function setGameAreaSize() {
 
 
 /* ========================================
-   MAIN IMAGE LOAD
+   RESIZE
 ======================================== */
 
-if (mainImage) {
+function handleResize() {
 
-    if (mainImage.complete) {
+    if (!websiteStarted) {
 
-        setGameAreaSize();
-
-    } else {
-
-        mainImage.addEventListener(
-            "load",
-            setGameAreaSize
-        );
+        return;
 
     }
+
+
+    /*
+       یک frame صبر می‌کنیم تا مرورگر
+       ابتدا width جدید را اعمال کند.
+    */
+
+    requestAnimationFrame(
+        function () {
+
+            setGameAreaSize();
+
+        }
+    );
 
 }
 
 
-/* ========================================
-   WINDOW RESIZE
-======================================== */
-
-var resizeTimer = null;
-
-
 window.addEventListener(
     "resize",
-    function () {
-
-        if (!websiteStarted) {
-
-            return;
-
-        }
-
-
-        clearTimeout(resizeTimer);
-
-
-        resizeTimer = setTimeout(
-            function () {
-
-                setGameAreaSize();
-
-            },
-            50
-        );
-
-    }
+    handleResize
 );
 
 
@@ -398,6 +416,12 @@ window.addEventListener(
         }
 
 
+        /*
+           بعد از تغییر orientation،
+           اندازه viewport ممکن است کمی
+           دیرتر توسط مرورگر اعمال شود.
+        */
+
         setTimeout(
             function () {
 
@@ -407,8 +431,40 @@ window.addEventListener(
             100
         );
 
+
+        setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            500
+        );
+
     }
 );
+
+
+/* ========================================
+   MAIN IMAGE LOAD
+======================================== */
+
+if (mainImage) {
+
+    mainImage.addEventListener(
+        "load",
+        function () {
+
+            if (websiteStarted) {
+
+                setGameAreaSize();
+
+            }
+
+        }
+    );
+
+}
 
 
 /* ========================================
@@ -428,6 +484,7 @@ function startButtonHover() {
         k < hoverImages.length;
         k++
     ) {
+
 
         hoverImages[k].addEventListener(
             "mouseenter",
@@ -492,52 +549,50 @@ function startMovingImages() {
 
 function startMovingImage(image) {
 
-    if (!image) {
-
-        return;
-
-    }
-
 
     /* =====================================
        START POSITION
     ====================================== */
 
-    var startX = parseFloat(
-        image.getAttribute(
-            "data-start-x"
-        )
-    );
+    var startX =
+        parseFloat(
+            image.getAttribute(
+                "data-start-x"
+            )
+        );
 
 
-    var startY = parseFloat(
-        image.getAttribute(
-            "data-start-y"
-        )
-    );
+    var startY =
+        parseFloat(
+            image.getAttribute(
+                "data-start-y"
+            )
+        );
 
 
     /* =====================================
        END POSITION
     ====================================== */
 
-    var endX = parseFloat(
-        image.getAttribute(
-            "data-end-x"
-        )
-    );
+    var endX =
+        parseFloat(
+            image.getAttribute(
+                "data-end-x"
+            )
+        );
 
 
-    var endY = parseFloat(
-        image.getAttribute(
-            "data-end-y"
-        )
-    );
+    var endY =
+        parseFloat(
+            image.getAttribute(
+                "data-end-y"
+            )
+        );
 
 
     /*
-       اگر مختصات معتبر نباشند،
-       انیمیشن اجرا نمی‌شود.
+       اگر مختصات ناقص باشند،
+       انیمیشن را اجرا نمی‌کنیم.
     */
 
     if (
@@ -573,11 +628,12 @@ function startMovingImage(image) {
        MOVEMENT SPEED
     ====================================== */
 
-    var speed = parseFloat(
-        image.getAttribute(
-            "data-speed"
-        )
-    );
+    var speed =
+        parseFloat(
+            image.getAttribute(
+                "data-speed"
+            )
+        );
 
 
     if (!speed || speed <= 0) {
@@ -606,6 +662,7 @@ function startMovingImage(image) {
     ====================================== */
 
     function updatePosition() {
+
 
         /* =================================
            CALCULATE X
@@ -656,6 +713,7 @@ function startMovingImage(image) {
 
         if (mode === "once") {
 
+
             progress =
                 progress +
                 speed *
@@ -695,6 +753,7 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "pingpong") {
+
 
             progress =
                 progress +
@@ -799,12 +858,25 @@ function startImageSlider() {
 
     function showNextImage() {
 
+
+        /*
+         * محو تصویر فعلی
+         */
+
         sliderImages[currentImage]
             .style.opacity = "0";
 
 
+        /*
+         * رفتن به تصویر بعدی
+         */
+
         currentImage++;
 
+
+        /*
+         * برگشت به تصویر اول
+         */
 
         if (
             currentImage >=
@@ -815,6 +887,10 @@ function startImageSlider() {
 
         }
 
+
+        /*
+         * نمایش تصویر بعدی
+         */
 
         sliderImages[currentImage]
             .style.opacity = "1";
