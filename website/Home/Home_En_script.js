@@ -99,7 +99,9 @@ function updateProgress() {
 
 
     if (percent > 100) {
+
         percent = 100;
+
     }
 
 
@@ -168,8 +170,11 @@ function waitForFont() {
 function startWebsite() {
 
     if (websiteStarted) {
+
         return;
+
     }
+
 
     websiteStarted = true;
 
@@ -177,13 +182,14 @@ function startWebsite() {
     loaderPercent.textContent =
         "100%";
 
+
     loaderProgress.style.width =
         "100%";
 
 
     /*
-       اجازه می‌دهیم 100% برای لحظه‌ای
-       دیده شود.
+       اجازه می‌دهیم 100%
+       برای لحظه‌ای دیده شود.
     */
 
     setTimeout(
@@ -199,41 +205,32 @@ function startWebsite() {
             );
 
 
-            /*
-             * ==================================
-             * START GAME AREA SIZE
-             * ==================================
-             */
+            /* ==============================
+               SET GAME AREA SIZE
+            ============================== */
 
             setGameAreaSize();
 
 
-            /*
-             * ==================================
-             * START MOVING IMAGES
-             * ==================================
-             */
+            /* ==============================
+               START MOVING IMAGES
+            ============================== */
 
             startMovingImages();
 
 
-            /*
-             * ==================================
-             * START BUTTON HOVER
-             * ==================================
-             */
+            /* ==============================
+               START BUTTON HOVER
+            ============================== */
 
             startButtonHover();
 
 
-            /*
-             * ==================================
-             * START IMAGE SLIDER
-             * ==================================
-             */
+            /* ==============================
+               START IMAGE SLIDER
+            ============================== */
 
             startImageSlider();
-
 
         },
         400
@@ -252,7 +249,11 @@ if (totalImages === 0) {
 
 } else {
 
-    for (var j = 0; j < resources.length; j++) {
+    for (
+        var j = 0;
+        j < resources.length;
+        j++
+    ) {
 
         var preloadImage =
             new Image();
@@ -275,10 +276,17 @@ if (totalImages === 0) {
 
 
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA SIZE
 ======================================== */
 
 function setGameAreaSize() {
+
+    if (!mainImage || !gameArea) {
+
+        return;
+
+    }
+
 
     if (
         !mainImage.naturalWidth ||
@@ -290,8 +298,21 @@ function setGameAreaSize() {
     }
 
 
+    /*
+       getBoundingClientRect() در حالت
+       responsive عرض واقعی game-area
+       را برمی‌گرداند.
+    */
+
     var width =
-        gameArea.offsetWidth;
+        gameArea.getBoundingClientRect().width;
+
+
+    if (!width || width <= 0) {
+
+        return;
+
+    }
 
 
     var height =
@@ -307,18 +328,84 @@ function setGameAreaSize() {
 
 
 /* ========================================
+   MAIN IMAGE LOAD
+======================================== */
+
+if (mainImage) {
+
+    if (mainImage.complete) {
+
+        setGameAreaSize();
+
+    } else {
+
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
+
+}
+
+
+/* ========================================
    WINDOW RESIZE
 ======================================== */
+
+var resizeTimer = null;
+
 
 window.addEventListener(
     "resize",
     function () {
 
-        if (websiteStarted) {
+        if (!websiteStarted) {
 
-            setGameAreaSize();
+            return;
 
         }
+
+
+        clearTimeout(resizeTimer);
+
+
+        resizeTimer = setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            50
+        );
+
+    }
+);
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        if (!websiteStarted) {
+
+            return;
+
+        }
+
+
+        setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            100
+        );
 
     }
 );
@@ -341,7 +428,6 @@ function startButtonHover() {
         k < hoverImages.length;
         k++
     ) {
-
 
         hoverImages[k].addEventListener(
             "mouseenter",
@@ -406,6 +492,12 @@ function startMovingImages() {
 
 function startMovingImage(image) {
 
+    if (!image) {
+
+        return;
+
+    }
+
 
     /* =====================================
        START POSITION
@@ -441,6 +533,23 @@ function startMovingImage(image) {
             "data-end-y"
         )
     );
+
+
+    /*
+       اگر مختصات معتبر نباشند،
+       انیمیشن اجرا نمی‌شود.
+    */
+
+    if (
+        isNaN(startX) ||
+        isNaN(startY) ||
+        isNaN(endX) ||
+        isNaN(endY)
+    ) {
+
+        return;
+
+    }
 
 
     /* =====================================
@@ -498,7 +607,6 @@ function startMovingImage(image) {
 
     function updatePosition() {
 
-
         /* =================================
            CALCULATE X
         ================================= */
@@ -548,7 +656,6 @@ function startMovingImage(image) {
 
         if (mode === "once") {
 
-
             progress =
                 progress +
                 speed *
@@ -588,7 +695,6 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -693,25 +799,12 @@ function startImageSlider() {
 
     function showNextImage() {
 
-
-        /*
-         * محو تصویر فعلی
-         */
-
         sliderImages[currentImage]
             .style.opacity = "0";
 
 
-        /*
-         * رفتن به تصویر بعدی
-         */
-
         currentImage++;
 
-
-        /*
-         * برگشت به تصویر اول
-         */
 
         if (
             currentImage >=
@@ -722,10 +815,6 @@ function startImageSlider() {
 
         }
 
-
-        /*
-         * نمایش تصویر بعدی
-         */
 
         sliderImages[currentImage]
             .style.opacity = "1";
