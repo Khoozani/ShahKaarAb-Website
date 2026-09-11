@@ -1,734 +1,760 @@
 /* ========================================
-   PAGE LOADING SYSTEM
+   BASIC
 ======================================== */
 
-var loader = document.getElementById("page-loader");
-var loaderPercent = document.getElementById("loader-percent");
-var loaderProgressBar = document.getElementById("loader-progress-bar");
+* {
+    box-sizing: border-box;
+}
 
-var completedTasks = 0;
-var totalTasks = 0;
-var loadingFinished = false;
+html,
+body {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background-image: url("../Background_Pattern.png");
+    background-color: aliceblue;
+
+    background-repeat: repeat;
+    background-position: 0 0;
+
+    animation: moveBackground 20s linear infinite;
+}
 
 
 /* ========================================
-   RESOURCE LIST
+   FONT
 ======================================== */
 
-var resources = [];
+@font-face {
+    font-family: "Unixel";
+    src: url("../Fonts/unixel-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html,
+body,
+* {
+    font-family: "Unixel", sans-serif;
+}
 
 
 /* ========================================
-   ADD RESOURCE
+   PAGE LOADER
 ======================================== */
 
-function addResource(src) {
+#page-loader {
+    position: fixed;
 
-    if (!src) {
-        return;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 99999;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: aliceblue;
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0s linear 0s;
+
+    direction: ltr;
+}
+
+
+/* ========================================
+   LOADER BOX
+======================================== */
+
+.loader-box {
+    width: min(260px, 80vw);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ========================================
+   LOADER PERCENT
+======================================== */
+
+.loader-percent {
+    width: 100%;
+
+    margin-bottom: 12px;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    text-align: center;
+
+    color: #000000;
+}
+
+
+/* ========================================
+   LOADER PROGRESS
+======================================== */
+
+.loader-progress {
+    width: 100%;
+    height: 14px;
+
+    border: 2px solid #000000;
+
+    background-color: aliceblue;
+
+    padding: 2px;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   LOADER PROGRESS BAR
+======================================== */
+
+.loader-progress-bar {
+    width: 0%;
+    height: 100%;
+
+    background-color: #000000;
+
+    transition: width 0.15s ease;
+}
+
+
+/* ========================================
+   HIDE PAGE UNTIL LOADED
+======================================== */
+
+.screen {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 30px 0;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+
+    overflow-x: hidden;
+}
+
+
+/* ========================================
+   PAGE LOADED
+======================================== */
+
+body.loaded .screen {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* ========================================
+   HIDE LOADER AFTER LOADING
+======================================== */
+
+body.loaded #page-loader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0s linear 0.4s;
+}
+
+
+/* ========================================
+   PAUSE BACKGROUND BEFORE LOADING
+======================================== */
+
+body:not(.loaded) {
+    animation-play-state: paused;
+}
+
+body.loaded {
+    animation-play-state: running;
+}
+
+
+/* ========================================
+   MAIN GAME AREA
+======================================== */
+
+/*
+   DESIGN SIZE = 900px
+
+   Desktop:
+   maximum width = 900px
+
+   Mobile:
+   automatically scales to viewport width
+*/
+
+.game-area {
+    position: relative;
+
+    width: min(900px, 100vw);
+    max-width: 100%;
+
+    height: auto;
+
+    flex: 0 1 auto;
+    flex-shrink: 1;
+
+    overflow: visible;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   MAIN IMAGE
+======================================== */
+
+.main-image {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   BUTTON BASE
+======================================== */
+
+.button {
+    position: absolute;
+
+    display: block;
+
+    transform: translate(-50%, -50%);
+
+    margin: 0;
+    padding: 0;
+
+    z-index: 10;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   BUTTON IMAGE
+======================================== */
+
+.button img {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* ========================================
+   BUTTON HOVER
+======================================== */
+
+.button:hover img {
+    transform: scale(1.05);
+}
+
+
+/* ========================================
+   BUTTON POSITIONS
+======================================== */
+
+.button-1 {
+    left: 94%;
+    top: 2.5%;
+    width: 4%;
+}
+
+.button-2 {
+    left: 86%;
+    top: 2.4%;
+    width: 12%;
+}
+
+.button-3 {
+    left: 79%;
+    top: 2.4%;
+    width: 4%;
+}
+
+.button-4 {
+    left: 70%;
+    top: 2.4%;
+    width: 15%;
+}
+
+.button-5 {
+    left: 61.5%;
+    top: 2.4%;
+    width: 4%;
+}
+
+.button-6 {
+    left: 54%;
+    top: 2.5%;
+    width: 13%;
+}
+
+.button-7 {
+    left: 46.5%;
+    top: 2.2%;
+    width: 3.8%;
+}
+
+.button-8 {
+    left: 38.5%;
+    top: 2.5%;
+    width: 13%;
+}
+
+.button-9 {
+    left: 30.9%;
+    top: 2.2%;
+    width: 3.8%;
+}
+
+.button-10 {
+    left: 22.8%;
+    top: 2.5%;
+    width: 13.5%;
+}
+
+.button-11 {
+    left: 15.1%;
+    top: 2.3%;
+    width: 3.8%;
+}
+
+.button-12 {
+    left: 7.9%;
+    top: 2.5%;
+    width: 13%;
+}
+
+
+/* ========================================
+   GAME BUTTONS
+======================================== */
+
+.button-13 {
+    left: 30.2%;
+    top: 71%;
+    width: 47%;
+}
+
+.button-14 {
+    left: 73%;
+    top: 56.2%;
+    width: 37%;
+}
+
+.button-20 {
+    left: 73%;
+    top: 89%;
+    width: 5%;
+}
+
+
+/* ========================================
+   MOVING IMAGES
+======================================== */
+
+.moving-image {
+    position: absolute;
+
+    display: block;
+
+    height: auto;
+    max-width: none;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+    pointer-events: none;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   MOVING IMAGE SIZES
+======================================== */
+
+.moving-image-1 {
+    width: 30%;
+}
+
+.moving-image-2 {
+    width: 89.5%;
+}
+
+.moving-image-3 {
+    width: 91.5%;
+}
+
+.moving-image-4 {
+    width: 91%;
+}
+
+.moving-image-5 {
+    width: 50%;
+}
+
+.moving-image-6 {
+    width: 30%;
+}
+
+.moving-image-7 {
+    width: 1%;
+}
+
+.moving-image-8 {
+    width: 1.5%;
+}
+
+.moving-image-9 {
+    width: 2%;
+}
+
+.moving-image-10 {
+    width: 2.5%;
+}
+
+.moving-image-11 {
+    width: 3%;
+}
+
+.moving-image-12 {
+    width: 3.5%;
+}
+
+.moving-image-13 {
+    width: 4%;
+}
+
+
+/* ========================================
+   TEXT BLOCK
+======================================== */
+
+.text-block {
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+
+    z-index: 25;
+
+    direction: rtl;
+
+    text-align: center;
+
+    user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT TITLE
+======================================== */
+
+.text-title {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: aliceblue;
+
+    line-height: 1;
+
+    margin: 0 0 12px 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT CONTENT
+======================================== */
+
+.text-content {
+    font-size: 16px;
+
+    font-weight: normal;
+
+    color: aliceblue;
+
+    line-height: 1.3;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT BLOCK POSITION
+======================================== */
+
+.text-block-1 {
+    left: 73%;
+    top: 76%;
+}
+
+
+/* ========================================
+   IMAGE FADE SLIDERS
+======================================== */
+
+.image-slider {
+    position: absolute;
+
+    left: 62%;
+    top: 16%;
+
+    width: 70%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
+
+    overflow: hidden;
+
+    line-height: 0;
+}
+
+
+.image-slider2 {
+    position: absolute;
+
+    left: 30%;
+    top: 70.9%;
+
+    width: 31.1%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    overflow: hidden;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   SLIDER IMAGES
+======================================== */
+
+.image-slider img,
+.image-slider2 img {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    opacity: 0;
+
+    transition: opacity 1s ease-in-out;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   FIRST SLIDER IMAGE
+======================================== */
+
+.image-slider img:first-child,
+.image-slider2 img:first-child {
+    position: relative;
+    opacity: 1;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .screen {
+        justify-content: center;
+
+        width: 100%;
+        min-width: 0;
+
+        padding-left: 0;
+        padding-right: 0;
     }
 
-    if (resources.indexOf(src) === -1) {
-
-        resources.push(src);
-
+    .game-area {
+        width: 100vw;
+        max-width: 100vw;
     }
-
-}
-
-
-/* ========================================
-   COLLECT IMAGE RESOURCES
-======================================== */
-
-var allImages = document.querySelectorAll("img");
-
-for (var i = 0; i < allImages.length; i++) {
-
-    addResource(
-        allImages[i].getAttribute("src")
-    );
-
-}
-
-
-/* ========================================
-   COLLECT NORMAL / HOVER IMAGES
-======================================== */
-
-var hoverImages = document.querySelectorAll(
-    "[data-normal][data-hover]"
-);
-
-for (var j = 0; j < hoverImages.length; j++) {
-
-    addResource(
-        hoverImages[j].getAttribute("data-normal")
-    );
-
-    addResource(
-        hoverImages[j].getAttribute("data-hover")
-    );
-
-}
-
-
-/* ========================================
-   BACKGROUND IMAGE
-======================================== */
-
-addResource(
-    "../Background_Pattern.png"
-);
-
-
-/* ========================================
-   TOTAL LOADING TASKS
-======================================== */
-
-totalTasks = resources.length + 1;
-
-
-/* ========================================
-   UPDATE LOADING PROGRESS
-======================================== */
-
-function updateLoadingProgress() {
-
-    var percent = 0;
-
-    if (totalTasks > 0) {
-
-        percent =
-            Math.floor(
-                (completedTasks / totalTasks) * 100
-            );
-
-    }
-
-    if (percent > 100) {
-
-        percent = 100;
-
-    }
-
-    loaderPercent.textContent =
-        percent + "%";
-
-    loaderProgressBar.style.width =
-        percent + "%";
-
-}
-
-
-/* ========================================
-   RESOURCE COMPLETED
-======================================== */
-
-function resourceCompleted() {
-
-    completedTasks++;
-
-    updateLoadingProgress();
-
-    if (
-        completedTasks >= totalTasks &&
-        !loadingFinished
-    ) {
-
-        loadingFinished = true;
-
-        finishLoading();
-
-    }
-
-}
-
-
-/* ========================================
-   PRELOAD IMAGE
-======================================== */
-
-function preloadImage(src) {
-
-    var image = new Image();
-
-    image.onload = function () {
-
-        resourceCompleted();
-
-    };
-
-    image.onerror = function () {
-
-        console.warn(
-            "Unable to load image:",
-            src
-        );
-
-        resourceCompleted();
-
-    };
-
-    image.src = src;
-
-}
-
-
-/* ========================================
-   START IMAGE PRELOADING
-======================================== */
-
-for (var k = 0; k < resources.length; k++) {
-
-    preloadImage(
-        resources[k]
-    );
-
-}
-
-
-/* ========================================
-   LOAD UNIXEL FONT
-======================================== */
-
-if (
-    document.fonts &&
-    document.fonts.load
-) {
-
-    document.fonts.load(
-        'normal 16px "Unixel"'
-    ).then(
-        function () {
-
-            resourceCompleted();
-
-        }
-    ).catch(
-        function () {
-
-            resourceCompleted();
-
-        }
-    );
-
-} else {
-
-    resourceCompleted();
-
-}
-
-
-/* ========================================
-   FINISH LOADING
-======================================== */
-
-function finishLoading() {
-
-    updateLoadingProgress();
 
     /*
-       اجازه می‌دهیم 100% برای مدت کوتاهی
-       دیده شود.
+       Slightly smaller typography on narrow phones
+       so the text does not overflow the composition.
     */
 
-    setTimeout(
-        function () {
+    .text-title {
+        font-size: clamp(8px, 2.22vw, 20px);
+    }
 
-            startPage();
-
-        },
-        200
-    );
-
+    .text-content {
+        font-size: clamp(6px, 1.78vw, 16px);
+    }
 }
 
 
 /* ========================================
-   MAIN IMAGE SIZE
+   VERY SMALL MOBILE
 ======================================== */
 
-var mainImage = document.querySelector(
-    ".main-image"
-);
+@media (max-width: 480px) {
 
-var gameArea = document.querySelector(
-    ".game-area"
-);
-
-
-function setGameAreaSize() {
-
-    if (
-        !mainImage.naturalWidth ||
-        !mainImage.naturalHeight
-    ) {
-
-        return;
-
+    .screen {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
-    var width =
-        gameArea.offsetWidth;
+    .text-title {
+        font-size: clamp(7px, 2.22vw, 20px);
+    }
 
-    var height =
-        width *
-        mainImage.naturalHeight /
-        mainImage.naturalWidth;
-
-    gameArea.style.height =
-        height + "px";
-
+    .text-content {
+        font-size: clamp(5px, 1.78vw, 16px);
+    }
 }
 
 
 /* ========================================
-   START PAGE
+   MOVING BACKGROUND
 ======================================== */
 
-function startPage() {
+@keyframes moveBackground {
 
-    /* =====================================
-       SET GAME AREA SIZE
-    ====================================== */
-
-    setGameAreaSize();
-
-
-    /* =====================================
-       WINDOW RESIZE
-    ====================================== */
-
-    window.addEventListener(
-        "resize",
-        setGameAreaSize
-    );
-
-
-    /* =====================================
-       BUTTON HOVER IMAGES
-    ====================================== */
-
-    for (
-        var i = 0;
-        i < hoverImages.length;
-        i++
-    ) {
-
-        hoverImages[i].addEventListener(
-            "mouseenter",
-            function () {
-
-                this.src =
-                    this.getAttribute(
-                        "data-hover"
-                    );
-
-            }
-        );
-
-
-        hoverImages[i].addEventListener(
-            "mouseleave",
-            function () {
-
-                this.src =
-                    this.getAttribute(
-                        "data-normal"
-                    );
-
-            }
-        );
-
+    from {
+        background-position: 0 0;
     }
 
-
-    /* =====================================
-       MOVING IMAGES
-    ====================================== */
-
-    var movingImages =
-        document.querySelectorAll(
-            ".moving-image"
-        );
-
-
-    for (
-        var j = 0;
-        j < movingImages.length;
-        j++
-    ) {
-
-        startMovingImage(
-            movingImages[j]
-        );
-
+    to {
+        background-position: 500px 500px;
     }
-
-
-    /* =====================================
-       START SLIDER 1
-    ====================================== */
-
-    startSlider(
-        ".image-slider img"
-    );
-
-
-    /* =====================================
-       START SLIDER 2
-    ====================================== */
-
-    startSlider(
-        ".image-slider2 img"
-    );
-
-
-    /* =====================================
-       SHOW PAGE
-    ====================================== */
-
-    document.body.classList.add(
-        "loaded"
-    );
-
 }
 
 
 /* ========================================
-   MOVING IMAGE FUNCTION
+   APARAT VIDEO
 ======================================== */
 
-function startMovingImage(image) {
+.video-box {
+    position: absolute;
 
+    left: 73%;
+    top: 56.2%;
 
-    /* =====================================
-       START POSITION
-    ====================================== */
+    width: 33%;
 
-    var startX = parseFloat(
-        image.getAttribute(
-            "data-start-x"
-        )
-    );
+    aspect-ratio: 16 / 9;
 
-    var startY = parseFloat(
-        image.getAttribute(
-            "data-start-y"
-        )
-    );
+    transform: translate(-50%, -50%);
 
+    z-index: 11;
 
-    /* =====================================
-       END POSITION
-    ====================================== */
-
-    var endX = parseFloat(
-        image.getAttribute(
-            "data-end-x"
-        )
-    );
-
-    var endY = parseFloat(
-        image.getAttribute(
-            "data-end-y"
-        )
-    );
-
-
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
-
-    var mode =
-        image.getAttribute(
-            "data-mode"
-        );
-
-    if (!mode) {
-
-        mode = "pingpong";
-
-    }
-
-
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
-
-    var speed = parseFloat(
-        image.getAttribute(
-            "data-speed"
-        )
-    );
-
-    if (!speed || speed <= 0) {
-
-        speed = 5;
-
-    }
-
-
-    /* =====================================
-       MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
-    ====================================== */
-
-    var progress = 0;
-
-
-    /* =====================================
-       MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
-    ====================================== */
-
-    var direction = 1;
-
-
-    /* =====================================
-       UPDATE POSITION
-    ====================================== */
-
-    function updatePosition() {
-
-
-        /* =================================
-           CALCULATE X
-        ================================= */
-
-        var x =
-            startX +
-            (endX - startX) *
-            progress;
-
-
-        /* =================================
-           CALCULATE Y
-        ================================= */
-
-        var y =
-            startY +
-            (endY - startY) *
-            progress;
-
-
-        /* =================================
-           APPLY POSITION
-        ================================= */
-
-        image.style.left =
-            x + "%";
-
-        image.style.top =
-            y + "%";
-
-
-        /* =================================
-           STATIC
-        ================================= */
-
-        if (mode === "static") {
-
-            return;
-
-        }
-
-
-        /* =================================
-           ONCE
-        ================================= */
-
-        if (mode === "once") {
-
-            progress =
-                progress +
-                speed *
-                0.0001;
-
-
-            if (progress >= 1) {
-
-                progress = 1;
-
-                image.style.left =
-                    endX + "%";
-
-                image.style.top =
-                    endY + "%";
-
-                return;
-
-            }
-
-
-            requestAnimationFrame(
-                updatePosition
-            );
-
-            return;
-
-        }
-
-
-        /* =================================
-           PINGPONG
-        ================================= */
-
-        if (mode === "pingpong") {
-
-            progress =
-                progress +
-                direction *
-                speed *
-                0.0001;
-
-
-            /* =============================
-               REACHED END
-            ============================= */
-
-            if (progress >= 1) {
-
-                progress = 1;
-
-                direction = -1;
-
-            }
-
-
-            /* =============================
-               REACHED START
-            ============================= */
-
-            if (progress <= 0) {
-
-                progress = 0;
-
-                direction = 1;
-
-            }
-
-        }
-
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
-
-        requestAnimationFrame(
-            updatePosition
-        );
-
-    }
-
-
-    /* =====================================
-       START
-    ====================================== */
-
-    updatePosition();
-
+    overflow: hidden;
 }
 
 
-/* ========================================
-   IMAGE FADE SLIDER
-======================================== */
+.video-box iframe {
+    width: 100%;
+    height: 100%;
 
-function startSlider(selector) {
+    display: block;
 
-    var sliderImages =
-        document.querySelectorAll(
-            selector
-        );
-
-    var currentImage = 0;
-
-
-    /* =====================================
-       NO IMAGES
-    ====================================== */
-
-    if (
-        !sliderImages ||
-        sliderImages.length === 0
-    ) {
-
-        return;
-
-    }
-
-
-    /* =====================================
-       FIRST IMAGE
-    ====================================== */
-
-    for (
-        var i = 0;
-        i < sliderImages.length;
-        i++
-    ) {
-
-        sliderImages[i].style.opacity = "0";
-
-    }
-
-
-    sliderImages[0].style.opacity = "1";
-
-
-    /* =====================================
-       ONLY ONE IMAGE
-    ====================================== */
-
-    if (sliderImages.length <= 1) {
-
-        return;
-
-    }
-
-
-    /* =====================================
-       NEXT IMAGE
-    ====================================== */
-
-    function showNextImage() {
-
-        sliderImages[currentImage].style.opacity =
-            "0";
-
-
-        currentImage++;
-
-
-        if (
-            currentImage >=
-            sliderImages.length
-        ) {
-
-            currentImage = 0;
-
-        }
-
-
-        sliderImages[currentImage].style.opacity =
-            "1";
-
-    }
-
-
-    /* =====================================
-       CHANGE EVERY 4 SECONDS
-    ====================================== */
-
-    setInterval(
-        showNextImage,
-        4000
-    );
-
+    border: 0;
 }
