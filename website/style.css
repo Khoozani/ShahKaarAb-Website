@@ -1,6 +1,7 @@
 /* ========================================
    BASIC
 ======================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -10,6 +11,11 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow: hidden;
 }
 
 body {
@@ -23,6 +29,8 @@ body {
 
     animation: moveBackground 20s linear infinite;
 }
+
+
 /* ========================================
    FONT
 ======================================== */
@@ -39,17 +47,25 @@ body {
     font-display: swap;
 }
 
+
 /* ========================================
    SCREEN
 ======================================== */
 
 .screen {
+
     width: 100vw;
     height: 100vh;
 
+    min-width: 0;
+    min-height: 0;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
 }
 
 
@@ -60,32 +76,26 @@ body {
 .game-area {
 
     /*
-       اندازه اصلی تصویر
+       اندازه اصلی صفحه
 
-       این مقدار را می‌توانی تغییر بدهی.
-
-       مثال:
-
-       900px
-       1000px
-       1200px
+       نسبت تصویر:
+       16 / 9
     */
 
     width: 900px;
-
-    /*
-       نسبت تصویر اصلی
-
-       اگر Box_Small.png مثلاً 1600 × 900 باشد:
-
-       aspect-ratio: 16 / 9;
-    */
 
     aspect-ratio: 16 / 9;
 
     position: relative;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
+
+    /*
+       جلوگیری از کوچک شدن
+       یا تغییر نسبت توسط flex
+    */
+
+    max-width: 90vw;
 }
 
 
@@ -103,7 +113,15 @@ body {
     object-fit: contain;
 
     user-select: none;
+    -webkit-user-select: none;
+
     pointer-events: none;
+
+    /*
+       تصویر اصلی اولین عنصر بصری صفحه است.
+    */
+
+    max-width: 100%;
 }
 
 
@@ -118,15 +136,31 @@ body {
     display: block;
 
     /*
-       نقطه مرکزی دکمه روی مختصات
-       left و top قرار می‌گیرد.
+       مختصات left/top
+       مرکز دکمه را مشخص می‌کنند.
     */
 
     transform: translate(-50%, -50%);
 
     z-index: 10;
+
+    /*
+       جلوگیری از رفتار ناخواسته لینک
+       در اندازه‌های مختلف
+    */
+
+    line-height: 0;
+
+    text-decoration: none;
+
+    margin: 0;
+    padding: 0;
 }
 
+
+/* ========================================
+   BUTTON IMAGES
+======================================== */
 
 .button img {
 
@@ -135,9 +169,12 @@ body {
     width: 100%;
     height: auto;
 
+    max-width: 100%;
+
     cursor: pointer;
 
     user-select: none;
+    -webkit-user-select: none;
 
     transition: transform 0.15s ease;
 }
@@ -150,6 +187,17 @@ body {
 .button:hover img {
 
     transform: scale(1.05);
+}
+
+
+/*
+   Keyboard accessibility
+*/
+
+.button:focus-visible {
+
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
 }
 
 
@@ -166,10 +214,6 @@ body {
 
     left: 20%;
     top: 23%;
-
-    /*
-       اندازه دکمه نسبت به game-area
-    */
 
     width: 7%;
 }
@@ -224,17 +268,14 @@ body {
 
     display: block;
 
-    /*
-       اندازه تصویر نسبت به game-area
-    */
-
     width: 10%;
-
     height: auto;
 
+    max-width: none;
+
     /*
-       مختصات X و Y توسط JavaScript
-       تعیین می‌شوند.
+       JavaScript مقدار left و top
+       را تعیین می‌کند.
     */
 
     transform: translate(-50%, -50%);
@@ -242,60 +283,53 @@ body {
     z-index: 5;
 
     user-select: none;
+    -webkit-user-select: none;
 
     pointer-events: none;
+
+    /*
+       جلوگیری از فاصله اضافی inline image
+    */
+
+    line-height: 0;
 }
 
 
 /* ========================================
-   MOVING IMAGE 1 SIZE
+   MOVING IMAGE 1
 ======================================== */
 
 .moving-image-1 {
 
-    /*
-       اندازه تصویر اول
-    */
-
     width: 30%;
 }
 
 
 /* ========================================
-   MOVING IMAGE 2 SIZE
+   MOVING IMAGE 2
 ======================================== */
 
 .moving-image-2 {
 
-    /*
-       اندازه تصویر دوم
-    */
-
     width: 89.5%;
 }
 
+
 /* ========================================
-   MOVING IMAGE 3 SIZE
+   MOVING IMAGE 3
 ======================================== */
 
 .moving-image-3 {
 
-    /*
-       اندازه تصویر سوم
-    */
-
     width: 30%;
 }
 
+
 /* ========================================
-   MOVING IMAGE 4 SIZE
+   MOVING IMAGE 4
 ======================================== */
 
 .moving-image-4 {
-
-    /*
-       اندازه تصویر چهارم
-    */
 
     width: 20%;
 }
@@ -309,57 +343,32 @@ body {
 
     position: absolute;
 
-    /*
-       مرکز Text Block
-       توسط left و top تعیین می‌شود.
-    */
-
     transform: translate(-50%, -50%);
-
-    /*
-       عرض متن نسبت به Game Area
-    */
 
     width: 55%;
 
-    /*
-       لایه متن
-    */
-
     z-index: 12;
 
-    /*
-       فونت
-    */
-
     font-family: "Unixel", sans-serif;
-
-    /*
-       راست‌چین برای فارسی
-    */
 
     direction: rtl;
 
     text-align: right;
 
-    /*
-       جلوگیری از انتخاب متن در صورت نیاز
-    */
-
     user-select: none;
-
-    /*
-       ارتفاع خطوط
-    */
+    -webkit-user-select: none;
 
     line-height: 1.6;
 
-    /*
-       حذف رفتار inline
-    */
-
     margin: 0;
     padding: 0;
+
+    /*
+       متن نباید باعث ایجاد
+       اسکرول افقی شود.
+    */
+
+    max-width: 55%;
 }
 
 
@@ -369,17 +378,13 @@ body {
 
 .text-title {
 
-    /*
-       عنوان بزرگ‌تر
-    */
-
     font-family: "Unixel", sans-serif;
 
     font-size: 14px;
 
     font-weight: bold;
 
-    line-height: 0.1;
+    line-height: 1.2;
 
     margin: 0 0 12px 0;
 
@@ -404,6 +409,9 @@ body {
     margin: 0;
 
     padding: 0;
+
+    overflow-wrap: break-word;
+    word-break: normal;
 }
 
 
@@ -413,20 +421,96 @@ body {
 
 .text-block-1 {
 
-    /*
-       مختصات مرکز متن
-
-       دقیقاً مانند Button:
-
-       left = X
-       top  = Y
-    */
-
     left: 45%;
 
     top: 90%;
-
 }
+
+
+/* ========================================
+   SEMANTIC / SEO CONTENT
+======================================== */
+
+/*
+   اگر در index.html یک بخش معنایی مانند:
+
+   <header class="seo-header">
+   ...
+   </header>
+
+   یا:
+
+   <section class="seo-content">
+   ...
+   </section>
+
+   وجود داشته باشد، این قوانین آن را
+   از طراحی تصویری صفحه خارج می‌کنند،
+   بدون اینکه از display:none استفاده شود.
+
+   توجه:
+   این بخش برای پنهان‌کردن محتوای فریبنده
+   یا keyword stuffing نیست؛ فقط برای عناصر
+   معنایی/دسترسی است که در طراحی تصویری
+   صفحه جای بصری مستقلی ندارند.
+*/
+
+.seo-header,
+.seo-content {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+
+/* ========================================
+   SEO TYPOGRAPHY RESET
+======================================== */
+
+.seo-header h1,
+.seo-header h2,
+.seo-header p,
+.seo-content h1,
+.seo-content h2,
+.seo-content h3,
+.seo-content p {
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   LANGUAGE LINKS
+======================================== */
+
+.language-selector {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    margin: 0;
+    padding: 0;
+}
+
 
 /* ========================================
    MOBILE / SMALL SCREENS
@@ -437,14 +521,109 @@ body {
     .game-area {
 
         /*
-           تصویر اصلی حداکثر 90٪
-           عرض صفحه را می‌گیرد.
+           صفحه در موبایل حداکثر
+           90 درصد عرض را می‌گیرد.
         */
 
         width: 90vw;
+
+        max-width: 90vw;
     }
 
 }
+
+
+/* ========================================
+   VERY SMALL SCREENS
+======================================== */
+
+@media (max-width: 600px) {
+
+    .game-area {
+
+        width: 90vw;
+
+        max-width: 90vw;
+    }
+
+}
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .game-area {
+
+        /*
+           در حالت Landscape ارتفاع
+           محدودکننده اصلی است.
+        */
+
+        width: auto;
+
+        height: 90vh;
+
+        max-width: 90vw;
+
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+/* ========================================
+   PORTRAIT MOBILE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: portrait
+) {
+
+    .game-area {
+
+        width: 90vw;
+
+        height: auto;
+
+        max-width: 90vw;
+
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+/*
+   برای کاربرانی که در سیستم‌عامل خود
+   حرکت‌های تصویری را محدود کرده‌اند.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    body {
+
+        animation: none;
+    }
+
+    .button img {
+
+        transition: none;
+    }
+}
+
 
 /* ========================================
    MOVING BACKGROUND
@@ -453,11 +632,14 @@ body {
 @keyframes moveBackground {
 
     from {
+
         background-position: 0 0;
     }
 
     to {
+
         background-position: 500px 500px;
     }
 
 }
+```
