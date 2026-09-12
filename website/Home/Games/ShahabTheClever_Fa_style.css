@@ -1,7 +1,3 @@
-/* ========================================
-   BASIC
-======================================== */
-
 * {
     box-sizing: border-box;
 }
@@ -24,7 +20,6 @@ body {
 
     background-image: url("../Background_Pattern.png");
     background-color: aliceblue;
-
     background-repeat: repeat;
     background-position: 0 0;
 
@@ -45,11 +40,8 @@ body {
 }
 
 html,
-body {
-    font-family: "Unixel", sans-serif;
-}
-* 
-{
+body,
+* {
     font-family: "Unixel", sans-serif;
 }
 
@@ -59,35 +51,35 @@ body {
 ======================================== */
 
 .screen {
-
     width: 100%;
-
     min-height: 100vh;
 
     display: flex;
-
     justify-content: center;
-
     align-items: flex-start;
 
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
+
+    overflow: hidden;
 }
 
 
 /* ========================================
-   MAIN GAME AREA
+   GAME AREA
 ======================================== */
 
 .game-area {
+    position: relative;
 
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
 
     height: auto;
 
-    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 
-    flex-shrink: 0;
+    flex: 0 1 900px;
 
     overflow: visible;
 
@@ -100,11 +92,9 @@ body {
 ======================================== */
 
 .main-image {
-
     display: block;
 
     width: 100%;
-
     height: auto;
 
     object-fit: contain;
@@ -113,17 +103,15 @@ body {
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 }
 
 
 /* ========================================
-   BUTTON BASE
+   BUTTONS
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
@@ -138,13 +126,7 @@ body {
     line-height: 0;
 }
 
-
-/* ========================================
-   BUTTON IMAGE
-======================================== */
-
 .button img {
-
     display: block;
 
     width: 100%;
@@ -154,19 +136,12 @@ body {
     padding: 0;
 
     cursor: pointer;
-
     user-select: none;
 
     transition: transform 0.15s ease;
 }
 
-
-/* ========================================
-   BUTTON HOVER
-======================================== */
-
 .button:hover img {
-
     transform: scale(1.05);
 }
 
@@ -175,131 +150,27 @@ body {
    BUTTON POSITIONS
 ======================================== */
 
-.button-1 {
-    left: 94%;
-    top: 2.5%;
-    width: 4%;
-}
+.button-1  { left: 94%;   top: 2.5%; width: 4%; }
+.button-2  { left: 86%;   top: 2.4%; width: 12%; }
+.button-3  { left: 79%;   top: 2.4%; width: 4%; }
+.button-4  { left: 70%;   top: 2.4%; width: 15%; }
+.button-5  { left: 61.5%; top: 2.4%; width: 4%; }
+.button-6  { left: 54%;   top: 2.5%; width: 13%; }
+.button-7  { left: 46.5%; top: 2.2%; width: 3.8%; }
+.button-8  { left: 38.5%; top: 2.5%; width: 13%; }
+.button-9  { left: 30.9%; top: 2.2%; width: 3.8%; }
+.button-10 { left: 22.8%; top: 2.5%; width: 13.5%; }
+.button-11 { left: 15.1%; top: 2.3%; width: 3.8%; }
+.button-12 { left: 7.9%;  top: 2.5%; width: 13%; }
 
-.button-2 {
-    left: 86%;
-    top: 2.4%;
-    width: 12%;
-}
-
-.button-3 {
-    left: 79%;
-    top: 2.4%;
-    width: 4%;
-}
-
-.button-4 {
-    left: 70%;
-    top: 2.4%;
-    width: 15%;
-}
-
-.button-5 {
-    left: 61.5%;
-    top: 2.4%;
-    width: 4%;
-}
-
-.button-6 {
-    left: 54%;
-    top: 2.5%;
-    width: 13%;
-}
-
-.button-7 {
-    left: 46.5%;
-    top: 2.2%;
-    width: 3.8%;
-}
-
-.button-8 {
-    left: 38.5%;
-    top: 2.5%;
-    width: 13%;
-}
-
-.button-9 {
-    left: 30.9%;
-    top: 2.2%;
-    width: 3.8%;
-}
-
-.button-10 {
-    left: 22.8%;
-    top: 2.5%;
-    width: 13.5%;
-}
-
-.button-11 {
-    left: 15.1%;
-    top: 2.3%;
-    width: 3.8%;
-}
-
-.button-12 {
-    left: 7.9%;
-    top: 2.5%;
-    width: 13%;
-}
-
-
-/* ========================================
-   GAME BUTTONS
-======================================== */
-
-.button-13 {
-    left: 30%;
-    top: 71%;
-    width: 47%;
-}
-
-.button-14 {
-    left: 73%;
-    top: 62%;
-    width: 37%;
-}
-
-.button-15 {
-    left: 65%;
-    top: 75%;
-    width: 20%;
-}
-
-.button-16 {
-    left: 84%;
-    top: 75%;
-    width: 15%;
-}
-
-.button-17 {
-    left: 65%;
-    top: 81%;
-    width: 20%;
-}
-
-.button-18 {
-    left: 84%;
-    top: 81%;
-    width: 10%;
-}
-
-.button-19 {
-    left: 84%;
-    top: 82%;
-    width: 12%;
-}
-
-.button-20 {
-    left: 73%;
-    top: 89%;
-    width: 5%;
-}
-
+.button-13 { left: 30%; top: 71%; width: 47%; }
+.button-14 { left: 73%; top: 62%; width: 37%; }
+.button-15 { left: 65%; top: 75%; width: 20%; }
+.button-16 { left: 84%; top: 75%; width: 15%; }
+.button-17 { left: 65%; top: 81%; width: 20%; }
+.button-18 { left: 84%; top: 81%; width: 10%; }
+.button-19 { left: 84%; top: 82%; width: 12%; }
+.button-20 { left: 73%; top: 89%; width: 5%; }
 
 
 /* ========================================
@@ -307,7 +178,6 @@ body {
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
@@ -322,195 +192,84 @@ body {
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 
     line-height: 0;
 }
 
+.moving-image-1  { width: 30%; }
+.moving-image-2  { width: 89.5%; }
+.moving-image-3  { width: 91.5%; }
+.moving-image-4  { width: 91%; }
+.moving-image-5  { width: 50%; }
+.moving-image-6  { width: 30%; }
+.moving-image-7  { width: 1%; }
+.moving-image-8  { width: 1.5%; }
+.moving-image-9  { width: 2%; }
+.moving-image-10 { width: 2.5%; }
+.moving-image-11 { width: 3%; }
+.moving-image-12 { width: 3.5%; }
+.moving-image-13 { width: 4%; }
+
 
 /* ========================================
-   MOVING IMAGE SIZES
-======================================== */
-
-.moving-image-1 {
-    width: 30%;
-}
-
-.moving-image-2 {
-    width: 89.5%;
-}
-
-.moving-image-3 {
-    width: 91.5%;
-}
-
-.moving-image-4 {
-    width: 91%;
-}
-
-.moving-image-5 {
-    width: 50%;
-}
-
-.moving-image-6 {
-    width: 30%;
-}
-.moving-image-7 {
-    width: 1%;
-}
-.moving-image-8 {
-    width: 1.5%;
-}
-.moving-image-9 {
-    width: 2%;
-}
-.moving-image-10 {
-    width: 2.5%;
-}
-.moving-image-11 {
-    width: 3%;
-}
-.moving-image-12 {
-    width: 3.5%;
-}
-.moving-image-13 {
-    width: 4%;
-}
-
-/* ========================================
-   TEXT BLOCK
+   TEXT
 ======================================== */
 
 .text-block {
-
     position: absolute;
-
-    /*
-       مرکز Text Block
-       توسط left و top تعیین می‌شود.
-    */
 
     transform: translate(-50%, -50%);
 
-    /*
-       عرض متن نسبت به Game Area
-    */
-
     width: 55%;
-
-    /*
-       لایه متن
-    */
 
     z-index: 25;
 
-    /*
-       فونت
-    */
-
-    font-family: "Unixel", sans-serif;
-
-    /*
-       راست‌چین برای فارسی
-    */
-
     direction: ltr;
-
     text-align: center;
-
-    /*
-       جلوگیری از انتخاب متن در صورت نیاز
-    */
 
     user-select: none;
 
-    /*
-       ارتفاع خطوط
-    */
-
     line-height: 1.6;
-
-    /*
-       حذف رفتار inline
-    */
 
     margin: 0;
     padding: 0;
 }
 
-
-/* ========================================
-   TEXT TITLE
-======================================== */
-
 .text-title {
-
-    /*
-       عنوان بزرگ‌تر
-    */
-
-    font-family: "Unixel", sans-serif;
-
-    font-size: 50px;
+    font-size: clamp(22px, 5.5556vw, 50px);
 
     font-weight: bold;
-	
-	color: aliceblue;
+
+    color: aliceblue;
 
     line-height: 1;
 
     margin: 0 0 12px 0;
-
     padding: 0;
 }
 
-
-/* ========================================
-   TEXT CONTENT
-======================================== */
-
 .text-content {
-
-    font-family: "Unixel", sans-serif;
-
-    font-size: 16px;
+    font-size: clamp(8px, 1.7778vw, 16px);
 
     font-weight: normal;
-	
-	color: aliceblue;
+
+    color: aliceblue;
 
     line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
 }
 
-
-/* ========================================
-   TEXT BLOCK POSITION
-======================================== */
-
 .text-block-1 {
-
-    /*
-       مختصات مرکز متن
-
-       دقیقاً مانند Button:
-
-       left = X
-       top  = Y
-    */
-
     left: 30%;
-
     top: 70%;
-
 }
 
+
 /* ========================================
-   IMAGE FADE SLIDER
+   IMAGE SLIDER
 ======================================== */
 
 .image-slider {
@@ -520,6 +279,7 @@ body {
     top: 16%;
 
     width: 70%;
+
     height: auto;
 
     transform: translate(-50%, -50%);
@@ -528,9 +288,6 @@ body {
 
     overflow: hidden;
 }
-
-
-/* تمام تصاویر روی هم قرار می‌گیرند */
 
 .image-slider img {
     position: absolute;
@@ -554,9 +311,6 @@ body {
     pointer-events: none;
 }
 
-
-/* اولین تصویر */
-
 .image-slider img:first-child {
     position: relative;
     opacity: 1;
@@ -564,100 +318,76 @@ body {
 
 
 /* ========================================
-   MOBILE / SMALL SCREENS
+   VIDEO
 ======================================== */
-
-@media (max-width: 900px) {
-
-    .screen {
-
-        justify-content: flex-start;
-
-    }
-
-    .game-area {
-
-        width: 900px;
-
-    }
-
-}
-
-
-/* ========================================
-   MOVING BACKGROUND
-======================================== */
-
-@keyframes moveBackground {
-
-    from {
-
-        background-position: 0 0;
-
-    }
-
-    to {
-
-        background-position: 500px 500px;
-
-    }
-
-}
-
-/* ========================================
-   APARAT VIDEO
-======================================== */
-
 
 .video-box {
-
     position: absolute;
-
-
-    /*
-       محل مرکز ویدیو
-       مشابه button ها
-    */
 
     left: 73%;
     top: 62%;
 
-
-    /*
-       اندازه ویدیو نسبت به game-area
-    */
-
     width: 33%;
-
-
-    /*
-       نسبت استاندارد ویدیو
-       16:9
-    */
 
     aspect-ratio: 16 / 9;
 
-
     transform: translate(-50%, -50%);
-
 
     z-index: 11;
 
-
     overflow: hidden;
-
 }
 
-
-
 .video-box iframe {
-
     width: 100%;
     height: 100%;
 
     display: block;
 
-
     border: 0;
+}
 
+
+/* ========================================
+   BACKGROUND ANIMATION
+======================================== */
+
+@keyframes moveBackground {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 500px 500px;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .screen {
+        width: 100%;
+        min-height: 100vh;
+
+        justify-content: center;
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .game-area {
+        width: 100%;
+        max-width: 900px;
+
+        flex: 0 1 900px;
+    }
+
+    .button:hover img {
+        transform: none;
+    }
 }
