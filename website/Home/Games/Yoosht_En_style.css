@@ -1,47 +1,34 @@
 /* ========================================
-   GLOBAL
+   BASIC
 ======================================== */
 
 * {
     box-sizing: border-box;
-    font-family: "Unixel", sans-serif;
 }
-
 
 html,
 body {
-
     width: 100%;
     min-height: 100%;
-
     margin: 0;
     padding: 0;
-
-    overflow-x: hidden;
 }
-
 
 html {
     overflow-x: hidden;
 }
 
-
 body {
-
     overflow-x: hidden;
     overflow-y: auto;
 
-    background-image:
-        url("../Background_Pattern.png");
-
+    background-image: url("../Background_Pattern.png");
     background-color: aliceblue;
 
     background-repeat: repeat;
-
     background-position: 0 0;
 
-    animation:
-        moveBackground 20s linear infinite;
+    animation: moveBackground 20s linear infinite;
 }
 
 
@@ -50,26 +37,20 @@ body {
 ======================================== */
 
 @font-face {
-
     font-family: "Unixel";
-
-    src:
-        url("../Fonts/unixel-Regular.ttf")
-        format("truetype");
-
+    src: url("../Fonts/unixel-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
-
     font-display: swap;
 }
 
-
 html,
 body {
-
-    font-family:
-        "Unixel",
-        sans-serif;
+    font-family: "Unixel", sans-serif;
+}
+* 
+{
+    font-family: "Unixel", sans-serif;
 }
 
 
@@ -80,48 +61,37 @@ body {
 .screen {
 
     width: 100%;
-    max-width: 100%;
 
     min-height: 100vh;
 
     display: flex;
 
     justify-content: center;
+
     align-items: flex-start;
 
     padding-top: 30px;
     padding-bottom: 30px;
-
-    overflow: visible;
 }
 
 
 /* ========================================
-   GAME AREA
+   MAIN GAME AREA
 ======================================== */
 
 .game-area {
 
-    /*
-       Desktop design remains 900px.
-       On smaller screens it can shrink.
-    */
-
     width: 900px;
-    max-width: 100%;
 
     height: auto;
 
     position: relative;
 
-    flex: 0 1 900px;
-    flex-shrink: 1;
+    flex-shrink: 0;
 
     overflow: visible;
 
     line-height: 0;
-
-    margin: 0 auto;
 }
 
 
@@ -134,7 +104,6 @@ body {
     display: block;
 
     width: 100%;
-    max-width: 100%;
 
     height: auto;
 
@@ -150,7 +119,7 @@ body {
 
 
 /* ========================================
-   BUTTONS
+   BUTTON BASE
 ======================================== */
 
 .button {
@@ -159,8 +128,7 @@ body {
 
     display: block;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     margin: 0;
     padding: 0;
@@ -168,20 +136,19 @@ body {
     z-index: 10;
 
     line-height: 0;
-
-    text-decoration: none;
 }
 
 
-.button img,
-img.button {
+/* ========================================
+   BUTTON IMAGE
+======================================== */
+
+.button img {
 
     display: block;
 
     width: 100%;
     height: auto;
-
-    max-width: 100%;
 
     margin: 0;
     padding: 0;
@@ -190,29 +157,22 @@ img.button {
 
     user-select: none;
 
-    transition:
-        transform 0.15s ease;
-}
-
-
-.button:hover img,
-.button:hover {
-
-    /*
-       Keep the original hover behaviour.
-    */
-}
-
-
-.button:hover img {
-
-    transform:
-        scale(1.05);
+    transition: transform 0.15s ease;
 }
 
 
 /* ========================================
-   TOP NAVIGATION
+   BUTTON HOVER
+======================================== */
+
+.button:hover img {
+
+    transform: scale(1.05);
+}
+
+
+/* ========================================
+   BUTTON POSITIONS
 ======================================== */
 
 .button-1 {
@@ -304,11 +264,6 @@ img.button {
     width: 37%;
 }
 
-
-/* ========================================
-   STORE BUTTONS
-======================================== */
-
 .button-15 {
     left: 65%;
     top: 75%;
@@ -339,16 +294,12 @@ img.button {
     width: 12%;
 }
 
-
-/* ========================================
-   HOME
-======================================== */
-
 .button-20 {
     left: 73%;
     top: 89%;
     width: 5%;
 }
+
 
 
 /* ========================================
@@ -363,10 +314,7 @@ img.button {
 
     height: auto;
 
-    max-width: 100%;
-
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     z-index: 5;
 
@@ -380,6 +328,10 @@ img.button {
     line-height: 0;
 }
 
+
+/* ========================================
+   MOVING IMAGE SIZES
+======================================== */
 
 .moving-image-1 {
     width: 30%;
@@ -404,35 +356,27 @@ img.button {
 .moving-image-6 {
     width: 30%;
 }
-
 .moving-image-7 {
     width: 1%;
 }
-
 .moving-image-8 {
     width: 1.5%;
 }
-
 .moving-image-9 {
     width: 2%;
 }
-
 .moving-image-10 {
     width: 2.5%;
 }
-
 .moving-image-11 {
     width: 3%;
 }
-
 .moving-image-12 {
     width: 3.5%;
 }
-
 .moving-image-13 {
     width: 4%;
 }
-
 
 /* ========================================
    TEXT BLOCK
@@ -442,93 +386,143 @@ img.button {
 
     position: absolute;
 
-    transform:
-        translate(-50%, -50%);
+    /*
+       مرکز Text Block
+       توسط left و top تعیین می‌شود.
+    */
+
+    transform: translate(-50%, -50%);
+
+    /*
+       عرض متن نسبت به Game Area
+    */
 
     width: 55%;
-    max-width: 55%;
+
+    /*
+       لایه متن
+    */
 
     z-index: 25;
 
-    font-family:
-        "Unixel",
-        sans-serif;
+    /*
+       فونت
+    */
+
+    font-family: "Unixel", sans-serif;
+
+    /*
+       راست‌چین برای فارسی
+    */
 
     direction: ltr;
 
     text-align: center;
 
+    /*
+       جلوگیری از انتخاب متن در صورت نیاز
+    */
+
     user-select: none;
+
+    /*
+       ارتفاع خطوط
+    */
 
     line-height: 1.6;
 
-    margin: 0;
-    padding: 0;
-}
-
-
-.text-title {
-
-    font-family:
-        "Unixel",
-        sans-serif;
-
-    font-size: 50px;
-
-    font-weight: bold;
-
-    color: aliceblue;
-
-    line-height: 1;
-
-    margin: 0 0 12px 0;
-    padding: 0;
-}
-
-
-.text-content {
-
-    font-family:
-        "Unixel",
-        sans-serif;
-
-    font-size: 16px;
-
-    font-weight: normal;
-
-    color: aliceblue;
-
-    line-height: 1.7;
+    /*
+       حذف رفتار inline
+    */
 
     margin: 0;
     padding: 0;
-}
-
-
-.text-block-1 {
-
-    left: 30%;
-    top: 70%;
 }
 
 
 /* ========================================
-   IMAGE SLIDER
+   TEXT TITLE
+======================================== */
+
+.text-title {
+
+    /*
+       عنوان بزرگ‌تر
+    */
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 50px;
+
+    font-weight: bold;
+	
+	color: aliceblue;
+
+    line-height: 1;
+
+    margin: 0 0 12px 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT CONTENT
+======================================== */
+
+.text-content {
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 16px;
+
+    font-weight: normal;
+	
+	color: aliceblue;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT BLOCK POSITION
+======================================== */
+
+.text-block-1 {
+
+    /*
+       مختصات مرکز متن
+
+       دقیقاً مانند Button:
+
+       left = X
+       top  = Y
+    */
+
+    left: 30%;
+
+    top: 70%;
+
+}
+
+/* ========================================
+   IMAGE FADE SLIDER
 ======================================== */
 
 .image-slider {
-
     position: absolute;
 
     left: 62%;
     top: 16%;
 
     width: 70%;
-
     height: auto;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     z-index: 1;
 
@@ -536,8 +530,9 @@ img.button {
 }
 
 
-.image-slider img {
+/* تمام تصاویر روی هم قرار می‌گیرند */
 
+.image-slider img {
     position: absolute;
 
     left: 0;
@@ -553,47 +548,106 @@ img.button {
 
     opacity: 0;
 
-    transition:
-        opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 
     user-select: none;
-
     pointer-events: none;
 }
 
 
+/* اولین تصویر */
+
 .image-slider img:first-child {
-
     position: relative;
-
     opacity: 1;
 }
 
 
 /* ========================================
-   VIDEO
+   MOBILE / SMALL SCREENS
 ======================================== */
+
+@media (max-width: 900px) {
+
+    .screen {
+
+        justify-content: flex-start;
+
+    }
+
+    .game-area {
+
+        width: 900px;
+
+    }
+
+}
+
+
+/* ========================================
+   MOVING BACKGROUND
+======================================== */
+
+@keyframes moveBackground {
+
+    from {
+
+        background-position: 0 0;
+
+    }
+
+    to {
+
+        background-position: 500px 500px;
+
+    }
+
+}
+
+/* ========================================
+   APARAT VIDEO
+======================================== */
+
 
 .video-box {
 
     position: absolute;
 
+
+    /*
+       محل مرکز ویدیو
+       مشابه button ها
+    */
+
     left: 73%;
     top: 62%;
 
+
+    /*
+       اندازه ویدیو نسبت به game-area
+    */
+
     width: 33%;
+
+
+    /*
+       نسبت استاندارد ویدیو
+       16:9
+    */
 
     aspect-ratio: 16 / 9;
 
-    transform:
-        translate(-50%, -50%);
+
+    transform: translate(-50%, -50%);
+
 
     z-index: 11;
 
+
     overflow: hidden;
 
-    max-width: 100%;
 }
+
 
 
 .video-box iframe {
@@ -601,218 +655,9 @@ img.button {
     width: 100%;
     height: 100%;
 
-    max-width: 100%;
-
     display: block;
 
+
     border: 0;
-}
 
-
-/* ========================================
-   BACKGROUND ANIMATION
-======================================== */
-
-@keyframes moveBackground {
-
-    from {
-
-        background-position:
-            0 0;
-    }
-
-    to {
-
-        background-position:
-            500px 500px;
-    }
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 900px) {
-
-    html,
-    body {
-
-        width: 100%;
-        max-width: 100%;
-
-        overflow-x: hidden;
-    }
-
-
-    .screen {
-
-        width: 100%;
-        max-width: 100%;
-
-        min-height: 100vh;
-
-        justify-content: center;
-        align-items: flex-start;
-
-        padding-top: 15px;
-        padding-bottom: 15px;
-
-        overflow: hidden;
-    }
-
-
-    .game-area {
-
-        /*
-           Critical mobile fix:
-           900px is no longer forced.
-        */
-
-        width: 100%;
-        max-width: 900px;
-
-        flex:
-            0 1 900px;
-
-        flex-shrink: 1;
-
-        height: auto;
-
-        margin: 0 auto;
-    }
-
-
-    .main-image {
-
-        width: 100%;
-        max-width: 100%;
-
-        height: auto;
-    }
-
-
-    .button,
-    .moving-image,
-    .video-box,
-    .text-block,
-    .image-slider {
-
-        /*
-           Keep every absolute element
-           inside the responsive Game Area.
-        */
-
-        max-width: 100%;
-    }
-
-
-    .video-box {
-
-        overflow: hidden;
-    }
-
-
-    .video-box iframe {
-
-        width: 100%;
-        height: 100%;
-    }
-
-
-    /*
-       Responsive typography.
-       Desktop remains 50px / 16px.
-    */
-
-    .text-title {
-
-        font-size:
-            clamp(
-                22px,
-                5.5vw,
-                50px
-            );
-    }
-
-
-    .text-content {
-
-        font-size:
-            clamp(
-                8px,
-                1.8vw,
-                16px
-            );
-
-        line-height: 1.7;
-    }
-}
-
-
-/* ========================================
-   SMALL PHONES
-======================================== */
-
-@media (max-width: 480px) {
-
-    .screen {
-
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-
-    .text-title {
-
-        font-size:
-            clamp(
-                18px,
-                5vw,
-                30px
-            );
-
-        margin-bottom: 5px;
-    }
-
-
-    .text-content {
-
-        font-size:
-            clamp(
-                7px,
-                1.8vw,
-                10px
-            );
-
-        line-height: 1.5;
-    }
-}
-
-
-/* ========================================
-   MOBILE LANDSCAPE
-======================================== */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-    .screen {
-
-        padding-top: 5px;
-        padding-bottom: 5px;
-
-        justify-content: center;
-    }
-
-
-    .game-area {
-
-        width:
-            min(
-                900px,
-                100vw
-            );
-
-        max-width: 100vw;
-    }
 }
