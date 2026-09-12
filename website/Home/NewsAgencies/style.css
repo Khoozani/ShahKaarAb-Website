@@ -11,6 +11,7 @@
 html,
 body {
     width: 100%;
+    min-width: 0;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -23,6 +24,8 @@ html {
 
 
 body {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -59,19 +62,10 @@ body {
    LOADING STATE
 ======================================== */
 
-/*
-   تا پایان Loading، انیمیشن پس‌زمینه
-   نیز متوقف می‌ماند.
-*/
-
 body:not(.loaded) {
     animation-play-state: paused;
 }
 
-
-/*
-   محتوای اصلی تا پایان Loading دیده نمی‌شود.
-*/
 
 .screen {
     visibility: hidden;
@@ -101,6 +95,9 @@ body.loaded .screen {
 
     align-items: center;
 
+    width: 100%;
+    height: 100%;
+
     background-color: aliceblue;
 
     opacity: 1;
@@ -116,7 +113,7 @@ body.loaded .screen {
 
 #loader-content {
 
-    width: 260px;
+    width: min(260px, calc(100vw - 40px));
 
     display: flex;
 
@@ -130,10 +127,6 @@ body.loaded .screen {
 
 }
 
-
-/* ========================================
-   LOADER PERCENT
-======================================== */
 
 #loader-percent {
 
@@ -156,10 +149,6 @@ body.loaded .screen {
 }
 
 
-/* ========================================
-   LOADER BAR
-======================================== */
-
 #loader-bar {
 
     position: relative;
@@ -176,10 +165,6 @@ body.loaded .screen {
 
 }
 
-
-/* ========================================
-   LOADER PROGRESS
-======================================== */
 
 #loader-progress {
 
@@ -202,10 +187,6 @@ body.loaded .screen {
 }
 
 
-/* ========================================
-   HIDE LOADER
-======================================== */
-
 #loader.hidden {
 
     opacity: 0;
@@ -224,6 +205,7 @@ body.loaded .screen {
 .screen {
 
     width: 100%;
+    max-width: 100%;
 
     min-height: 100vh;
 
@@ -233,9 +215,9 @@ body.loaded .screen {
 
     align-items: flex-start;
 
-    padding-top: 30px;
+    padding: 30px 10px;
 
-    padding-bottom: 30px;
+    margin: 0;
 
 }
 
@@ -246,13 +228,21 @@ body.loaded .screen {
 
 .game-area {
 
-    width: 900px;
+    position: relative;
+
+    width: min(900px, 100%);
+
+    max-width: 900px;
 
     height: auto;
 
-    position: relative;
+    flex: 0 1 900px;
 
-    flex-shrink: 0;
+    min-width: 0;
+
+    margin: 0 auto;
+
+    padding: 0;
 
     overflow: visible;
 
@@ -270,6 +260,8 @@ body.loaded .screen {
     display: block;
 
     width: 100%;
+
+    max-width: 100%;
 
     height: auto;
 
@@ -318,6 +310,8 @@ body.loaded .screen {
     display: block;
 
     width: 100%;
+
+    max-width: 100%;
 
     height: auto;
 
@@ -601,6 +595,8 @@ body.loaded .screen {
 
     height: auto;
 
+    max-width: none;
+
     transform: translate(-50%, -50%);
 
     z-index: 5;
@@ -687,6 +683,8 @@ body.loaded .screen {
 
     width: 55%;
 
+    max-width: 100%;
+
     z-index: 12;
 
     font-family: "Unixel", sans-serif;
@@ -706,10 +704,6 @@ body.loaded .screen {
 }
 
 
-/* ========================================
-   TEXT TITLE
-======================================== */
-
 .text-title {
 
     font-family: "Unixel", sans-serif;
@@ -726,10 +720,6 @@ body.loaded .screen {
 
 }
 
-
-/* ========================================
-   TEXT CONTENT
-======================================== */
 
 .text-content {
 
@@ -748,15 +738,11 @@ body.loaded .screen {
 }
 
 
-/* ========================================
-   TEXT BLOCK POSITION
-======================================== */
-
 .text-block-1 {
 
     left: 50%;
 
-    top: 105%;
+    top: 110%;
 
 }
 
@@ -777,11 +763,15 @@ body.loaded .screen {
 
     height: auto;
 
+    aspect-ratio: auto;
+
     transform: translate(-50%, -50%);
 
     z-index: 1;
 
     overflow: hidden;
+
+    pointer-events: none;
 
 }
 
@@ -801,6 +791,8 @@ body.loaded .screen {
     display: block;
 
     width: 100%;
+
+    max-width: 100%;
 
     height: auto;
 
@@ -833,20 +825,83 @@ body.loaded .screen {
 
 
 /* ========================================
-   MOBILE / SMALL SCREENS
+   MOBILE
 ======================================== */
 
 @media (max-width: 900px) {
 
     .screen {
 
-        justify-content: flex-start;
+        width: 100%;
+
+        min-width: 0;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        padding: 10px;
 
     }
 
+
     .game-area {
 
-        width: 900px;
+        width: 100%;
+
+        max-width: 900px;
+
+        flex: 0 1 900px;
+
+        min-width: 0;
+
+    }
+
+
+    .main-image {
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+
+    .button img {
+
+        max-width: 100%;
+
+    }
+
+}
+
+
+/* ========================================
+   VERY SMALL SCREENS
+======================================== */
+
+@media (max-width: 480px) {
+
+    .screen {
+
+        padding-left: 5px;
+        padding-right: 5px;
+
+    }
+
+}
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .screen {
+
+        padding-top: 5px;
+        padding-bottom: 20px;
 
     }
 
