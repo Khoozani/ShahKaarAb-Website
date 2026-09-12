@@ -1,30 +1,118 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   GLOBAL
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
+var screen = document.querySelector(".screen");
 
+
+/* ========================================
+   DESIGN CANVAS
+======================================== */
+
+var DESIGN_WIDTH = 900;
+
+
+/* ========================================
+   MAIN IMAGE SIZE
+======================================== */
 
 function setGameAreaSize() {
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+    if (
+        !mainImage ||
+        !gameArea ||
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
 
-    var height =
-        width *
+    /* ====================================
+       ORIGINAL DESIGN HEIGHT
+    ==================================== */
+
+    var designHeight =
+        DESIGN_WIDTH *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
-    gameArea.style.height = height + "px";
+
+    /*
+       Game Area همیشه Canvas اصلی 900px است.
+    */
+
+    gameArea.style.width =
+        DESIGN_WIDTH + "px";
+
+    gameArea.style.height =
+        designHeight + "px";
+
+
+    /* ====================================
+       RESPONSIVE SCALE
+    ==================================== */
+
+    var viewportWidth =
+        document.documentElement.clientWidth;
+
+
+    /*
+       دسکتاپ:
+       بدون Scale
+
+       موبایل:
+       Canvas به اندازه عرض صفحه کوچک می‌شود.
+    */
+
+    var scale =
+        Math.min(
+            1,
+            viewportWidth / DESIGN_WIDTH
+        );
+
+
+    gameArea.style.transform =
+        "scale(" + scale + ")";
+
+
+    /*
+       چون transform فضای layout را تغییر نمی‌دهد،
+       ارتفاع واقعی مورد نیاز Screen را اصلاح می‌کنیم.
+    */
+
+    screen.style.height =
+        (designHeight * scale) + "px";
+
+
+    screen.style.minHeight =
+        (designHeight * scale) + "px";
+
+
+    /*
+       فاصله بالای دسکتاپ
+       در موبایل حذف می‌شود.
+    */
+
+    if (viewportWidth <= DESIGN_WIDTH) {
+
+        screen.style.paddingTop = "0";
+        screen.style.paddingBottom = "0";
+
+    } else {
+
+        screen.style.paddingTop = "30px";
+        screen.style.paddingBottom = "30px";
+
+    }
+
 }
 
 
 /* ========================================
-   IMAGE LOADED
+   INITIAL LOAD
 ======================================== */
 
 if (mainImage.complete) {
@@ -50,13 +138,32 @@ window.addEventListener(
     setGameAreaSize
 );
 
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        setTimeout(
+            setGameAreaSize,
+            100
+        );
+
+    }
+);
+
+
 /* ========================================
    BUTTON HOVER IMAGES
 ======================================== */
 
-var hoverImages = document.querySelectorAll(
-    "[data-normal][data-hover]"
-);
+var hoverImages =
+    document.querySelectorAll(
+        "[data-normal][data-hover]"
+    );
 
 
 for (var i = 0; i < hoverImages.length; i++) {
@@ -66,7 +173,9 @@ for (var i = 0; i < hoverImages.length; i++) {
         function () {
 
             this.src =
-                this.getAttribute("data-hover");
+                this.getAttribute(
+                    "data-hover"
+                );
 
         }
     );
@@ -77,7 +186,9 @@ for (var i = 0; i < hoverImages.length; i++) {
         function () {
 
             this.src =
-                this.getAttribute("data-normal");
+                this.getAttribute(
+                    "data-normal"
+                );
 
         }
     );
@@ -85,24 +196,27 @@ for (var i = 0; i < hoverImages.length; i++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
 
-var movingImages = document.querySelectorAll(
-    ".moving-image"
-);
+var movingImages =
+    document.querySelectorAll(
+        ".moving-image"
+    );
 
 
-for (var j = 0; j < movingImages.length; j++) {
+for (
+    var j = 0;
+    j < movingImages.length;
+    j++
+) {
 
     startMovingImage(
         movingImages[j]
     );
 
 }
-
 
 
 /* ========================================
@@ -116,26 +230,38 @@ function startMovingImage(image) {
        START POSITION
     ====================================== */
 
-    var startX = parseFloat(
-        image.getAttribute("data-start-x")
-    );
+    var startX =
+        parseFloat(
+            image.getAttribute(
+                "data-start-x"
+            )
+        );
 
-    var startY = parseFloat(
-        image.getAttribute("data-start-y")
-    );
+    var startY =
+        parseFloat(
+            image.getAttribute(
+                "data-start-y"
+            )
+        );
 
 
     /* =====================================
        END POSITION
     ====================================== */
 
-    var endX = parseFloat(
-        image.getAttribute("data-end-x")
-    );
+    var endX =
+        parseFloat(
+            image.getAttribute(
+                "data-end-x"
+            )
+        );
 
-    var endY = parseFloat(
-        image.getAttribute("data-end-y")
-    );
+    var endY =
+        parseFloat(
+            image.getAttribute(
+                "data-end-y"
+            )
+        );
 
 
     /* =====================================
@@ -143,7 +269,10 @@ function startMovingImage(image) {
     ====================================== */
 
     var mode =
-        image.getAttribute("data-mode");
+        image.getAttribute(
+            "data-mode"
+        );
+
 
     if (!mode) {
 
@@ -156,9 +285,13 @@ function startMovingImage(image) {
        MOVEMENT SPEED
     ====================================== */
 
-    var speed = parseFloat(
-        image.getAttribute("data-speed")
-    );
+    var speed =
+        parseFloat(
+            image.getAttribute(
+                "data-speed"
+            )
+        );
+
 
     if (!speed || speed <= 0) {
 
@@ -169,9 +302,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
     ====================================== */
 
     var progress = 0;
@@ -179,9 +309,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
     ====================================== */
 
     var direction = 1;
@@ -227,8 +354,6 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
@@ -240,13 +365,9 @@ function startMovingImage(image) {
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -280,12 +401,9 @@ function startMovingImage(image) {
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -293,10 +411,6 @@ function startMovingImage(image) {
                 speed *
                 0.0001;
 
-
-            /* =============================
-               REACHED END
-            ============================= */
 
             if (progress >= 1) {
 
@@ -306,10 +420,6 @@ function startMovingImage(image) {
 
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
@@ -321,10 +431,6 @@ function startMovingImage(image) {
 
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
@@ -341,32 +447,78 @@ function startMovingImage(image) {
 
 }
 
+
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
+    /*
+       اگر اسلایدر تصویر نداشت،
+       خطای JavaScript ایجاد نشود.
+    */
 
-    /* رفتن به تصویر بعدی */
-    currentImage++;
+    if (!sliderImages.length) {
 
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+        return;
+
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    /* ====================================
+       HIDE CURRENT
+    ==================================== */
+
+    sliderImages[currentImage]
+        .style.opacity = "0";
+
+
+    /* ====================================
+       NEXT IMAGE
+    ==================================== */
+
+    currentImage++;
+
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
+        currentImage = 0;
+
+    }
+
+
+    /* ====================================
+       SHOW NEXT
+    ==================================== */
+
+    sliderImages[currentImage]
+        .style.opacity = "1";
+
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   SLIDER TIMER
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+
+}
