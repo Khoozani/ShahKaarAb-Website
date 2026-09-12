@@ -29,9 +29,7 @@ function addResource(src) {
     }
 
     if (resources.indexOf(src) === -1) {
-
         resources.push(src);
-
     }
 
 }
@@ -107,9 +105,7 @@ function updateLoadingProgress() {
     }
 
     if (percent > 100) {
-
         percent = 100;
-
     }
 
     loaderPercent.textContent =
@@ -228,11 +224,6 @@ function finishLoading() {
 
     updateLoadingProgress();
 
-    /*
-       اجازه می‌دهیم 100% برای مدت کوتاهی
-       دیده شود.
-    */
-
     setTimeout(
         function () {
 
@@ -246,7 +237,7 @@ function finishLoading() {
 
 
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA
 ======================================== */
 
 var mainImage = document.querySelector(
@@ -258,7 +249,21 @@ var gameArea = document.querySelector(
 );
 
 
+/* ========================================
+   SET GAME AREA SIZE
+======================================== */
+
 function setGameAreaSize() {
+
+    if (
+        !mainImage ||
+        !gameArea
+    ) {
+
+        return;
+
+    }
+
 
     if (
         !mainImage.naturalWidth ||
@@ -269,16 +274,66 @@ function setGameAreaSize() {
 
     }
 
+
+    /*
+       Width is controlled by CSS.
+
+       Desktop:
+       maximum 900px
+
+       Mobile:
+       automatically becomes viewport width.
+    */
+
     var width =
-        gameArea.offsetWidth;
+        gameArea.getBoundingClientRect().width;
+
+
+    if (!width || width <= 0) {
+
+        return;
+
+    }
+
 
     var height =
         width *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
+
     gameArea.style.height =
         height + "px";
+
+}
+
+
+/* ========================================
+   RESPONSIVE RESIZE HANDLER
+======================================== */
+
+var resizeFrame = null;
+
+function handleResize() {
+
+    if (resizeFrame) {
+
+        cancelAnimationFrame(
+            resizeFrame
+        );
+
+    }
+
+    resizeFrame =
+        requestAnimationFrame(
+            function () {
+
+                setGameAreaSize();
+
+                resizeFrame = null;
+
+            }
+        );
 
 }
 
@@ -302,7 +357,23 @@ function startPage() {
 
     window.addEventListener(
         "resize",
-        setGameAreaSize
+        handleResize,
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================
+       ORIENTATION CHANGE
+    ====================================== */
+
+    window.addEventListener(
+        "orientationchange",
+        handleResize,
+        {
+            passive: true
+        }
     );
 
 
@@ -393,6 +464,16 @@ function startPage() {
         "loaded"
     );
 
+
+    /*
+       One additional measurement after
+       the page becomes visible.
+    */
+
+    requestAnimationFrame(
+        setGameAreaSize
+    );
+
 }
 
 
@@ -401,11 +482,6 @@ function startPage() {
 ======================================== */
 
 function startMovingImage(image) {
-
-
-    /* =====================================
-       START POSITION
-    ====================================== */
 
     var startX = parseFloat(
         image.getAttribute(
@@ -420,10 +496,6 @@ function startMovingImage(image) {
     );
 
 
-    /* =====================================
-       END POSITION
-    ====================================== */
-
     var endX = parseFloat(
         image.getAttribute(
             "data-end-x"
@@ -437,25 +509,16 @@ function startMovingImage(image) {
     );
 
 
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
-
     var mode =
         image.getAttribute(
             "data-mode"
         );
 
+
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
-
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
 
     var speed = parseFloat(
         image.getAttribute(
@@ -463,43 +526,18 @@ function startMovingImage(image) {
         )
     );
 
+
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
-    /* =====================================
-       MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
-    ====================================== */
-
     var progress = 0;
-
-
-    /* =====================================
-       MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
-    ====================================== */
 
     var direction = 1;
 
 
-    /* =====================================
-       UPDATE POSITION
-    ====================================== */
-
     function updatePosition() {
-
-
-        /* =================================
-           CALCULATE X
-        ================================= */
 
         var x =
             startX +
@@ -507,19 +545,11 @@ function startMovingImage(image) {
             progress;
 
 
-        /* =================================
-           CALCULATE Y
-        ================================= */
-
         var y =
             startY +
             (endY - startY) *
             progress;
 
-
-        /* =================================
-           APPLY POSITION
-        ================================= */
 
         image.style.left =
             x + "%";
@@ -588,10 +618,6 @@ function startMovingImage(image) {
                 0.0001;
 
 
-            /* =============================
-               REACHED END
-            ============================= */
-
             if (progress >= 1) {
 
                 progress = 1;
@@ -600,10 +626,6 @@ function startMovingImage(image) {
 
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
@@ -616,20 +638,12 @@ function startMovingImage(image) {
         }
 
 
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
-
         requestAnimationFrame(
             updatePosition
         );
 
     }
 
-
-    /* =====================================
-       START
-    ====================================== */
 
     updatePosition();
 
@@ -674,19 +688,23 @@ function startSlider(selector) {
         i++
     ) {
 
-        sliderImages[i].style.opacity = "0";
+        sliderImages[i].style.opacity =
+            "0";
 
     }
 
 
-    sliderImages[0].style.opacity = "1";
+    sliderImages[0].style.opacity =
+        "1";
 
 
     /* =====================================
        ONLY ONE IMAGE
     ====================================== */
 
-    if (sliderImages.length <= 1) {
+    if (
+        sliderImages.length <= 1
+    ) {
 
         return;
 
