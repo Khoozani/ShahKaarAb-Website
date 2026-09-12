@@ -1,30 +1,84 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN ELEMENTS
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
 
+/* ========================================
+   UPDATE GAME AREA
+======================================== */
+
 function setGameAreaSize() {
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+    if (!mainImage || !gameArea) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+
+    if (
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
+        return;
+    }
+
+
+    /* =====================================
+       GET REAL WIDTH
+    ====================================== */
+
+    var width = gameArea.clientWidth;
+
+
+    if (!width || width <= 0) {
+        return;
+    }
+
+
+    /* =====================================
+       CALCULATE IMAGE HEIGHT
+    ====================================== */
 
     var height =
         width *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
-    gameArea.style.height = height + "px";
+
+    gameArea.style.height =
+        height + "px";
+
+
+    /* =====================================
+       CALCULATE DESIGN SCALE
+
+       Original design = 900px
+    ====================================== */
+
+    var scale =
+        width / 900;
+
+
+    /*
+       جلوگیری از صفر شدن scale
+    */
+
+    if (!scale || scale <= 0) {
+        scale = 1;
+    }
+
+
+    gameArea.style.setProperty(
+        "--game-scale",
+        scale
+    );
 }
 
 
 /* ========================================
-   IMAGE LOADED
+   INITIAL SIZE
 ======================================== */
 
 if (mainImage.complete) {
@@ -45,28 +99,68 @@ if (mainImage.complete) {
    WINDOW RESIZE
 ======================================== */
 
+var resizeTimer;
+
 window.addEventListener(
     "resize",
-    setGameAreaSize
+    function () {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(
+            setGameAreaSize,
+            50
+        );
+
+    }
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        setTimeout(
+            setGameAreaSize,
+            150
+        );
+
+    }
+);
+
 
 /* ========================================
    BUTTON HOVER IMAGES
 ======================================== */
 
-var hoverImages = document.querySelectorAll(
-    "[data-normal][data-hover]"
-);
+var hoverImages =
+    document.querySelectorAll(
+        "[data-normal][data-hover]"
+    );
 
 
-for (var i = 0; i < hoverImages.length; i++) {
+for (
+    var i = 0;
+    i < hoverImages.length;
+    i++
+) {
 
     hoverImages[i].addEventListener(
         "mouseenter",
         function () {
 
-            this.src =
-                this.getAttribute("data-hover");
+            var hover =
+                this.getAttribute(
+                    "data-hover"
+                );
+
+            if (hover) {
+                this.src = hover;
+            }
 
         }
     );
@@ -76,8 +170,14 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseleave",
         function () {
 
-            this.src =
-                this.getAttribute("data-normal");
+            var normal =
+                this.getAttribute(
+                    "data-normal"
+                );
+
+            if (normal) {
+                this.src = normal;
+            }
 
         }
     );
@@ -85,24 +185,27 @@ for (var i = 0; i < hoverImages.length; i++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
 
-var movingImages = document.querySelectorAll(
-    ".moving-image"
-);
+var movingImages =
+    document.querySelectorAll(
+        ".moving-image"
+    );
 
 
-for (var j = 0; j < movingImages.length; j++) {
+for (
+    var j = 0;
+    j < movingImages.length;
+    j++
+) {
 
     startMovingImage(
         movingImages[j]
     );
 
 }
-
 
 
 /* ========================================
@@ -116,26 +219,40 @@ function startMovingImage(image) {
        START POSITION
     ====================================== */
 
-    var startX = parseFloat(
-        image.getAttribute("data-start-x")
-    );
+    var startX =
+        parseFloat(
+            image.getAttribute(
+                "data-start-x"
+            )
+        );
 
-    var startY = parseFloat(
-        image.getAttribute("data-start-y")
-    );
+
+    var startY =
+        parseFloat(
+            image.getAttribute(
+                "data-start-y"
+            )
+        );
 
 
     /* =====================================
        END POSITION
     ====================================== */
 
-    var endX = parseFloat(
-        image.getAttribute("data-end-x")
-    );
+    var endX =
+        parseFloat(
+            image.getAttribute(
+                "data-end-x"
+            )
+        );
 
-    var endY = parseFloat(
-        image.getAttribute("data-end-y")
-    );
+
+    var endY =
+        parseFloat(
+            image.getAttribute(
+                "data-end-y"
+            )
+        );
 
 
     /* =====================================
@@ -143,12 +260,13 @@ function startMovingImage(image) {
     ====================================== */
 
     var mode =
-        image.getAttribute("data-mode");
+        image.getAttribute(
+            "data-mode"
+        );
+
 
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
 
@@ -156,22 +274,21 @@ function startMovingImage(image) {
        MOVEMENT SPEED
     ====================================== */
 
-    var speed = parseFloat(
-        image.getAttribute("data-speed")
-    );
+    var speed =
+        parseFloat(
+            image.getAttribute(
+                "data-speed"
+            )
+        );
+
 
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
     /* =====================================
        MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
     ====================================== */
 
     var progress = 0;
@@ -179,9 +296,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
     ====================================== */
 
     var direction = 1;
@@ -227,31 +341,21 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
-
             return;
-
         }
 
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
 
-
-            progress =
-                progress +
-                speed *
-                0.0001;
+            progress +=
+                speed * 0.0001;
 
 
             if (progress >= 1) {
@@ -265,7 +369,6 @@ function startMovingImage(image) {
                     endY + "%";
 
                 return;
-
             }
 
 
@@ -274,99 +377,116 @@ function startMovingImage(image) {
             );
 
             return;
-
         }
 
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
 
-
-            progress =
-                progress +
+            progress +=
                 direction *
                 speed *
                 0.0001;
 
-
-            /* =============================
-               REACHED END
-            ============================= */
 
             if (progress >= 1) {
 
                 progress = 1;
 
                 direction = -1;
-
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
                 progress = 0;
 
                 direction = 1;
-
             }
-
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
         );
-
     }
 
 
     /* =====================================
-       START
+       START ANIMATION
     ====================================== */
 
     updatePosition();
-
 }
+
 
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
-function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
+/* ========================================
+   CHECK SLIDER
+======================================== */
 
-    /* رفتن به تصویر بعدی */
-    currentImage++;
+if (sliderImages.length > 1) {
 
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+
+    function showNextImage() {
+
+
+        /* ================================
+           HIDE CURRENT
+        ================================= */
+
+        sliderImages[
+            currentImage
+        ].style.opacity = "0";
+
+
+        /* ================================
+           NEXT IMAGE
+        ================================= */
+
+        currentImage++;
+
+
+        if (
+            currentImage >=
+            sliderImages.length
+        ) {
+
+            currentImage = 0;
+        }
+
+
+        /* ================================
+           SHOW NEXT
+        ================================= */
+
+        sliderImages[
+            currentImage
+        ].style.opacity = "1";
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    /* ====================================
+       EVERY 4 SECONDS
+    ==================================== */
+
+    setInterval(
+        showNextImage,
+        4000
+    );
 }
-
-
-/* هر ۴ ثانیه تصویر بعدی */
-
-setInterval(showNextImage, 4000);
