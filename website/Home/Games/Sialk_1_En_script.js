@@ -1,18 +1,38 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
 
+/* ========================================
+   SET GAME AREA SIZE
+======================================== */
+
 function setGameAreaSize() {
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+    if (!mainImage || !gameArea) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+    if (
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
+        return;
+    }
+
+    /*
+       Always use the CURRENT responsive width
+       of the game area.
+    */
+
+    var width = gameArea.getBoundingClientRect().width;
+
+    if (!width || width <= 0) {
+        return;
+    }
 
     var height =
         width *
@@ -24,19 +44,23 @@ function setGameAreaSize() {
 
 
 /* ========================================
-   IMAGE LOADED
+   INITIAL IMAGE LOAD
 ======================================== */
 
-if (mainImage.complete) {
+if (mainImage) {
 
-    setGameAreaSize();
+    if (mainImage.complete) {
 
-} else {
+        setGameAreaSize();
 
-    mainImage.addEventListener(
-        "load",
-        setGameAreaSize
-    );
+    } else {
+
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
 
 }
 
@@ -49,6 +73,43 @@ window.addEventListener(
     "resize",
     setGameAreaSize
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        /*
+           Wait until browser finishes
+           changing viewport dimensions.
+        */
+
+        setTimeout(
+            setGameAreaSize,
+            100
+        );
+
+    }
+);
+
+
+/* ========================================
+   VISUAL VIEWPORT RESIZE
+======================================== */
+
+if (window.visualViewport) {
+
+    window.visualViewport.addEventListener(
+        "resize",
+        setGameAreaSize
+    );
+
+}
+
 
 /* ========================================
    BUTTON HOVER IMAGES
@@ -65,8 +126,12 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseenter",
         function () {
 
-            this.src =
+            var hover =
                 this.getAttribute("data-hover");
+
+            if (hover) {
+                this.src = hover;
+            }
 
         }
     );
@@ -76,14 +141,17 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseleave",
         function () {
 
-            this.src =
+            var normal =
                 this.getAttribute("data-normal");
+
+            if (normal) {
+                this.src = normal;
+            }
 
         }
     );
 
 }
-
 
 
 /* ========================================
@@ -104,12 +172,15 @@ for (var j = 0; j < movingImages.length; j++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGE FUNCTION
 ======================================== */
 
 function startMovingImage(image) {
+
+    if (!image) {
+        return;
+    }
 
 
     /* =====================================
@@ -146,9 +217,7 @@ function startMovingImage(image) {
         image.getAttribute("data-mode");
 
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
 
@@ -161,15 +230,13 @@ function startMovingImage(image) {
     );
 
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
     /* =====================================
        MOVEMENT PROGRESS
-
+       
        0 = START
        1 = END
     ====================================== */
@@ -193,20 +260,11 @@ function startMovingImage(image) {
 
     function updatePosition() {
 
-
-        /* =================================
-           CALCULATE X
-        ================================= */
-
         var x =
             startX +
             (endX - startX) *
             progress;
 
-
-        /* =================================
-           CALCULATE Y
-        ================================= */
 
         var y =
             startY +
@@ -227,26 +285,18 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
-
             return;
-
         }
 
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -265,7 +315,6 @@ function startMovingImage(image) {
                     endY + "%";
 
                 return;
-
             }
 
 
@@ -274,18 +323,14 @@ function startMovingImage(image) {
             );
 
             return;
-
         }
 
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -294,37 +339,23 @@ function startMovingImage(image) {
                 0.0001;
 
 
-            /* =============================
-               REACHED END
-            ============================= */
-
             if (progress >= 1) {
 
                 progress = 1;
 
                 direction = -1;
-
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
                 progress = 0;
 
                 direction = 1;
-
             }
 
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
@@ -341,32 +372,71 @@ function startMovingImage(image) {
 
 }
 
+
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
-
-    /* رفتن به تصویر بعدی */
-    currentImage++;
-
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+    if (!sliderImages.length) {
+        return;
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    /* =====================================
+       HIDE CURRENT IMAGE
+    ====================================== */
+
+    sliderImages[currentImage].style.opacity =
+        "0";
+
+
+    /* =====================================
+       NEXT IMAGE
+    ====================================== */
+
+    currentImage++;
+
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
+        currentImage = 0;
+
+    }
+
+
+    /* =====================================
+       SHOW NEXT IMAGE
+    ====================================== */
+
+    sliderImages[currentImage].style.opacity =
+        "1";
+
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   SLIDER TIMER
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+
+}
