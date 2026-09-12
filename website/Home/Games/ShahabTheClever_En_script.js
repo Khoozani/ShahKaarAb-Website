@@ -7,7 +7,7 @@ var gameArea = document.querySelector(".game-area");
 
 
 /* ========================================
-   GAME AREA SIZE
+   UPDATE GAME AREA
 ======================================== */
 
 function setGameAreaSize() {
@@ -16,16 +16,31 @@ function setGameAreaSize() {
         return;
     }
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+
+    if (
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
         return;
     }
 
 
-    /* =====================================
-       GET CURRENT WIDTH
-    ====================================== */
+    /*
+       Game Area width is controlled by CSS.
 
-    var width = gameArea.getBoundingClientRect().width;
+       Desktop:
+       900px
+
+       Mobile:
+       viewport width
+    */
+
+    var width = gameArea.clientWidth;
+
+
+    if (!width) {
+        return;
+    }
 
 
     /* =====================================
@@ -38,17 +53,32 @@ function setGameAreaSize() {
         mainImage.naturalWidth;
 
 
-    gameArea.style.height = height + "px";
+    gameArea.style.height =
+        height + "px";
 
 
     /* =====================================
-       CALCULATE SCALE
-       
-       Desktop reference = 900px
+       CALCULATE DESIGN SCALE
+
+       Original design width = 900px
     ====================================== */
 
-    var scale = width / 900;
+    var scale =
+        width / 900;
 
+
+    /*
+       Prevent invalid values.
+    */
+
+    if (!isFinite(scale) || scale <= 0) {
+        scale = 1;
+    }
+
+
+    /*
+       CSS variable used by text.
+    */
 
     gameArea.style.setProperty(
         "--game-scale",
@@ -75,7 +105,6 @@ if (mainImage) {
         );
 
     }
-
 }
 
 
@@ -83,20 +112,9 @@ if (mainImage) {
    WINDOW RESIZE
 ======================================== */
 
-var resizeTimer;
-
 window.addEventListener(
     "resize",
-    function () {
-
-        clearTimeout(resizeTimer);
-
-        resizeTimer = setTimeout(
-            setGameAreaSize,
-            50
-        );
-
-    }
+    setGameAreaSize
 );
 
 
@@ -108,6 +126,11 @@ window.addEventListener(
     "orientationchange",
     function () {
 
+        /*
+           Give browser time to update
+           viewport dimensions.
+        */
+
         setTimeout(
             setGameAreaSize,
             100
@@ -115,6 +138,20 @@ window.addEventListener(
 
     }
 );
+
+
+/* ========================================
+   VISUAL VIEWPORT RESIZE
+======================================== */
+
+if (window.visualViewport) {
+
+    window.visualViewport.addEventListener(
+        "resize",
+        setGameAreaSize
+    );
+
+}
 
 
 /* ========================================
@@ -132,8 +169,14 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseenter",
         function () {
 
-            this.src =
+            var hover =
                 this.getAttribute("data-hover");
+
+            if (hover) {
+
+                this.src = hover;
+
+            }
 
         }
     );
@@ -143,8 +186,14 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseleave",
         function () {
 
-            this.src =
+            var normal =
                 this.getAttribute("data-normal");
+
+            if (normal) {
+
+                this.src = normal;
+
+            }
 
         }
     );
@@ -204,11 +253,26 @@ function startMovingImage(image) {
 
 
     /* =====================================
+       VALIDATE POSITIONS
+    ====================================== */
+
+    if (
+        isNaN(startX) ||
+        isNaN(startY) ||
+        isNaN(endX) ||
+        isNaN(endY)
+    ) {
+        return;
+    }
+
+
+    /* =====================================
        MOVEMENT MODE
     ====================================== */
 
     var mode =
         image.getAttribute("data-mode");
+
 
     if (!mode) {
 
@@ -225,6 +289,7 @@ function startMovingImage(image) {
         image.getAttribute("data-speed")
     );
 
+
     if (!speed || speed <= 0) {
 
         speed = 5;
@@ -234,9 +299,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT PROGRESS
-       
-       0 = START
-       1 = END
     ====================================== */
 
     var progress = 0;
@@ -244,9 +306,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT DIRECTION
-       
-       1  = FORWARD
-       -1 = BACKWARD
     ====================================== */
 
     var direction = 1;
@@ -390,17 +449,16 @@ function startMovingImage(image) {
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages =
-    document.querySelectorAll(
-        ".image-slider img"
-    );
+var sliderImages = document.querySelectorAll(
+    ".image-slider img"
+);
 
 
 var currentImage = 0;
 
 
 /* ========================================
-   CHECK SLIDER
+   SLIDER
 ======================================== */
 
 function showNextImage() {
@@ -410,17 +468,9 @@ function showNextImage() {
     }
 
 
-    /* =====================================
-       HIDE CURRENT
-    ====================================== */
-
     sliderImages[currentImage].style.opacity =
         "0";
 
-
-    /* =====================================
-       NEXT IMAGE
-    ====================================== */
 
     currentImage++;
 
@@ -435,17 +485,13 @@ function showNextImage() {
     }
 
 
-    /* =====================================
-       SHOW NEXT
-    ====================================== */
-
     sliderImages[currentImage].style.opacity =
         "1";
 }
 
 
 /* ========================================
-   CHANGE IMAGE EVERY 4 SECONDS
+   SLIDER TIMER
 ======================================== */
 
 if (sliderImages.length > 1) {
@@ -456,3 +502,10 @@ if (sliderImages.length > 1) {
     );
 
 }
+
+
+/* ========================================
+   INITIAL SIZE
+======================================== */
+
+setGameAreaSize();
