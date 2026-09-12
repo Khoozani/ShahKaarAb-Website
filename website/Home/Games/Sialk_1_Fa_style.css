@@ -9,6 +9,7 @@
 html,
 body {
     width: 100%;
+    min-width: 0;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -29,6 +30,8 @@ body {
     background-position: 0 0;
 
     animation: moveBackground 20s linear infinite;
+
+    font-family: "Unixel", sans-serif;
 }
 
 
@@ -45,11 +48,8 @@ body {
 }
 
 html,
-body {
-    font-family: "Unixel", sans-serif;
-}
-* 
-{
+body,
+* {
     font-family: "Unixel", sans-serif;
 }
 
@@ -59,19 +59,18 @@ body {
 ======================================== */
 
 .screen {
-
     width: 100%;
-
+    max-width: 100%;
     min-height: 100vh;
 
     display: flex;
 
     justify-content: center;
-
     align-items: flex-start;
 
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
+
+    overflow: visible;
 }
 
 
@@ -79,19 +78,34 @@ body {
    MAIN GAME AREA
 ======================================== */
 
-.game-area {
+/*
+   DESKTOP:
+   حداکثر عرض = 900px
 
-    width: 900px;
+   MOBILE:
+   عرض = 100% viewport
+
+   بنابراین دیگر یک Game Area
+   با عرض 900px روی موبایل ساخته نمی‌شود.
+*/
+
+.game-area {
+    position: relative;
+
+    width: min(900px, 100vw);
+    max-width: 100vw;
 
     height: auto;
 
-    position: relative;
-
-    flex-shrink: 0;
+    flex: 0 1 auto;
+    flex-shrink: 1;
 
     overflow: visible;
 
     line-height: 0;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -100,10 +114,10 @@ body {
 ======================================== */
 
 .main-image {
-
     display: block;
 
     width: 100%;
+    max-width: 100%;
 
     height: auto;
 
@@ -113,7 +127,6 @@ body {
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 }
 
@@ -123,7 +136,6 @@ body {
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
@@ -136,6 +148,8 @@ body {
     z-index: 10;
 
     line-height: 0;
+
+    max-width: 100%;
 }
 
 
@@ -144,10 +158,11 @@ body {
 ======================================== */
 
 .button img {
-
     display: block;
 
     width: 100%;
+    max-width: 100%;
+
     height: auto;
 
     margin: 0;
@@ -166,7 +181,6 @@ body {
 ======================================== */
 
 .button:hover img {
-
     transform: scale(1.05);
 }
 
@@ -301,18 +315,17 @@ body {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
 
     height: auto;
+    max-width: 100%;
 
     transform: translate(-50%, -50%);
 
@@ -322,7 +335,6 @@ body {
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 
     line-height: 0;
@@ -356,84 +368,58 @@ body {
 .moving-image-6 {
     width: 30%;
 }
+
 .moving-image-7 {
     width: 1%;
 }
+
 .moving-image-8 {
     width: 1.5%;
 }
+
 .moving-image-9 {
     width: 2%;
 }
+
 .moving-image-10 {
     width: 2.5%;
 }
+
 .moving-image-11 {
     width: 3%;
 }
+
 .moving-image-12 {
     width: 3.5%;
 }
+
 .moving-image-13 {
     width: 4%;
 }
+
 
 /* ========================================
    TEXT BLOCK
 ======================================== */
 
 .text-block {
-
     position: absolute;
-
-    /*
-       مرکز Text Block
-       توسط left و top تعیین می‌شود.
-    */
 
     transform: translate(-50%, -50%);
 
-    /*
-       عرض متن نسبت به Game Area
-    */
-
     width: 55%;
-
-    /*
-       لایه متن
-    */
+    max-width: 55%;
 
     z-index: 25;
 
-    /*
-       فونت
-    */
-
     font-family: "Unixel", sans-serif;
 
-    /*
-       راست‌چین برای فارسی
-    */
-
     direction: ltr;
-
     text-align: center;
-
-    /*
-       جلوگیری از انتخاب متن در صورت نیاز
-    */
 
     user-select: none;
 
-    /*
-       ارتفاع خطوط
-    */
-
     line-height: 1.6;
-
-    /*
-       حذف رفتار inline
-    */
 
     margin: 0;
     padding: 0;
@@ -445,23 +431,22 @@ body {
 ======================================== */
 
 .text-title {
-
-    /*
-       عنوان بزرگ‌تر
-    */
-
     font-family: "Unixel", sans-serif;
 
-    font-size: 50px;
+    /*
+       روی Desktop همان 50px باقی می‌ماند.
+       روی موبایل به صورت متناسب کوچک می‌شود.
+    */
+
+    font-size: clamp(22px, 5.55vw, 50px);
 
     font-weight: bold;
-	
-	color: aliceblue;
+
+    color: aliceblue;
 
     line-height: 1;
 
     margin: 0 0 12px 0;
-
     padding: 0;
 }
 
@@ -471,19 +456,22 @@ body {
 ======================================== */
 
 .text-content {
-
     font-family: "Unixel", sans-serif;
 
-    font-size: 16px;
+    /*
+       Desktop = 16px
+       Mobile = حدود 12px
+    */
+
+    font-size: clamp(11px, 1.78vw, 16px);
 
     font-weight: normal;
-	
-	color: aliceblue;
+
+    color: aliceblue;
 
     line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
 }
 
@@ -493,21 +481,10 @@ body {
 ======================================== */
 
 .text-block-1 {
-
-    /*
-       مختصات مرکز متن
-
-       دقیقاً مانند Button:
-
-       left = X
-       top  = Y
-    */
-
     left: 30%;
-
     top: 70%;
-
 }
+
 
 /* ========================================
    IMAGE FADE SLIDER
@@ -520,17 +497,25 @@ body {
     top: 16%;
 
     width: 70%;
-    height: auto;
+    height: 0;
 
     transform: translate(-50%, -50%);
 
     z-index: 1;
 
-    overflow: hidden;
+    overflow: visible;
+
+    margin: 0;
+    padding: 0;
 }
 
 
-/* تمام تصاویر روی هم قرار می‌گیرند */
+/*
+   چون تصاویر absolute هستند،
+   ارتفاع خود Slider از تصاویر گرفته نمی‌شود.
+   بنابراین ارتفاع را با aspect-ratio تصاویر
+   کنترل نمی‌کنیم و خود تصاویر آزاد هستند.
+*/
 
 .image-slider img {
     position: absolute;
@@ -541,6 +526,8 @@ body {
     display: block;
 
     width: 100%;
+    max-width: 100%;
+
     height: auto;
 
     margin: 0;
@@ -555,30 +542,150 @@ body {
 }
 
 
-/* اولین تصویر */
+/* ========================================
+   FIRST SLIDE
+======================================== */
 
 .image-slider img:first-child {
-    position: relative;
+    position: absolute;
     opacity: 1;
 }
 
 
 /* ========================================
-   MOBILE / SMALL SCREENS
+   APARAT VIDEO
 ======================================== */
+
+.video-box {
+    position: absolute;
+
+    left: 73%;
+    top: 62%;
+
+    width: 33%;
+    max-width: 33%;
+
+    aspect-ratio: 16 / 9;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 11;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+.video-box iframe {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+/*
+   دیگر width:900px نداریم.
+   Game Area خودش با viewport کوچک می‌شود.
+*/
 
 @media (max-width: 900px) {
 
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow-x: hidden;
+    }
+
     .screen {
+        width: 100%;
+        max-width: 100%;
 
-        justify-content: flex-start;
+        justify-content: center;
+        align-items: flex-start;
 
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+        overflow: visible;
     }
 
     .game-area {
+        width: 100vw;
+        max-width: 100vw;
 
-        width: 900px;
+        flex: 0 1 100vw;
+    }
 
+    .main-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /*
+       کمی کاهش فاصلهٔ عنوان در موبایل
+    */
+
+    .text-title {
+        margin-bottom: 6px;
+    }
+
+    /*
+       جلوگیری از بزرگ شدن Hover در موبایل
+    */
+
+    .button:hover img {
+        transform: none;
+    }
+}
+
+
+/* ========================================
+   VERY SMALL PHONES
+======================================== */
+
+@media (max-width: 400px) {
+
+    .screen {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .text-content {
+        line-height: 1.5;
+    }
+
+}
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .screen {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .game-area {
+        width: min(900px, 100vw);
+        max-width: 100vw;
     }
 
 }
@@ -591,73 +698,12 @@ body {
 @keyframes moveBackground {
 
     from {
-
         background-position: 0 0;
-
     }
 
     to {
-
         background-position: 500px 500px;
-
     }
 
 }
-
-/* ========================================
-   APARAT VIDEO
-======================================== */
-
-
-.video-box {
-
-    position: absolute;
-
-
-    /*
-       محل مرکز ویدیو
-       مشابه button ها
-    */
-
-    left: 73%;
-    top: 62%;
-
-
-    /*
-       اندازه ویدیو نسبت به game-area
-    */
-
-    width: 33%;
-
-
-    /*
-       نسبت استاندارد ویدیو
-       16:9
-    */
-
-    aspect-ratio: 16 / 9;
-
-
-    transform: translate(-50%, -50%);
-
-
-    z-index: 11;
-
-
-    overflow: hidden;
-
-}
-
-
-
-.video-box iframe {
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-
-    border: 0;
-
-}
+```
