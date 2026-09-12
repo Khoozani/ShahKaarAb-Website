@@ -11,6 +11,7 @@
 html,
 body {
     width: 100%;
+    min-width: 0;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -23,6 +24,7 @@ html {
 
 
 body {
+    width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -35,6 +37,9 @@ body {
     animation: moveBackground 20s linear infinite;
 
     font-family: "Unixel", sans-serif;
+
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 
@@ -59,19 +64,10 @@ body {
    LOADING STATE
 ======================================== */
 
-/*
-   تا پایان Loading، انیمیشن پس‌زمینه
-   نیز متوقف می‌ماند.
-*/
-
 body:not(.loaded) {
     animation-play-state: paused;
 }
 
-
-/*
-   محتوای اصلی تا پایان Loading دیده نمی‌شود.
-*/
 
 .screen {
     visibility: hidden;
@@ -88,35 +84,33 @@ body.loaded .screen {
 ======================================== */
 
 #loader {
-
     position: fixed;
 
     inset: 0;
+
+    width: 100vw;
+    height: 100vh;
 
     z-index: 99999;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     background-color: aliceblue;
 
     opacity: 1;
-
     visibility: visible;
 
     transition:
         opacity 0.6s ease,
         visibility 0.6s ease;
-
 }
 
 
 #loader-content {
-
-    width: 260px;
+    width: min(260px, calc(100vw - 40px));
 
     display: flex;
 
@@ -127,7 +121,6 @@ body.loaded .screen {
     font-family: "Unixel", sans-serif;
 
     user-select: none;
-
 }
 
 
@@ -136,15 +129,12 @@ body.loaded .screen {
 ======================================== */
 
 #loader-percent {
-
     margin: 0 0 16px 0;
-
     padding: 0;
 
     font-family: "Unixel", sans-serif;
 
     font-size: 28px;
-
     font-weight: normal;
 
     line-height: 1;
@@ -152,7 +142,6 @@ body.loaded .screen {
     direction: ltr;
 
     text-align: center;
-
 }
 
 
@@ -161,11 +150,9 @@ body.loaded .screen {
 ======================================== */
 
 #loader-bar {
-
     position: relative;
 
     width: 100%;
-
     height: 8px;
 
     overflow: hidden;
@@ -173,7 +160,6 @@ body.loaded .screen {
     background-color: rgba(0, 0, 0, 0.12);
 
     border-radius: 2px;
-
 }
 
 
@@ -182,15 +168,12 @@ body.loaded .screen {
 ======================================== */
 
 #loader-progress {
-
     position: absolute;
 
     left: 0;
-
     top: 0;
 
     width: 0%;
-
     height: 100%;
 
     background-color: #000000;
@@ -198,7 +181,6 @@ body.loaded .screen {
     border-radius: 2px;
 
     transition: width 0.2s ease;
-
 }
 
 
@@ -207,13 +189,11 @@ body.loaded .screen {
 ======================================== */
 
 #loader.hidden {
-
     opacity: 0;
 
     visibility: hidden;
 
     pointer-events: none;
-
 }
 
 
@@ -222,21 +202,23 @@ body.loaded .screen {
 ======================================== */
 
 .screen {
-
     width: 100%;
 
     min-height: 100vh;
+    min-height: 100dvh;
 
     display: flex;
 
     justify-content: center;
-
     align-items: flex-start;
 
     padding-top: 30px;
-
     padding-bottom: 30px;
 
+    padding-left: 0;
+    padding-right: 0;
+
+    overflow: visible;
 }
 
 
@@ -244,20 +226,32 @@ body.loaded .screen {
    MAIN GAME AREA
 ======================================== */
 
-.game-area {
+/*
+   Desktop:
+   حداکثر عرض طراحی = 900px
 
-    width: 900px;
+   Mobile:
+   عرض طراحی به اندازه viewport کاهش پیدا می‌کند.
+*/
+
+.game-area {
+    position: relative;
+
+    width: min(900px, calc(100vw - 20px));
+
+    max-width: 900px;
+
+    min-width: 0;
 
     height: auto;
 
-    position: relative;
-
-    flex-shrink: 0;
+    flex: 0 1 auto;
 
     overflow: visible;
 
     line-height: 0;
 
+    margin: 0 auto;
 }
 
 
@@ -266,23 +260,20 @@ body.loaded .screen {
 ======================================== */
 
 .main-image {
-
     display: block;
 
     width: 100%;
+    max-width: 100%;
 
     height: auto;
 
     object-fit: contain;
 
     margin: 0;
-
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
-
 }
 
 
@@ -291,7 +282,6 @@ body.loaded .screen {
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
@@ -299,13 +289,13 @@ body.loaded .screen {
     transform: translate(-50%, -50%);
 
     margin: 0;
-
     padding: 0;
 
     z-index: 10;
 
     line-height: 0;
 
+    max-width: 100%;
 }
 
 
@@ -314,15 +304,14 @@ body.loaded .screen {
 ======================================== */
 
 .button img {
-
     display: block;
 
     width: 100%;
+    max-width: 100%;
 
     height: auto;
 
     margin: 0;
-
     padding: 0;
 
     cursor: pointer;
@@ -330,7 +319,6 @@ body.loaded .screen {
     user-select: none;
 
     transition: transform 0.15s ease;
-
 }
 
 
@@ -339,9 +327,7 @@ body.loaded .screen {
 ======================================== */
 
 .button:hover img {
-
     transform: scale(1.05);
-
 }
 
 
@@ -594,27 +580,25 @@ body.loaded .screen {
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
 
     height: auto;
 
+    max-width: none;
+
     transform: translate(-50%, -50%);
 
     z-index: 5;
 
     margin: 0;
-
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 
     line-height: 0;
-
 }
 
 
@@ -680,12 +664,12 @@ body.loaded .screen {
 ======================================== */
 
 .text-block {
-
     position: absolute;
 
     transform: translate(-50%, -50%);
 
     width: 55%;
+    max-width: 55%;
 
     z-index: 12;
 
@@ -700,9 +684,7 @@ body.loaded .screen {
     line-height: 1.6;
 
     margin: 0;
-
     padding: 0;
-
 }
 
 
@@ -711,7 +693,6 @@ body.loaded .screen {
 ======================================== */
 
 .text-title {
-
     font-family: "Unixel", sans-serif;
 
     font-size: 14px;
@@ -723,7 +704,6 @@ body.loaded .screen {
     margin: 0 0 12px 0;
 
     padding: 0;
-
 }
 
 
@@ -732,7 +712,6 @@ body.loaded .screen {
 ======================================== */
 
 .text-content {
-
     font-family: "Unixel", sans-serif;
 
     font-size: 10px;
@@ -742,9 +721,7 @@ body.loaded .screen {
     line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
-
 }
 
 
@@ -753,11 +730,8 @@ body.loaded .screen {
 ======================================== */
 
 .text-block-1 {
-
     left: 50%;
-
-    top: 105%;
-
+    top: 110%;
 }
 
 
@@ -766,14 +740,13 @@ body.loaded .screen {
 ======================================== */
 
 .image-slider {
-
     position: absolute;
 
     left: 62%;
-
     top: 16%;
 
     width: 70%;
+    max-width: 70%;
 
     height: auto;
 
@@ -783,6 +756,7 @@ body.loaded .screen {
 
     overflow: hidden;
 
+    line-height: 0;
 }
 
 
@@ -791,21 +765,19 @@ body.loaded .screen {
 ======================================== */
 
 .image-slider img {
-
     position: absolute;
 
     left: 0;
-
     top: 0;
 
     display: block;
 
     width: 100%;
+    max-width: 100%;
 
     height: auto;
 
     margin: 0;
-
     padding: 0;
 
     opacity: 0;
@@ -815,7 +787,6 @@ body.loaded .screen {
     user-select: none;
 
     pointer-events: none;
-
 }
 
 
@@ -824,32 +795,141 @@ body.loaded .screen {
 ======================================== */
 
 .image-slider img:first-child {
-
     position: relative;
 
     opacity: 1;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+
+        overflow-x: hidden;
+    }
+
+
+    .screen {
+        width: 100%;
+
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        justify-content: center;
+
+        padding-top: 15px;
+        padding-bottom: 30px;
+
+        overflow: visible;
+    }
+
+
+    /*
+       بسیار مهم:
+       دیگر 900px ثابت نداریم.
+    */
+
+    .game-area {
+        width: calc(100vw - 20px);
+
+        max-width: calc(100vw - 20px);
+
+        min-width: 0;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        flex-shrink: 1;
+    }
+
+
+    .text-title {
+        font-size: 14px;
+    }
+
+
+    .text-content {
+        font-size: 10px;
+    }
 
 }
 
 
 /* ========================================
-   MOBILE / SMALL SCREENS
+   VERY SMALL MOBILE
 ======================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 480px) {
 
     .screen {
-
-        justify-content: flex-start;
-
+        padding-top: 10px;
+        padding-bottom: 25px;
     }
+
 
     .game-area {
+        width: calc(100vw - 12px);
 
-        width: 900px;
-
+        max-width: calc(100vw - 12px);
     }
 
+}
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (orientation: landscape) and (max-width: 900px) {
+
+    .screen {
+        padding-top: 10px;
+        padding-bottom: 25px;
+    }
+
+
+    .game-area {
+        width: calc(100vw - 20px);
+
+        max-width: calc(100vw - 20px);
+    }
+
+}
+
+
+/* ========================================
+   PREVENT IMAGE OVERFLOW
+======================================== */
+
+img {
+    max-width: 100%;
+}
+
+
+/*
+   عناصر absolute اصلی نباید به‌وسیله
+   max-width عمومی کوچک شوند.
+*/
+
+.moving-image {
+    max-width: none;
+}
+
+
+.button img {
+    max-width: 100%;
+}
+
+
+.image-slider img {
+    max-width: 100%;
 }
 
 
@@ -860,15 +940,11 @@ body.loaded .screen {
 @keyframes moveBackground {
 
     from {
-
         background-position: 0 0;
-
     }
 
     to {
-
         background-position: 500px 500px;
-
     }
 
 }
