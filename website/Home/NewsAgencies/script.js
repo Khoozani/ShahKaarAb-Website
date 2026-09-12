@@ -181,11 +181,6 @@ function startWebsite() {
         "100%";
 
 
-    /*
-       اجازه می‌دهیم 100% برای لحظه‌ای
-       دیده شود.
-    */
-
     setTimeout(
         function () {
 
@@ -199,38 +194,14 @@ function startWebsite() {
             );
 
 
-            /*
-             * ==================================
-             * START GAME AREA SIZE
-             * ==================================
-             */
-
             setGameAreaSize();
 
-
-            /*
-             * ==================================
-             * START MOVING IMAGES
-             * ==================================
-             */
 
             startMovingImages();
 
 
-            /*
-             * ==================================
-             * START BUTTON HOVER
-             * ==================================
-             */
-
             startButtonHover();
 
-
-            /*
-             * ==================================
-             * START IMAGE SLIDER
-             * ==================================
-             */
 
             startImageSlider();
 
@@ -252,7 +223,11 @@ if (totalImages === 0) {
 
 } else {
 
-    for (var j = 0; j < resources.length; j++) {
+    for (
+        var j = 0;
+        j < resources.length;
+        j++
+    ) {
 
         var preloadImage =
             new Image();
@@ -275,10 +250,15 @@ if (totalImages === 0) {
 
 
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN GAME AREA SIZE
 ======================================== */
 
 function setGameAreaSize() {
+
+    if (!mainImage) {
+        return;
+    }
+
 
     if (
         !mainImage.naturalWidth ||
@@ -290,14 +270,34 @@ function setGameAreaSize() {
     }
 
 
+    /*
+     * عرض واقعی game-area
+     */
+
     var width =
-        gameArea.offsetWidth;
+        gameArea.clientWidth;
 
 
-    var height =
-        width *
+    if (!width || width <= 0) {
+        return;
+    }
+
+
+    /*
+     * نسبت واقعی تصویر اصلی
+     */
+
+    var aspectRatio =
         mainImage.naturalHeight /
         mainImage.naturalWidth;
+
+
+    /*
+     * ارتفاع game-area
+     */
+
+    var height =
+        width * aspectRatio;
 
 
     gameArea.style.height =
@@ -310,15 +310,54 @@ function setGameAreaSize() {
    WINDOW RESIZE
 ======================================== */
 
+var resizeTimer = null;
+
 window.addEventListener(
     "resize",
     function () {
 
-        if (websiteStarted) {
-
-            setGameAreaSize();
-
+        if (!websiteStarted) {
+            return;
         }
+
+
+        clearTimeout(resizeTimer);
+
+
+        resizeTimer = setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            50
+        );
+
+    }
+);
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        if (!websiteStarted) {
+            return;
+        }
+
+
+        setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            150
+        );
 
     }
 );
@@ -341,7 +380,6 @@ function startButtonHover() {
         k < hoverImages.length;
         k++
     ) {
-
 
         hoverImages[k].addEventListener(
             "mouseenter",
@@ -406,11 +444,6 @@ function startMovingImages() {
 
 function startMovingImage(image) {
 
-
-    /* =====================================
-       START POSITION
-    ====================================== */
-
     var startX = parseFloat(
         image.getAttribute(
             "data-start-x"
@@ -424,10 +457,6 @@ function startMovingImage(image) {
         )
     );
 
-
-    /* =====================================
-       END POSITION
-    ====================================== */
 
     var endX = parseFloat(
         image.getAttribute(
@@ -443,9 +472,22 @@ function startMovingImage(image) {
     );
 
 
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
+    /*
+     * اگر مختصات ناقص باشد،
+     * انیمیشن متوقف می‌شود.
+     */
+
+    if (
+        isNaN(startX) ||
+        isNaN(startY) ||
+        isNaN(endX) ||
+        isNaN(endY)
+    ) {
+
+        return;
+
+    }
+
 
     var mode =
         image.getAttribute(
@@ -454,15 +496,9 @@ function startMovingImage(image) {
 
 
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
-
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
 
     var speed = parseFloat(
         image.getAttribute(
@@ -472,36 +508,16 @@ function startMovingImage(image) {
 
 
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
-    /* =====================================
-       MOVEMENT PROGRESS
-    ====================================== */
-
     var progress = 0;
-
-
-    /* =====================================
-       MOVEMENT DIRECTION
-    ====================================== */
 
     var direction = 1;
 
 
-    /* =====================================
-       UPDATE POSITION
-    ====================================== */
-
     function updatePosition() {
-
-
-        /* =================================
-           CALCULATE X
-        ================================= */
 
         var x =
             startX +
@@ -509,19 +525,11 @@ function startMovingImage(image) {
             progress;
 
 
-        /* =================================
-           CALCULATE Y
-        ================================= */
-
         var y =
             startY +
             (endY - startY) *
             progress;
 
-
-        /* =================================
-           APPLY POSITION
-        ================================= */
 
         image.style.left =
             x + "%";
@@ -531,23 +539,12 @@ function startMovingImage(image) {
             y + "%";
 
 
-        /* =================================
-           STATIC
-        ================================= */
-
         if (mode === "static") {
-
             return;
-
         }
 
 
-        /* =================================
-           ONCE
-        ================================= */
-
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -559,14 +556,11 @@ function startMovingImage(image) {
 
                 progress = 1;
 
-
                 image.style.left =
                     endX + "%";
 
-
                 image.style.top =
                     endY + "%";
-
 
                 return;
 
@@ -577,18 +571,12 @@ function startMovingImage(image) {
                 updatePosition
             );
 
-
             return;
 
         }
 
 
-        /* =================================
-           PINGPONG
-        ================================= */
-
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -596,10 +584,6 @@ function startMovingImage(image) {
                 speed *
                 0.0001;
 
-
-            /* =============================
-               REACHED END
-            ============================= */
 
             if (progress >= 1) {
 
@@ -609,10 +593,6 @@ function startMovingImage(image) {
 
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
@@ -625,20 +605,12 @@ function startMovingImage(image) {
         }
 
 
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
-
         requestAnimationFrame(
             updatePosition
         );
 
     }
 
-
-    /* =====================================
-       START POSITION
-    ====================================== */
 
     updatePosition();
 
@@ -658,18 +630,12 @@ function startImageSlider() {
 
 
     if (!sliderImages.length) {
-
         return;
-
     }
 
 
     var currentImage = 0;
 
-
-    /* =====================================
-       FIRST IMAGE
-    ====================================== */
 
     for (
         var s = 0;
@@ -687,31 +653,14 @@ function startImageSlider() {
         "1";
 
 
-    /* =====================================
-       NEXT IMAGE
-    ====================================== */
-
     function showNextImage() {
-
-
-        /*
-         * محو تصویر فعلی
-         */
 
         sliderImages[currentImage]
             .style.opacity = "0";
 
 
-        /*
-         * رفتن به تصویر بعدی
-         */
-
         currentImage++;
 
-
-        /*
-         * برگشت به تصویر اول
-         */
 
         if (
             currentImage >=
@@ -723,19 +672,11 @@ function startImageSlider() {
         }
 
 
-        /*
-         * نمایش تصویر بعدی
-         */
-
         sliderImages[currentImage]
             .style.opacity = "1";
 
     }
 
-
-    /* =====================================
-       EVERY 4 SECONDS
-    ====================================== */
 
     setInterval(
         showNextImage,
