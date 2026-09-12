@@ -2,13 +2,16 @@
    BASIC
 ======================================== */
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 html,
 body {
     width: 100%;
+    min-width: 0;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -29,8 +32,6 @@ body {
     background-position: 0 0;
 
     animation: moveBackground 20s linear infinite;
-
-    font-family: "Unixel", sans-serif;
 }
 
 
@@ -48,7 +49,10 @@ body {
 
 html,
 body,
-* {
+button,
+a,
+img,
+div {
     font-family: "Unixel", sans-serif;
 }
 
@@ -58,8 +62,8 @@ body,
 ======================================== */
 
 .screen {
-
     width: 100%;
+    min-width: 0;
     min-height: 100vh;
 
     display: flex;
@@ -80,30 +84,32 @@ body,
 .game-area {
 
     /*
+       Design size = 900px
+
        Desktop:
-       900px
+       maximum width = 900px
 
        Mobile:
-       automatically scales to viewport width
+       automatically shrinks to viewport width
     */
 
-    width: min(900px, 100vw);
-
+    width: min(900px, 100%);
     max-width: 900px;
-
-    height: auto;
 
     position: relative;
 
     flex: 0 1 900px;
+
+    min-width: 0;
+
+    height: auto;
 
     overflow: visible;
 
     line-height: 0;
 
     /*
-       Allows JavaScript/CSS to scale typography
-       proportionally with the game area.
+       Used by JavaScript to scale text
     */
 
     --game-scale: 1;
@@ -166,9 +172,9 @@ body,
     display: block;
 
     width: 100%;
-    height: auto;
-
     max-width: 100%;
+
+    height: auto;
 
     margin: 0;
     padding: 0;
@@ -186,7 +192,6 @@ body,
 ======================================== */
 
 .button:hover img {
-
     transform: scale(1.05);
 }
 
@@ -311,5 +316,419 @@ body,
 .button-19 {
     left: 84%;
     top: 82%;
-    width
-```
+    width: 12%;
+}
+
+.button-20 {
+    left: 73%;
+    top: 89%;
+    width: 5%;
+}
+
+
+/* ========================================
+   MOVING IMAGES
+======================================== */
+
+.moving-image {
+
+    position: absolute;
+
+    display: block;
+
+    height: auto;
+
+    max-width: 100%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   MOVING IMAGE SIZES
+======================================== */
+
+.moving-image-1 {
+    width: 30%;
+}
+
+.moving-image-2 {
+    width: 89.5%;
+}
+
+.moving-image-3 {
+    width: 91.5%;
+}
+
+.moving-image-4 {
+    width: 91%;
+}
+
+.moving-image-5 {
+    width: 50%;
+}
+
+.moving-image-6 {
+    width: 30%;
+}
+
+.moving-image-7 {
+    width: 1%;
+}
+
+.moving-image-8 {
+    width: 1.5%;
+}
+
+.moving-image-9 {
+    width: 2%;
+}
+
+.moving-image-10 {
+    width: 2.5%;
+}
+
+.moving-image-11 {
+    width: 3%;
+}
+
+.moving-image-12 {
+    width: 3.5%;
+}
+
+.moving-image-13 {
+    width: 4%;
+}
+
+
+/* ========================================
+   TEXT BLOCK
+======================================== */
+
+.text-block {
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+    max-width: 55%;
+
+    z-index: 25;
+
+    font-family: "Unixel", sans-serif;
+
+    direction: ltr;
+
+    text-align: center;
+
+    user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT TITLE
+======================================== */
+
+.text-title {
+
+    font-family: "Unixel", sans-serif;
+
+    /*
+       50px at 900px game width.
+       JavaScript scales this on smaller screens.
+    */
+
+    font-size: calc(50px * var(--game-scale));
+
+    font-weight: bold;
+
+    color: aliceblue;
+
+    line-height: 1;
+
+    margin: 0 0 calc(12px * var(--game-scale)) 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT CONTENT
+======================================== */
+
+.text-content {
+
+    font-family: "Unixel", sans-serif;
+
+    /*
+       16px at 900px game width.
+    */
+
+    font-size: calc(16px * var(--game-scale));
+
+    font-weight: normal;
+
+    color: aliceblue;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT BLOCK POSITION
+======================================== */
+
+.text-block-1 {
+
+    left: 30%;
+
+    top: 70%;
+}
+
+
+/* ========================================
+   IMAGE FADE SLIDER
+======================================== */
+
+.image-slider {
+
+    position: absolute;
+
+    left: 62%;
+    top: 16%;
+
+    width: 70%;
+
+    /*
+       Prevent the slider from creating
+       horizontal overflow.
+    */
+
+    max-width: 70%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
+
+    overflow: hidden;
+
+    line-height: 0;
+}
+
+
+/* ========================================
+   SLIDER IMAGES
+======================================== */
+
+.image-slider img {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    opacity: 0;
+
+    transition: opacity 1s ease-in-out;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   FIRST SLIDER IMAGE
+======================================== */
+
+.image-slider img:first-child {
+
+    position: relative;
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   APARAT VIDEO
+======================================== */
+
+.video-box {
+
+    position: absolute;
+
+    left: 73%;
+    top: 62%;
+
+    width: 33%;
+    max-width: 33%;
+
+    aspect-ratio: 16 / 9;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 11;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   APARAT IFRAME
+======================================== */
+
+.video-box iframe {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+
+    border: 0;
+}
+
+
+/* ========================================
+   BACKGROUND ANIMATION
+======================================== */
+
+@keyframes moveBackground {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 500px 500px;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .screen {
+
+        width: 100%;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        padding-left: 0;
+        padding-right: 0;
+
+        justify-content: center;
+        align-items: flex-start;
+
+        overflow: visible;
+    }
+
+
+    .game-area {
+
+        width: 100%;
+        max-width: 100%;
+
+        flex: 0 1 100%;
+
+        min-width: 0;
+    }
+
+
+    .main-image {
+
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .button img,
+    .moving-image,
+    .image-slider img {
+
+        max-width: 100%;
+    }
+}
+
+
+/* ========================================
+   VERY SMALL PHONES
+======================================== */
+
+@media (max-width: 480px) {
+
+    .screen {
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+
+    .text-title {
+
+        font-size: calc(50px * var(--game-scale));
+    }
+
+
+    .text-content {
+
+        font-size: calc(16px * var(--game-scale));
+    }
+}
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .screen {
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+
+    .game-area {
+
+        width: 100%;
+        max-width: 100%;
+    }
+}
