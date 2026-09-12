@@ -1,25 +1,59 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
 
+/* ========================================
+   GAME AREA SIZE
+======================================== */
+
 function setGameAreaSize() {
+
+    if (!mainImage || !gameArea) {
+        return;
+    }
 
     if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+
+    /* =====================================
+       GET CURRENT WIDTH
+    ====================================== */
+
+    var width = gameArea.getBoundingClientRect().width;
+
+
+    /* =====================================
+       CALCULATE HEIGHT
+    ====================================== */
 
     var height =
         width *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
+
     gameArea.style.height = height + "px";
+
+
+    /* =====================================
+       CALCULATE SCALE
+       
+       Desktop reference = 900px
+    ====================================== */
+
+    var scale = width / 900;
+
+
+    gameArea.style.setProperty(
+        "--game-scale",
+        scale
+    );
 }
 
 
@@ -27,16 +61,20 @@ function setGameAreaSize() {
    IMAGE LOADED
 ======================================== */
 
-if (mainImage.complete) {
+if (mainImage) {
 
-    setGameAreaSize();
+    if (mainImage.complete) {
 
-} else {
+        setGameAreaSize();
 
-    mainImage.addEventListener(
-        "load",
-        setGameAreaSize
-    );
+    } else {
+
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
 
 }
 
@@ -45,10 +83,39 @@ if (mainImage.complete) {
    WINDOW RESIZE
 ======================================== */
 
+var resizeTimer;
+
 window.addEventListener(
     "resize",
-    setGameAreaSize
+    function () {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(
+            setGameAreaSize,
+            50
+        );
+
+    }
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        setTimeout(
+            setGameAreaSize,
+            100
+        );
+
+    }
+);
+
 
 /* ========================================
    BUTTON HOVER IMAGES
@@ -85,7 +152,6 @@ for (var i = 0; i < hoverImages.length; i++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
@@ -102,7 +168,6 @@ for (var j = 0; j < movingImages.length; j++) {
     );
 
 }
-
 
 
 /* ========================================
@@ -169,7 +234,7 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT PROGRESS
-
+       
        0 = START
        1 = END
     ====================================== */
@@ -179,7 +244,7 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT DIRECTION
-
+       
        1  = FORWARD
        -1 = BACKWARD
     ====================================== */
@@ -227,8 +292,6 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
@@ -240,13 +303,9 @@ function startMovingImage(image) {
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -280,12 +339,9 @@ function startMovingImage(image) {
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -293,10 +349,6 @@ function startMovingImage(image) {
                 speed *
                 0.0001;
 
-
-            /* =============================
-               REACHED END
-            ============================= */
 
             if (progress >= 1) {
 
@@ -306,10 +358,6 @@ function startMovingImage(image) {
 
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
@@ -321,10 +369,6 @@ function startMovingImage(image) {
 
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
@@ -341,32 +385,74 @@ function startMovingImage(image) {
 
 }
 
+
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
+
+/* ========================================
+   CHECK SLIDER
+======================================== */
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
-
-    /* رفتن به تصویر بعدی */
-    currentImage++;
-
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+    if (!sliderImages.length) {
+        return;
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    /* =====================================
+       HIDE CURRENT
+    ====================================== */
+
+    sliderImages[currentImage].style.opacity =
+        "0";
+
+
+    /* =====================================
+       NEXT IMAGE
+    ====================================== */
+
+    currentImage++;
+
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
+        currentImage = 0;
+
+    }
+
+
+    /* =====================================
+       SHOW NEXT
+    ====================================== */
+
+    sliderImages[currentImage].style.opacity =
+        "1";
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   CHANGE IMAGE EVERY 4 SECONDS
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+
+}
