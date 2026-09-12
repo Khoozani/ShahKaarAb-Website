@@ -181,11 +181,6 @@ function startWebsite() {
         "100%";
 
 
-    /*
-       اجازه می‌دهیم 100% برای لحظه‌ای
-       دیده شود.
-    */
-
     setTimeout(
         function () {
 
@@ -199,38 +194,30 @@ function startWebsite() {
             );
 
 
-            /*
-             * ==================================
-             * START GAME AREA SIZE
-             * ==================================
-             */
+            /* ==============================
+               INITIAL SIZE
+            ============================== */
 
             setGameAreaSize();
 
 
-            /*
-             * ==================================
-             * START MOVING IMAGES
-             * ==================================
-             */
+            /* ==============================
+               START MOVING IMAGES
+            ============================== */
 
             startMovingImages();
 
 
-            /*
-             * ==================================
-             * START BUTTON HOVER
-             * ==================================
-             */
+            /* ==============================
+               START BUTTON HOVER
+            ============================== */
 
             startButtonHover();
 
 
-            /*
-             * ==================================
-             * START IMAGE SLIDER
-             * ==================================
-             */
+            /* ==============================
+               START IMAGE SLIDER
+            ============================== */
 
             startImageSlider();
 
@@ -275,10 +262,20 @@ if (totalImages === 0) {
 
 
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN GAME AREA SIZE
 ======================================== */
 
 function setGameAreaSize() {
+
+    if (
+        !mainImage ||
+        !gameArea
+    ) {
+
+        return;
+
+    }
+
 
     if (
         !mainImage.naturalWidth ||
@@ -290,9 +287,26 @@ function setGameAreaSize() {
     }
 
 
-    var width =
-        gameArea.offsetWidth;
+    /*
+       عرض واقعی game-area را از CSS می‌گیریم.
+       روی دسکتاپ حدود 900px است.
+       روی موبایل برابر viewport می‌شود.
+    */
 
+    var width =
+        gameArea.getBoundingClientRect().width;
+
+
+    if (!width || width <= 0) {
+
+        return;
+
+    }
+
+
+    /*
+       محاسبه ارتفاع متناسب با تصویر اصلی
+    */
 
     var height =
         width *
@@ -307,21 +321,77 @@ function setGameAreaSize() {
 
 
 /* ========================================
-   WINDOW RESIZE
+   RESIZE
 ======================================== */
 
-window.addEventListener(
-    "resize",
-    function () {
+var resizeTimer = null;
 
-        if (websiteStarted) {
+function handleResize() {
+
+    if (!websiteStarted) {
+        return;
+    }
+
+
+    clearTimeout(resizeTimer);
+
+
+    resizeTimer = setTimeout(
+        function () {
 
             setGameAreaSize();
 
+        },
+        50
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    handleResize
+);
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        if (!websiteStarted) {
+            return;
         }
+
+
+        setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            150
+        );
 
     }
 );
+
+
+/* ========================================
+   VISUAL VIEWPORT CHANGE
+======================================== */
+
+if (window.visualViewport) {
+
+    window.visualViewport.addEventListener(
+        "resize",
+        handleResize
+    );
+
+}
 
 
 /* ========================================
@@ -341,7 +411,6 @@ function startButtonHover() {
         k < hoverImages.length;
         k++
     ) {
-
 
         hoverImages[k].addEventListener(
             "mouseenter",
@@ -406,7 +475,6 @@ function startMovingImages() {
 
 function startMovingImage(image) {
 
-
     /* =====================================
        START POSITION
     ====================================== */
@@ -441,6 +509,28 @@ function startMovingImage(image) {
             "data-end-y"
         )
     );
+
+
+    /*
+       جلوگیری از NaN در صورتی که
+       یک data attribute ناقص باشد.
+    */
+
+    if (isNaN(startX)) {
+        startX = 50;
+    }
+
+    if (isNaN(startY)) {
+        startY = 50;
+    }
+
+    if (isNaN(endX)) {
+        endX = startX;
+    }
+
+    if (isNaN(endY)) {
+        endY = startY;
+    }
 
 
     /* =====================================
@@ -498,7 +588,6 @@ function startMovingImage(image) {
 
     function updatePosition() {
 
-
         /* =================================
            CALCULATE X
         ================================= */
@@ -548,7 +637,6 @@ function startMovingImage(image) {
 
         if (mode === "once") {
 
-
             progress =
                 progress +
                 speed *
@@ -588,7 +676,6 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -693,25 +780,12 @@ function startImageSlider() {
 
     function showNextImage() {
 
-
-        /*
-         * محو تصویر فعلی
-         */
-
         sliderImages[currentImage]
             .style.opacity = "0";
 
 
-        /*
-         * رفتن به تصویر بعدی
-         */
-
         currentImage++;
 
-
-        /*
-         * برگشت به تصویر اول
-         */
 
         if (
             currentImage >=
@@ -722,10 +796,6 @@ function startImageSlider() {
 
         }
 
-
-        /*
-         * نمایش تصویر بعدی
-         */
 
         sliderImages[currentImage]
             .style.opacity = "1";
