@@ -1,526 +1,767 @@
-/* ========================================
-   MAIN IMAGE SIZE
-======================================== */
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-var mainImage =
-    document.querySelector(".main-image");
+<head>
 
-var gameArea =
-    document.querySelector(".game-area");
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-function setGameAreaSize() {
+    <title>
+        شاه کار آب : یک پدیدآور بازی افزار مستقل | Shah Kaar Ab : An Independent Game Auteur
+    </title>
 
-    if (!mainImage || !gameArea) {
-        return;
-    }
+    <link
+        rel="stylesheet"
+        href="Yoosht_En_style.css"
+    >
 
+</head>
 
-    /*
-       Wait until the main image has
-       a real natural size.
-    */
 
-    if (
-        !mainImage.naturalWidth ||
-        !mainImage.naturalHeight
-    ) {
-        return;
-    }
+<body>
 
+    <main class="screen">
 
-    /*
-       IMPORTANT:
-       Use the actual displayed width,
-       not the original 900px width.
-    */
+        <div class="game-area">
+			
 
-    var width =
-        gameArea.clientWidth;
+<!-- =====================================
+     APARAT VIDEO
+====================================== -->
 
+<div class="video-box">
 
-    if (!width || width <= 0) {
-        return;
-    }
+    <iframe
+        src="https://www.aparat.com/video/video/embed/videohash/rurnd34/vt/frame"
+        title="Aparat Video"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
 
+</div>
 
-    /*
-       Preserve the exact aspect ratio
-       of Box.png.
-    */
+            <!-- =====================================
+                 MAIN IMAGE
+            ====================================== -->
 
-    var height =
-        width *
-        mainImage.naturalHeight /
-        mainImage.naturalWidth;
+            <img
+                class="main-image"
+                src="../Boxes/Box.png"
+                alt="شاه کار آب"
+            >
 
 
-    gameArea.style.height =
-        Math.ceil(height) + "px";
-}
+            <!-- =====================================
+                 MOVING IMAGE 6
+            ====================================== -->
 
+            <img
+                class="moving-image moving-image-6"
+                src="../Shah_ab/Body_2.png"
 
-/* ========================================
-   IMAGE LOADED
-======================================== */
+                data-start-x="20"
+                data-start-y="50"
 
-if (mainImage) {
+                data-end-x="70"
+                data-end-y="30"
 
-    if (mainImage.complete) {
+                data-mode="pingpong"
+                data-speed="100"
 
-        setGameAreaSize();
+                alt="Body_2"
+            >
+	  
+          <!-- =====================================
+                 MOVING IMAGE 7 Stars 1
+            ====================================== -->
 
-    } else {
+            <img
+                class="moving-image moving-image-7"
+                src="../Shah_ab/Star.png"
 
-        mainImage.addEventListener(
-            "load",
-            setGameAreaSize
-        );
-    }
-}
+                data-start-x="20"
+                data-start-y="15"
 
+                data-end-x="50"
+                data-end-y="50"
 
-/* ========================================
-   WINDOW RESIZE
-======================================== */
+                data-mode="once"
+                data-speed="25"
 
-window.addEventListener(
-    "resize",
-    setGameAreaSize
-);
+                alt="Stars_1"
+            ><!-- =====================================
+                 MOVING IMAGE 7 Stars 2
+            ====================================== -->
 
+            <img
+                class="moving-image moving-image-8"
+                src="../Shah_ab/Star.png"
 
-/* ========================================
-   ORIENTATION CHANGE
-======================================== */
+                data-start-x="30"
+                data-start-y="15"
 
-window.addEventListener(
-    "orientationchange",
-    function () {
+                data-end-x="50"
+                data-end-y="50"
 
-        /*
-           Mobile browsers sometimes need
-           a short delay after rotation.
-        */
+                data-mode="once"
+                data-speed="50"
 
-        setTimeout(
-            setGameAreaSize,
-            100
-        );
+                alt="Stars_2"
+            >
 
+            <!-- =====================================
+                 MOVING IMAGE 2
+            ====================================== -->
 
-        setTimeout(
-            setGameAreaSize,
-            300
-        );
+            <img
+                class="moving-image moving-image-2"
+                src="../Seas/IndependentGameAuteur_En.png"
 
-    }
-);
+                data-start-x="50"
+                data-start-y="33"
 
+                data-end-x="50"
+                data-end-y="40"
 
-/* ========================================
-   BUTTON HOVER IMAGES
-======================================== */
+                data-mode="pingpong"
+                data-speed="100"
 
-var hoverImages =
-    document.querySelectorAll(
-        "[data-normal][data-hover]"
-    );
+                alt="Independent Game Auteur"
+            >
 
 
-for (
-    var i = 0;
-    i < hoverImages.length;
-    i++
-) {
+            <!-- =====================================
+                 MOVING IMAGE 5
+            ====================================== -->
 
-    hoverImages[i].addEventListener(
-        "mouseenter",
-        function () {
+            <img
+                class="moving-image moving-image-5"
+                src="../Shah_ab/Body_1.png"
 
-            this.src =
-                this.getAttribute(
-                    "data-hover"
-                );
-        }
-    );
+                data-start-x="69"
+                data-start-y="60"
 
+                data-end-x="69"
+                data-end-y="45"
 
-    hoverImages[i].addEventListener(
-        "mouseleave",
-        function () {
+                data-mode="pingpong"
+                data-speed="100"
 
-            this.src =
-                this.getAttribute(
-                    "data-normal"
-                );
-        }
-    );
-}
+                alt="Body_1"
+            >
 
+			<!-- =====================================
+                 MOVING IMAGE 7 Stars 3
+            ====================================== -->
 
-/* ========================================
-   MOVING IMAGES
-======================================== */
+            <img
+                class="moving-image moving-image-9"
+                src="../Shah_ab/Star.png"
 
-var movingImages =
-    document.querySelectorAll(
-        ".moving-image"
-    );
+                data-start-x="40"
+                data-start-y="15"
 
+                data-end-x="50"
+                data-end-y="50"
 
-for (
-    var j = 0;
-    j < movingImages.length;
-    j++
-) {
+                data-mode="once"
+                data-speed="100"
 
-    startMovingImage(
-        movingImages[j]
-    );
-}
+                alt="Stars_3"
+            >
+			<!-- =====================================
+                 MOVING IMAGE 7 Stars 4
+            ====================================== -->
 
+            <img
+                class="moving-image moving-image-10"
+                src="../Shah_ab/Star.png"
 
-/* ========================================
-   MOVING IMAGE FUNCTION
-======================================== */
+                data-start-x="50"
+                data-start-y="15"
 
-function startMovingImage(image) {
+                data-end-x="50"
+                data-end-y="50"
 
+                data-mode="once"
+                data-speed="150"
 
-    /* =====================================
-       START POSITION
-    ====================================== */
+                alt="Stars_4"
+            >
+		
+			<!-- =====================================
+                 MOVING IMAGE 7 Stars 7
+            ====================================== -->
 
-    var startX =
-        parseFloat(
-            image.getAttribute(
-                "data-start-x"
-            )
-        );
+            <img
+                class="moving-image moving-image-13"
+                src="../Shah_ab/Star.png"
 
+                data-start-x="80"
+                data-start-y="15"
 
-    var startY =
-        parseFloat(
-            image.getAttribute(
-                "data-start-y"
-            )
-        );
+                data-end-x="50"
+                data-end-y="50"
 
+                data-mode="once"
+                data-speed="300"
 
-    /* =====================================
-       END POSITION
-    ====================================== */
+                alt="Stars_7"
+            >
 
-    var endX =
-        parseFloat(
-            image.getAttribute(
-                "data-end-x"
-            )
-        );
 
+            <!-- =====================================
+                 MOVING IMAGE 4
+            ====================================== -->
 
-    var endY =
-        parseFloat(
-            image.getAttribute(
-                "data-end-y"
-            )
-        );
+            <img
+                class="moving-image moving-image-4"
+                src="../Seas/Since2000_En.png"
 
+                data-start-x="49"
+                data-start-y="40"
 
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
+                data-end-x="49"
+                data-end-y="45"
 
-    var mode =
-        image.getAttribute(
-            "data-mode"
-        );
+                data-mode="pingpong"
+                data-speed="120"
 
+                alt="Since 2000"
+            >
 
-    if (!mode) {
 
-        mode = "pingpong";
-    }
+            <!-- =====================================
+                 MOVING IMAGE 1
+            ====================================== -->
 
+            <img
+                class="moving-image moving-image-1"
+                src="../Logo/Logo.png"
 
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
+                data-start-x="19"
+                data-start-y="12"
 
-    var speed =
-        parseFloat(
-            image.getAttribute(
-                "data-speed"
-            )
-        );
+                data-end-x="19"
+                data-end-y="20"
 
+                data-mode="pingpong"
+                data-speed="50"
 
-    if (
-        !speed ||
-        speed <= 0
-    ) {
+                alt="Shah Kaar Ab Logo"
+            >
+<!-- =====================================
+                 MOVING IMAGE 7 Stars 5
+            ====================================== -->
 
-        speed = 5;
-    }
+            <img
+                class="moving-image moving-image-11"
+                src="../Shah_ab/Star.png"
 
+                data-start-x="60"
+                data-start-y="15"
 
-    /* =====================================
-       MOVEMENT PROGRESS
+                data-end-x="50"
+                data-end-y="50"
 
-       0 = START
-       1 = END
-    ====================================== */
+                data-mode="once"
+                data-speed="200"
 
-    var progress = 0;
+                alt="Stars_5"
+            >
+			<!-- =====================================
+                 MOVING IMAGE 7 Stars 6
+            ====================================== -->
 
+            <img
+                class="moving-image moving-image-12"
+                src="../Shah_ab/Star.png"
 
-    /* =====================================
-       MOVEMENT DIRECTION
+                data-start-x="70"
+                data-start-y="15"
 
-       1  = FORWARD
-       -1 = BACKWARD
-    ====================================== */
+                data-end-x="50"
+                data-end-y="50"
 
-    var direction = 1;
+                data-mode="once"
+                data-speed="250"
 
+                alt="Stars_6"
+            >
 
-    /* =====================================
-       UPDATE POSITION
-    ====================================== */
+            <!-- =====================================
+                 MOVING IMAGE 3
+            ====================================== -->
 
-    function updatePosition() {
+            <img
+                class="moving-image moving-image-3"
+                src="../Seas/Games.png"
 
+                data-start-x="49"
+                data-start-y="70"
 
-        /* =================================
-           CALCULATE X
-        ================================= */
+                data-end-x="49"
+                data-end-y="70"
 
-        var x =
-            startX +
-            (
-                endX - startX
-            ) *
-            progress;
+                data-mode="pingpong"
+                data-speed="70"
 
+                alt="Independent Game Auteur"
+            >
 
-        /* =================================
-           CALCULATE Y
-        ================================= */
 
-        var y =
-            startY +
-            (
-                endY - startY
-            ) *
-            progress;
 
 
-        /* =================================
-           APPLY POSITION
-        ================================= */
+            <!-- =====================================
+                 BUTTON 1
+            ====================================== -->
 
-        image.style.left =
-            x + "%";
+            <a
+                href="../Museum/Museum_En.html"
+                class="button button-1"
+            >
 
+                <img
+                    src="../Buttons/A_Up.png"
+                    data-normal="../Buttons/A_Up.png"
+                    data-hover="../Buttons/A_Down.png"
+                    alt="Persian Museum"
+                >
 
-        image.style.top =
-            y + "%";
+            </a>
 
 
-        /* =================================
-           STATIC
-        ================================= */
+            <!-- =====================================
+                 BUTTON 2
+            ====================================== -->
 
-        if (
-            mode === "static"
-        ) {
+            <a
+                href="../Museum/Museum_En.html"
+                class="button button-2"
+            >
 
-            return;
-        }
+                <img
+                    src="../Frames/Frame_Museum_En.png"
+                    alt="Persian Museum"
+                >
 
+            </a>
 
-        /* =================================
-           ONCE
-           START → END → STOP
-        ================================= */
 
-        if (
-            mode === "once"
-        ) {
+            <!-- =====================================
+                 BUTTON 3
+            ====================================== -->
 
-            progress +=
-                speed *
-                0.0001;
+            <a
+                class="button button-3"
+                href="../ArticlesAndBooks/ArticlesAndBooks_En.html"
+            >
 
+                <img
+                    src="../Buttons/B_Up.png"
+                    data-normal="../Buttons/B_Up.png"
+                    data-hover="../Buttons/B_Down.png"
+                    alt="صفحه اصلی فارسی"
+                >
 
-            if (
-                progress >= 1
-            ) {
+            </a>
 
-                progress = 1;
 
+            <!-- =====================================
+                 BUTTON 4
+            ====================================== -->
 
-                image.style.left =
-                    endX + "%";
+            <a
+                class="button button-4"
+                href="../ArticlesAndBooks/ArticlesAndBooks_En.html"
+            >
 
+                <img
+                    src="../Frames/Frame_Articles_En.png"
+                    alt="فارسی"
+                >
 
-                image.style.top =
-                    endY + "%";
+            </a>
 
 
-                return;
-            }
+            <!-- =====================================
+                 BUTTON 5
+            ====================================== -->
 
+            <a
+                class="button button-5"
+                href="../Meets/Meets_En.html"
+            >
 
-            requestAnimationFrame(
-                updatePosition
-            );
+                <img
+                    src="../Buttons/Circle_Up.png"
+                    data-normal="../Buttons/Circle_Up.png"
+                    data-hover="../Buttons/Circle_Down.png"
+                    alt="Persian Meets"
+                >
 
+            </a>
 
-            return;
-        }
 
+            <!-- =====================================
+                 BUTTON 6
+            ====================================== -->
 
-        /* =================================
-           PINGPONG
+            <a
+                class="button button-6"
+                href="../Meets/Meets_En.html"
+            >
 
-           START → END → START → ...
-        ================================= */
+                <img
+                    src="../Frames/Frame_MeetsAndExhibitions_En.png"
+                    alt="فارسی"
+                >
 
-        if (
-            mode === "pingpong"
-        ) {
+            </a>
 
-            progress +=
-                direction *
-                speed *
-                0.0001;
 
+            <!-- =====================================
+                 BUTTON 7
+            ====================================== -->
 
-            /* =============================
-               REACHED END
-            ============================= */
+            <a
+                class="button button-7"
+                href="../Lectures/Lectures_En.html"
+            >
 
-            if (
-                progress >= 1
-            ) {
+                <img
+                    src="../Buttons/Triangle_Up.png"
+                    data-normal="../Buttons/Triangle_Up.png"
+                    data-hover="../Buttons/Triangle_Down.png"
+                    alt="Persian Lectures"
+                >
 
-                progress = 1;
+            </a>
 
-                direction = -1;
-            }
 
+            <!-- =====================================
+                 BUTTON 8
+            ====================================== -->
 
-            /* =============================
-               REACHED START
-            ============================= */
+            <a
+                class="button button-8"
+                href="../Lectures/Lectures_En.html"
+            >
 
-            if (
-                progress <= 0
-            ) {
+                <img
+                    src="../Frames/Frame_Lecture_En.png"
+                    alt="فارسی"
+                >
 
-                progress = 0;
+            </a>
 
-                direction = 1;
-            }
-        }
 
+            <!-- =====================================
+                 BUTTON 9
+            ====================================== -->
 
-        /* =================================
-           CONTINUE
-        ================================= */
+            <a
+                href="../Merch/Merch_En.html"
+                class="button button-9"
+            >
 
-        requestAnimationFrame(
-            updatePosition
-        );
-    }
+                <img
+                    src="../Buttons/Square_Up.png"
+                    data-normal="../Buttons/Square_Up.png"
+                    data-hover="../Buttons/Square_Down.png"
+                    alt="Persian Merch"
+                >
 
+            </a>
 
-    /* =====================================
-       START
-    ====================================== */
 
-    updatePosition();
-}
+            <!-- =====================================
+                 BUTTON 10
+            ====================================== -->
 
+            <a
+                href="../Merch/Merch_En.html"
+                class="button button-10"
+            >
 
-/* ========================================
-   IMAGE FADE SLIDER
-======================================== */
+                <img
+                    src="../Frames/Frame_Merch_En.png"
+                    alt="فارسی"
+                >
 
-var sliderImages =
-    document.querySelectorAll(
-        ".image-slider img"
-    );
+            </a>
 
 
-var currentImage = 0;
+            <!-- =====================================
+                 BUTTON 11
+====================================== -->
 
 
-/* ========================================
-   SHOW NEXT IMAGE
-======================================== */
+            <a
+                href="../NewsAgencies/NewsAgencies_En.html"
+                class="button button-11"
+            >
 
-function showNextImage() {
+                <img
+                    src="../Buttons/x_Up.png"
+                    data-normal="../Buttons/x_Up.png"
+                    data-hover="../Buttons/x_Down.png"
+                    alt="Persian games"
+                >
 
-    if (
-        !sliderImages.length
-    ) {
+            </a>
 
-        return;
-    }
+            <!-- =====================================
+                 BUTTON 12
+            ====================================== -->
 
+            <a
+                href="../NewsAgencies/NewsAgencies_En.html"
+                class="button button-12"
+            >
 
-    /*
-       Hide current image.
-    */
+                <img
+                    src="../Frames/Frame_NewsAgencies_En.png"
+                    alt="فارسی"
+                >
 
-    sliderImages[
-        currentImage
-    ].style.opacity = "0";
+            </a>
 
 
-    /*
-       Move to next image.
-    */
+            <!-- =====================================
+                 BUTTON 13
+            ====================================== -->
 
-    currentImage++;
 
+                <img class="button button-13"
+                    src="../Sprites/Game_Details.png"
+                    data-normal="../Sprites/Game_Details.png"
+                    data-hover="../Sprites/Game_Details.png"
+                    alt="Games"
+                >
 
-    /*
-       Loop back to first image.
-    */
+            
 
-    if (
-        currentImage >=
-        sliderImages.length
-    ) {
 
-        currentImage = 0;
-    }
+            <!-- =====================================
+                 BUTTON 14
+            ====================================== -->
 
+           
 
-    /*
-       Show next image.
-    */
+                <img  class="button button-14"
+                    src="../Sprites/Game_Icon_Big.png"
+                    data-normal="../Sprites/Game_Icon_Big.png"
+                    data-hover="../Sprites/Game_Icon_Big.png"
+                    alt="Games 1"
+                >
 
-    sliderImages[
-        currentImage
-    ].style.opacity = "1";
-}
+            
 
 
-/* ========================================
-   SLIDER TIMER
-======================================== */
+            <!-- =====================================
+                 BUTTON 15
+            ====================================== -->
 
-if (
-    sliderImages.length > 1
-) {
+            <a
+                href="https://cafebazaar.ir/app/ir.ShahKaarAb.Yoosht"
+                class="button button-15"
+            >
 
-    setInterval(
-        showNextImage,
-        4000
-    );
-}
+                <img
+                    src="../Buttons/Bazaar_En.png"
+                    data-normal="../Buttons/Bazaar_En.png"
+                    data-hover="../Buttons/Bazaar_En.png"
+                    alt="Games 1"
+                >
+
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 16
+            ====================================== -->
+
+            <a
+                href="https://myket.ir/app/ir.ShahKaarAb.yoosht"
+                class="button button-16"
+            >
+
+                <img
+                    src="../Buttons/Myket_En.png"
+                    data-normal="../Buttons/Myket_En.png"
+                    data-hover="../Buttons/Myket_En.png"
+                    alt="Games 1"
+                >
+
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 17
+            ====================================== -->
+
+            <a
+                href="https://shahkaarab.itch.io/yoosht"
+                class="button button-17"
+            >
+
+                <img
+                    src="../Buttons/Itch_1.png"
+                    data-normal="../Buttons/Itch_1.png"
+                    data-hover="../Buttons/Itch_2.png"
+                    alt="Games 1"
+                >
+
+            </a>
+
+
+            <!-- =====================================
+                 BUTTON 18
+            
+
+            <a
+                href="https://drive.google.com/file/d/1AvUg1nWmDr4uKwXPVqvWLA6MZPJ0e-Bz/view?usp=drive_link"
+                class="button button-18"
+            >
+
+                <img
+                    src="../Buttons/Google Drive.png"
+                    data-normal="../Buttons/Google Drive.png"
+                    data-hover="../Buttons/Google Drive.png"
+                    alt="Games 1"
+                >
+
+            </a>
+====================================== -->
+
+            <!-- =====================================
+                 BUTTON 19
+           
+
+            <a
+                href="https://drive.google.com/file/d/1GWoTH7UnCvsgGFM2YECcYXAGCpJ87cXi/view?usp=sharing"
+                class="button button-19"
+            >
+
+                <img
+                    src="../Buttons/GitHub.png"
+                    data-normal="../Buttons/GitHub.png"
+                    data-hover="../Buttons/GitHub.png"
+                    alt="Games 1"
+                >
+
+            </a>
+ ====================================== -->
+
+
+            <!-- =====================================
+                 BUTTON 20
+            ====================================== -->
+
+            <a
+                href="../Home_En.html"
+                class="button button-20"
+            >
+
+                <img
+                    src="../Buttons/A_Up.png"
+                    data-normal="../Buttons/A_Up.png"
+                    data-hover="../Buttons/A_Down.png"
+                    alt="Games 1"
+                >
+
+            </a>
+<!-- =====================================
+                 TEXT BLOCK
+                 10 LINES
+            ====================================== -->
+
+            <div class="text-block text-block-1">
+
+                <div class="text-title">
+			     	Yoosht
+                </div>
+
+                <div class="text-content">
+
+					
+				   <b>Engine:</b> Unity <br>
+                   <b>Platform:</b> Windows <br>
+                   <b>Development Time:</b> 4 Month <br>
+				   <b>Status:</b> Released <br>
+                   <b>Year:</b> 2024 <br>
+                   <b>Team:</b> 1 <br>
+				   <b>Credits:</b><br>
+				   <b>Solo Indie Game Developer:</b>Shahab Khoozani<br>
+				   <b>Genre:</b>Visual Novel Puzzle<br>
+                           
+                           
+				</div>
+				
+
+            </div>
+			
+            <!-- =====================================
+                 IMAGE FADE SLIDER
+                 8 IMAGES
+            ====================================== -->
+
+            <div class="image-slider">
+<img
+                    src="../Slide/Slide_1_En.png"
+                    alt="Slide 1"
+                >
+
+                <img
+                    src="../Slide/Slide_2_En.png"
+                    alt="Slide 2"
+                >
+
+                <img
+                    src="../Slide/Slide_3_En.png"
+                    alt="Slide 3"
+                >
+
+                <img
+                    src="../Slide/Slide_4_En.png"
+                    alt="Slide 4"
+                >
+				<img
+                    src="../Slide/Slide_5_En.png"
+                    alt="Slide 5"
+                >
+
+                <img
+                    src="../Slide/Slide_6_En.png"
+                    alt="Slide 6"
+                >
+
+                <img
+                    src="../Slide/Slide_7_En.png"
+                    alt="Slide 7"
+                >
+
+
+
+            </div>
+
+        </div>
+		
+
+           
+		      
+			     
+
+    </main>
+
+
+    <script src="Yoosht_En_script.js"></script>
+
+</body>
+
+</html>
