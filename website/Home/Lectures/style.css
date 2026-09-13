@@ -412,6 +412,7 @@ body.loaded .screen {
    GAME BUTTONS
 ======================================== */
 
+
 .button-13 {
     left: 19%;
     top: 57%;
@@ -431,21 +432,21 @@ body.loaded .screen {
 }
 
 .button-16 {
-    left: 85%;
-    top: 52%;
-    width: 12%;
+    left: 19%;
+    top: 77%;
+    width: 24.5%;
 }
 
 .button-17 {
-    left: 85%;
-    top: 62%;
-    width: 12%;
+    left: 43%;
+    top: 77%;
+    width: 24.5%;
 }
 
 .button-18 {
-    left: 85%;
-    top: 72%;
-    width: 12%;
+    left: 67%;
+    top: 77%;
+    width: 24.5%;
 }
 
 .button-19 {
