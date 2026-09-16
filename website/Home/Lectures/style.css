@@ -28,7 +28,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 
-    background-image: url("Background_Pattern.png");
+    background-image: url("../Background_Pattern.png");
     background-color: aliceblue;
 
     background-repeat: repeat;
