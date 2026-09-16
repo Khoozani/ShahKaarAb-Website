@@ -378,6 +378,38 @@ body {
     max-width: 55%;
 }
 
+.text-block2 {
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+
+    z-index: 12;
+
+    font-family: "Unixel", sans-serif;
+
+    direction: rtl;
+
+    text-align: left;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+
+    /*
+       متن نباید باعث ایجاد
+       اسکرول افقی شود.
+    */
+
+    max-width: 55%;
+}
+
 
 /* ========================================
    TEXT TITLE
@@ -432,7 +464,13 @@ body {
 
     top: 110%;
 }
+.text-block-2 {
 
+    left: 46%;
+
+    top: 89%;
+	color: #655B0F;
+}
 
 /* ========================================
    SEMANTIC / SEO CONTENT
