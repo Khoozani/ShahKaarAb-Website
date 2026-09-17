@@ -9,7 +9,7 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -57,9 +57,6 @@ body {
     width: 100vw;
     height: 100vh;
 
-    min-width: 0;
-    min-height: 0;
-
     display: flex;
 
     align-items: center;
@@ -93,19 +90,19 @@ body {
 
 .main-image {
 
+    display: block;
+
     width: 100%;
     height: 100%;
 
-    display: block;
-
     object-fit: contain;
+
+    max-width: 100%;
 
     user-select: none;
     -webkit-user-select: none;
 
     pointer-events: none;
-
-    max-width: 100%;
 }
 
 
@@ -171,12 +168,13 @@ body {
 .button:focus-visible {
 
     outline: 2px solid currentColor;
+
     outline-offset: 4px;
 }
 
 
 /* ========================================
-   BUTTON POSITIONS & SIZES
+   BUTTON POSITIONS
 ======================================== */
 
 .button-1 {
@@ -257,25 +255,18 @@ body {
 ======================================== */
 
 .moving-image-1 {
-
     width: 30%;
 }
 
-
 .moving-image-2 {
-
     width: 89.5%;
 }
 
-
 .moving-image-3 {
-
     width: 30%;
 }
 
-
 .moving-image-4 {
-
     width: 20%;
 }
 
@@ -346,9 +337,9 @@ body {
 
     font-weight: bold;
 
-    line-height: 1.2;
+    line-height: 1.35;
 
-    margin: 0 0 12px 0;
+    margin: 0 0 12px;
 
     padding: 0;
 }
@@ -366,7 +357,7 @@ body {
 
     font-weight: normal;
 
-    line-height: 1.7;
+    line-height: 1.75;
 
     margin: 0;
 
@@ -399,7 +390,7 @@ body {
 
 
 /* ========================================
-   SEMANTIC / SEO CONTENT
+   SEO CONTENT
 ======================================== */
 
 .seo-header,
@@ -460,30 +451,14 @@ body {
 
 
 /* ========================================
-   MOBILE / SMALL SCREENS
+   TABLET / SMALL DESKTOP
 ======================================== */
 
 @media (max-width: 900px) {
 
     .game-area {
 
-        width: 90vw;
-
-        max-width: 90vw;
-    }
-
-}
-
-
-/* ========================================
-   VERY SMALL SCREENS
-======================================== */
-
-@media (max-width: 600px) {
-
-    .game-area {
-
-        width: 90vw;
+        width: min(90vw, 900px);
 
         max-width: 90vw;
     }
@@ -503,9 +478,15 @@ body {
 
     .screen {
 
-        align-items: center;
+        width: 100vw;
+        height: 100vh;
 
+        display: flex;
+
+        align-items: center;
         justify-content: center;
+
+        overflow: hidden;
     }
 
 
@@ -513,7 +494,7 @@ body {
 
         width: auto;
 
-        height: 90vh;
+        height: min(90vh, 506px);
 
         max-width: 90vw;
 
@@ -522,8 +503,8 @@ body {
 
 
     /*
-       در Landscape همان ساختار
-       دسکتاپ حفظ می‌شود.
+       Landscape همچنان composition
+       اصلی را حفظ می‌کند.
     */
 
     .text-block,
@@ -545,13 +526,14 @@ body {
     orientation: portrait
 ) {
 
-    /*
-       صفحه دیگر overflow را مخفی نمی‌کند،
-       چون متن‌ها اکنون بخشی از ارتفاع
-       واقعی صفحه هستند.
-    */
+    html {
 
-    html,
+        overflow-x: hidden;
+
+        overflow-y: auto;
+    }
+
+
     body {
 
         overflow-x: hidden;
@@ -559,6 +541,10 @@ body {
         overflow-y: auto;
     }
 
+
+    /* ------------------------------------
+       SCREEN
+    ------------------------------------ */
 
     .screen {
 
@@ -572,29 +558,29 @@ body {
 
         overflow: visible;
 
-        padding: 20px 0 40px 0;
+        padding-top: clamp(12px, 3vh, 24px);
+
+        padding-bottom: clamp(30px, 6vh, 60px);
     }
 
 
-    /*
+    /* ------------------------------------
        GAME AREA
-       در Portrait به جای canvas ثابت
-       تبدیل به container عمودی می‌شود.
-    */
+    ------------------------------------ */
 
     .game-area {
 
-        width: 90vw;
+        width: min(92vw, 520px);
 
-        max-width: 90vw;
+        max-width: 92vw;
 
         height: auto;
-
-        min-height: 0;
 
         aspect-ratio: auto;
 
         margin: 0 auto;
+
+        position: relative;
 
         display: flex;
 
@@ -602,14 +588,13 @@ body {
 
         align-items: center;
 
-        position: relative;
+        flex: none;
     }
 
 
-    /*
+    /* ------------------------------------
        MAIN IMAGE
-       نسبت اصلی تصویر حفظ می‌شود.
-    */
+    ------------------------------------ */
 
     .main-image {
 
@@ -621,15 +606,13 @@ body {
 
         object-fit: contain;
 
-        flex: 0 0 auto;
+        flex: none;
     }
 
 
-    /*
-       تمام عناصر absolute
-       هنوز نسبت به تصویر اصلی
-       روی همان composition قرار می‌گیرند.
-    */
+    /* ------------------------------------
+       PRESERVE IMAGE COMPOSITION
+    ------------------------------------ */
 
     .button,
     .moving-image {
@@ -638,11 +621,9 @@ body {
     }
 
 
-    /*
+    /* ------------------------------------
        TEXT BLOCKS
-       از حالت absolute خارج می‌شوند.
-       بنابراین دیگر روی تصویر نمی‌افتند.
-    */
+    ------------------------------------ */
 
     .text-block,
     .text-block2 {
@@ -654,70 +635,72 @@ body {
 
         transform: none;
 
-        width: 92%;
+        width: min(92%, 480px);
 
         max-width: 92%;
 
         height: auto;
 
-        flex: 0 0 auto;
-
-        z-index: 20;
+        flex: none;
 
         margin-left: auto;
         margin-right: auto;
 
+        z-index: 20;
+
         padding: 0;
+
+        overflow: visible;
     }
 
 
-    /*
-       فاصله متن اول از تصویر
-    */
+    /* ------------------------------------
+       FIRST TEXT BLOCK
+    ------------------------------------ */
 
     .text-block-1 {
 
-        margin-top: 28px;
+        margin-top: clamp(24px, 5vw, 36px);
 
-        margin-bottom: 34px;
+        margin-bottom: clamp(30px, 6vw, 48px);
     }
 
 
-    /*
-       متن دوم بعد از متن اول
-    */
+    /* ------------------------------------
+       SECOND TEXT BLOCK
+    ------------------------------------ */
 
     .text-block-2 {
 
         margin-top: 0;
 
-        margin-bottom: 20px;
+        margin-bottom: clamp(20px, 5vw, 36px);
     }
 
 
-    /*
-       TITLE
-    */
+    /* ------------------------------------
+       TITLES
+    ------------------------------------ */
 
     .text-title {
 
         font-size: clamp(11px, 3.2vw, 14px);
 
-        line-height: 1.5;
+        line-height: 1.55;
 
-        margin-bottom: 10px;
+        margin-bottom: clamp(8px, 2vw, 12px);
 
         overflow-wrap: anywhere;
     }
 
 
-    /*
+    /* ------------------------------------
        CONTENT
-    */
+    ------------------------------------ */
 
     .text-content {
 
-        font-size: clamp(8px, 2.5vw, 10px);
+        font-size: clamp(8.5px, 2.5vw, 11px);
 
         line-height: 1.9;
 
@@ -728,22 +711,11 @@ body {
         white-space: normal;
     }
 
-
-    /*
-       جلوگیری از بزرگ شدن غیرطبیعی
-       عناصر تصویری
-    */
-
-    .button img {
-
-        max-width: 100%;
-    }
-
 }
 
 
 /* ========================================
-   PORTRAIT — VERY SMALL PHONES
+   SMALL PORTRAIT PHONES
 ======================================== */
 
 @media (
@@ -754,9 +726,9 @@ body {
 
     .screen {
 
-        padding-top: 12px;
+        padding-top: 10px;
 
-        padding-bottom: 30px;
+        padding-bottom: 32px;
     }
 
 
@@ -779,31 +751,84 @@ body {
 
     .text-block-1 {
 
-        margin-top: 24px;
+        margin-top: clamp(20px, 5vw, 28px);
 
-        margin-bottom: 30px;
+        margin-bottom: clamp(28px, 7vw, 40px);
     }
 
 
     .text-block-2 {
 
-        margin-bottom: 20px;
+        margin-bottom: clamp(18px, 5vw, 30px);
     }
 
 
     .text-title {
 
-        font-size: clamp(10px, 3.5vw, 13px);
+        font-size: clamp(10px, 3.4vw, 13px);
 
-        line-height: 1.5;
+        line-height: 1.55;
     }
 
 
     .text-content {
 
-        font-size: clamp(8px, 2.7vw, 10px);
+        font-size: clamp(8px, 2.65vw, 10px);
 
-        line-height: 1.85;
+        line-height: 1.9;
+    }
+
+}
+
+
+/* ========================================
+   EXTRA SMALL PHONES
+======================================== */
+
+@media (
+    max-width: 380px
+) and (
+    orientation: portrait
+) {
+
+    .game-area {
+
+        width: 95vw;
+
+        max-width: 95vw;
+    }
+
+
+    .text-block,
+    .text-block2 {
+
+        width: 95%;
+
+        max-width: 95%;
+    }
+
+
+    .text-title {
+
+        font-size: 10px;
+
+        line-height: 1.6;
+    }
+
+
+    .text-content {
+
+        font-size: 8px;
+
+        line-height: 1.95;
+    }
+
+
+    .text-block-1 {
+
+        margin-top: 18px;
+
+        margin-bottom: 26px;
     }
 
 }
@@ -819,6 +844,7 @@ body {
 
         animation: none;
     }
+
 
     .button img {
 
@@ -837,6 +863,7 @@ body {
 
         background-position: 0 0;
     }
+
 
     to {
 
