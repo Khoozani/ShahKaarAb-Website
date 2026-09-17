@@ -1,260 +1,26 @@
 /* ========================================
-   BASIC
+   BUTTON HOVER IMAGES
 ======================================== */
 
-* {
-    box-sizing: border-box;
-}
+var hoverImages = document.querySelectorAll(
+    "[data-normal][data-hover]"
+);
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+for (var i = 0; i < hoverImages.length; i++) {
 
-html {
-    overflow: hidden;
-}
+    hoverImages[i].addEventListener("mouseenter", function () {
 
-body {
-    overflow: hidden;
+        this.src = this.getAttribute("data-hover");
 
-    background-image: url("./Home/Background_Pattern.png");
-    background-color: aliceblue;
+    });
 
-    background-repeat: repeat;
-    background-position: 0 0;
 
-    animation: moveBackground 20s linear infinite;
-}
+    hoverImages[i].addEventListener("mouseleave", function () {
 
+        this.src = this.getAttribute("data-normal");
 
-/* ========================================
-   FONT
-======================================== */
+    });
 
-@font-face {
-    font-family: "Unixel";
-
-    src: url("Home/Fonts/unixel-Regular.ttf")
-         format("truetype");
-
-    font-weight: normal;
-    font-style: normal;
-
-    font-display: swap;
-}
-
-
-/* ========================================
-   SCREEN
-======================================== */
-
-.screen {
-
-    width: 100vw;
-    height: 100vh;
-
-    min-width: 0;
-    min-height: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-
-/* ========================================
-   MAIN GAME AREA
-======================================== */
-
-.game-area {
-
-    /*
-       Main desktop size.
-
-       Original design ratio:
-       16 / 9
-    */
-
-    width: 900px;
-
-    aspect-ratio: 16 / 9;
-
-    position: relative;
-
-    flex: 0 0 auto;
-
-    max-width: 90vw;
-}
-
-
-/* ========================================
-   MAIN IMAGE
-======================================== */
-
-.main-image {
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: contain;
-
-    max-width: 100%;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    pointer-events: none;
-}
-
-
-/* ========================================
-   BUTTON BASE
-======================================== */
-
-.button {
-
-    position: absolute;
-
-    display: block;
-
-    /*
-       left/top represent
-       the center of the button.
-    */
-
-    transform: translate(-50%, -50%);
-
-    z-index: 10;
-
-    line-height: 0;
-
-    text-decoration: none;
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ========================================
-   BUTTON IMAGES
-======================================== */
-
-.button img {
-
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    max-width: 100%;
-
-    cursor: pointer;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    transition: transform 0.15s ease;
-}
-
-
-/* ========================================
-   BUTTON HOVER
-======================================== */
-
-.button:hover img {
-
-    transform: scale(1.05);
-}
-
-
-/* ========================================
-   KEYBOARD ACCESSIBILITY
-======================================== */
-
-.button:focus-visible {
-
-    outline: 2px solid currentColor;
-
-    outline-offset: 4px;
-}
-
-
-/* ========================================
-   BUTTON POSITIONS & SIZES
-======================================== */
-
-
-/* ----------------------------------------
-   BUTTON 1 — ENGLISH UP
----------------------------------------- */
-
-.button-1 {
-
-    left: 20%;
-    top: 23%;
-
-    width: 7%;
-}
-
-
-/* ----------------------------------------
-   BUTTON 2 — ENGLISH FRAME
----------------------------------------- */
-
-.button-2 {
-
-    left: 32%;
-    top: 23%;
-
-    width: 17%;
-}
-
-
-/* ----------------------------------------
-   BUTTON 3 — PERSIAN UP
----------------------------------------- */
-
-.button-3 {
-
-    left: 66%;
-    top: 23%;
-
-    width: 7%;
-}
-
-
-/* ----------------------------------------
-   BUTTON 4 — PERSIAN FRAME
----------------------------------------- */
-
-.button-4 {
-
-    left: 75%;
-    top: 23%;
-
-    width: 10%;
-}
-
-
-/* ----------------------------------------
-   BUTTON 5 — CONTACT
----------------------------------------- */
-
-.button-5 {
-
-    left: 10%;
-    top: 2%;
-
-    width: 15%;
 }
 
 
@@ -262,700 +28,220 @@ body {
    MOVING IMAGES
 ======================================== */
 
-.moving-image {
+var movingImages = document.querySelectorAll(
+    ".moving-image"
+);
 
-    position: absolute;
 
-    display: block;
+for (var j = 0; j < movingImages.length; j++) {
 
-    width: 10%;
-    height: auto;
+    startMovingImage(movingImages[j]);
 
-    max-width: none;
-
-    /*
-       JavaScript controls
-       left and top.
-    */
-
-    transform: translate(-50%, -50%);
-
-    z-index: 5;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    pointer-events: none;
-
-    line-height: 0;
 }
 
 
 /* ========================================
-   MOVING IMAGE 1
+   MOVING IMAGE FUNCTION
 ======================================== */
 
-.moving-image-1 {
+function startMovingImage(image) {
 
-    width: 30%;
-}
 
+    /* =====================================
+       START POSITION
+    ====================================== */
 
-/* ========================================
-   MOVING IMAGE 2
-======================================== */
+    var startX = parseFloat(
+        image.getAttribute("data-start-x")
+    );
 
-.moving-image-2 {
+    var startY = parseFloat(
+        image.getAttribute("data-start-y")
+    );
 
-    width: 89.5%;
-}
 
+    /* =====================================
+       END POSITION
+    ====================================== */
 
-/* ========================================
-   MOVING IMAGE 3
-======================================== */
+    var endX = parseFloat(
+        image.getAttribute("data-end-x")
+    );
 
-.moving-image-3 {
+    var endY = parseFloat(
+        image.getAttribute("data-end-y")
+    );
 
-    width: 30%;
-}
 
+    /* =====================================
+       MOVEMENT MODE
+    ====================================== */
 
-/* ========================================
-   MOVING IMAGE 4
-======================================== */
+    var mode = image.getAttribute("data-mode");
 
-.moving-image-4 {
-
-    width: 20%;
-}
-
-
-/* ========================================
-   TEXT BLOCK
-======================================== */
-
-.text-block {
-
-    position: absolute;
-
-    transform: translate(-50%, -50%);
-
-    width: 55%;
-    max-width: 55%;
-
-    z-index: 12;
-
-    font-family: "Unixel", sans-serif;
-
-    direction: rtl;
-
-    text-align: center;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    line-height: 1.6;
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ========================================
-   TEXT BLOCK 2
-======================================== */
-
-.text-block2 {
-
-    position: absolute;
-
-    transform: translate(-50%, -50%);
-
-    width: 55%;
-    max-width: 55%;
-
-    z-index: 12;
-
-    font-family: "Unixel", sans-serif;
-
-    direction: rtl;
-
-    text-align: left;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    line-height: 1.6;
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ========================================
-   TEXT TITLE
-======================================== */
-
-.text-title {
-
-    font-family: "Unixel", sans-serif;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    line-height: 1.2;
-
-    margin: 0 0 12px 0;
-
-    padding: 0;
-}
-
-
-/* ========================================
-   TEXT CONTENT
-======================================== */
-
-.text-content {
-
-    font-family: "Unixel", sans-serif;
-
-    font-size: 10px;
-
-    font-weight: normal;
-
-    line-height: 1.7;
-
-    margin: 0;
-    padding: 0;
-
-    overflow-wrap: break-word;
-
-    word-break: normal;
-
-    white-space: normal;
-}
-
-
-/* ========================================
-   TEXT BLOCK DESKTOP POSITIONS
-======================================== */
-
-.text-block-1 {
-
-    left: 45%;
-
-    top: 110%;
-}
-
-
-.text-block-2 {
-
-    left: 46%;
-
-    top: 89%;
-
-    color: #655B0F;
-}
-
-
-/* ========================================
-   SEMANTIC / SEO CONTENT
-======================================== */
-
-.seo-header,
-.seo-content {
-
-    position: absolute;
-
-    width: 1px;
-    height: 1px;
-
-    padding: 0;
-    margin: -1px;
-
-    overflow: hidden;
-
-    clip: rect(0 0 0 0);
-
-    clip-path: inset(50%);
-
-    white-space: nowrap;
-
-    border: 0;
-}
-
-
-/* ========================================
-   SEO TYPOGRAPHY RESET
-======================================== */
-
-.seo-header h1,
-.seo-header h2,
-.seo-header p,
-.seo-content h1,
-.seo-content h2,
-.seo-content h3,
-.seo-content p {
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ========================================
-   LANGUAGE LINKS
-======================================== */
-
-.language-selector {
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 1rem;
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ========================================
-   TABLET / SMALL DESKTOP
-======================================== */
-
-@media (max-width: 900px) {
-
-    .game-area {
-
-        width: 90vw;
-
-        max-width: 90vw;
-    }
-}
-
-
-/* ========================================
-   VERY SMALL SCREENS
-======================================== */
-
-@media (max-width: 600px) {
-
-    .game-area {
-
-        width: 90vw;
-
-        max-width: 90vw;
-    }
-}
-
-
-/* ========================================
-   LANDSCAPE MOBILE
-======================================== */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-    /*
-       Restore the original full-screen
-       16:9 composition in landscape.
-    */
-
-    html {
-        overflow: hidden;
-    }
-
-    body {
-        width: 100%;
-        height: 100%;
-
-        overflow: hidden;
-    }
-
-    .screen {
-
-        width: 100vw;
-        height: 100vh;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        overflow: hidden;
-
-        padding: 0;
-    }
-
-    .game-area {
-
-        width: auto;
-
-        height: 90vh;
-
-        max-width: 90vw;
-
-        aspect-ratio: 16 / 9;
-
-        position: relative;
-
-        margin: 0;
-    }
-
-    .main-image {
-
-        width: 100%;
-        height: 100%;
-
-        display: block;
-
-        object-fit: contain;
-    }
-
-    /*
-       Keep text in its original
-       composition in landscape.
-    */
-
-    .text-block {
-
-        position: absolute;
-
-        transform: translate(-50%, -50%);
-
-        width: 55%;
-        max-width: 55%;
-    }
-
-    .text-block2 {
-
-        position: absolute;
-
-        transform: translate(-50%, -50%);
-
-        width: 55%;
-        max-width: 55%;
-    }
-
-    .text-block-1 {
-
-        left: 45%;
-
-        top: 110%;
-    }
-
-    .text-block-2 {
-
-        left: 46%;
-
-        top: 89%;
-    }
-}
-
-
-/* ========================================
-   PORTRAIT MOBILE
-   TEXT BELOW MAIN IMAGE
-======================================== */
-
-@media (max-width: 900px) and (orientation: portrait) {
-
-    /*
-       IMPORTANT:
-       Portrait becomes a vertically
-       scrollable document instead of
-       a fixed 16:9 screen.
-    */
-
-    html {
-
-        width: 100%;
-
-        height: auto;
-        min-height: 100%;
-
-        overflow-x: hidden;
-        overflow-y: auto;
+    if (!mode) {
+        mode = "pingpong";
     }
 
 
-    body {
+    /* =====================================
+       MOVEMENT SPEED
+    ====================================== */
 
-        width: 100%;
+    var speed = parseFloat(
+        image.getAttribute("data-speed")
+    );
 
-        height: auto;
-        min-height: 100%;
-
-        overflow-x: hidden;
-        overflow-y: auto;
+    if (!speed) {
+        speed = 5;
     }
 
 
-    /* ====================================
-       SCREEN
-    ==================================== */
+    /* =====================================
+       MOVEMENT PROGRESS
 
-    .screen {
+       0 = START
+       1 = END
+    ====================================== */
 
-        width: 100%;
-
-        height: auto;
-        min-height: 100vh;
-
-        display: block;
-
-        overflow: visible;
-
-        padding: 4vw 0 12vw 0;
-    }
+    var progress = 0;
 
 
-    /* ====================================
-       GAME AREA
-    ==================================== */
+    /* =====================================
+       MOVEMENT DIRECTION
 
-    .game-area {
+       1  = FORWARD
+       -1 = BACKWARD
+    ====================================== */
 
-        width: 90vw;
-        max-width: 90vw;
-
-        /*
-           IMPORTANT:
-           No fixed 16:9 height here.
-           The container grows with the
-           text blocks.
-        */
-
-        height: auto;
-
-        aspect-ratio: auto;
-
-        margin: 0 auto;
-
-        position: relative;
-
-        overflow: visible;
-
-        display: block;
-    }
+    var direction = 1;
 
 
-    /* ====================================
-       MAIN IMAGE
-    ==================================== */
+    /* =====================================
+       UPDATE POSITION
+    ====================================== */
 
-    .main-image {
-
-        width: 100%;
-
-        height: auto;
-
-        max-width: 100%;
-
-        display: block;
-
-        object-fit: contain;
-
-        position: relative;
-
-        z-index: 1;
-    }
+    function updatePosition() {
 
 
-    /* ====================================
-       TEXT BLOCKS
-       NORMAL DOCUMENT FLOW
-    ==================================== */
+        /* Calculate X */
 
-    .text-block,
-    .text-block2 {
-
-        /*
-           Remove absolute positioning
-           in portrait mode.
-        */
-
-        position: relative;
-
-        left: auto !important;
-        top: auto !important;
-
-        transform: none !important;
-
-        width: 100%;
-        max-width: 100%;
-
-        height: auto;
-
-        margin-left: auto;
-        margin-right: auto;
-
-        padding-left: 4vw;
-        padding-right: 4vw;
-
-        overflow: visible;
-
-        white-space: normal;
-
-        z-index: 20;
-    }
+        var x =
+            startX +
+            (endX - startX) *
+            progress;
 
 
-    /* ====================================
-       TEXT BLOCK 1
-    ==================================== */
+        /* Calculate Y */
 
-    .text-block-1 {
-
-        margin-top: 5vw;
-
-        margin-bottom: 0;
-
-        text-align: center;
-
-        direction: rtl;
-    }
+        var y =
+            startY +
+            (endY - startY) *
+            progress;
 
 
-    /* ====================================
-       TEXT BLOCK 2
-    ==================================== */
+        /* Apply position */
 
-    .text-block-2 {
-
-        margin-top: 8vw;
-
-        margin-bottom: 5vw;
-
-        text-align: left;
-
-        direction: rtl;
-
-        color: #655B0F;
-    }
+        image.style.left = x + "%";
+        image.style.top = y + "%";
 
 
-    /* ====================================
-       MOBILE TITLES
-    ==================================== */
+        /* =================================
+           STATIC
+        ================================= */
 
-    .text-block .text-title,
-    .text-block2 .text-title {
+        if (mode === "static") {
 
-        width: 100%;
+            return;
 
-        font-size: clamp(
-            11px,
-            3.2vw,
-            14px
+        }
+
+
+        /* =================================
+           ONCE
+
+           START → END
+           THEN STOP
+        ================================= */
+
+        if (mode === "once") {
+
+            progress =
+                progress +
+                speed *
+                0.0001;
+
+
+            if (progress >= 1) {
+
+                progress = 1;
+
+                return;
+
+            }
+
+
+            requestAnimationFrame(
+                updatePosition
+            );
+
+            return;
+
+        }
+
+
+        /* =================================
+           PINGPONG
+
+           START → END → START → END...
+        ================================= */
+
+        if (mode === "pingpong") {
+
+            progress =
+                progress +
+                direction *
+                speed *
+                0.0001;
+
+
+            /* Reached END */
+
+            if (progress >= 1) {
+
+                progress = 1;
+
+                direction = -1;
+
+            }
+
+
+            /* Reached START */
+
+            if (progress <= 0) {
+
+                progress = 0;
+
+                direction = 1;
+
+            }
+
+        }
+
+
+        /* Continue animation */
+
+        requestAnimationFrame(
+            updatePosition
         );
 
-        line-height: 1.5;
-
-        margin: 0 0 3vw 0;
-
-        padding: 0;
-
-        white-space: normal;
-
-        overflow-wrap: anywhere;
-
-        word-break: normal;
     }
 
 
-    /* ====================================
-       MOBILE CONTENT
-    ==================================== */
+    /* =====================================
+       START
+    ====================================== */
 
-    .text-block .text-content,
-    .text-block2 .text-content {
+    updatePosition();
 
-        width: 100%;
-
-        font-size: clamp(
-            9px,
-            2.6vw,
-            12px
-        );
-
-        line-height: 1.9;
-
-        margin: 0;
-
-        padding: 0;
-
-        white-space: normal;
-
-        overflow-wrap: anywhere;
-
-        word-break: normal;
-    }
-
-
-    /* ====================================
-       MOBILE MOVING IMAGES
-    ==================================== */
-
-    /*
-       Moving images remain inside the
-       visual composition above the text.
-    */
-
-    .moving-image {
-
-        position: absolute;
-
-        z-index: 5;
-    }
-
-
-    /* ====================================
-       MOBILE BUTTONS
-    ==================================== */
-
-    .button {
-
-        position: absolute;
-
-        z-index: 10;
-    }
-}
-
-
-/* ========================================
-   REDUCED MOTION
-======================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    body {
-
-        animation: none;
-    }
-
-    .button img {
-
-        transition: none;
-    }
-}
-
-
-/* ========================================
-   MOVING BACKGROUND
-======================================== */
-
-@keyframes moveBackground {
-
-    from {
-
-        background-position: 0 0;
-    }
-
-    to {
-
-        background-position: 500px 500px;
-    }
 }
