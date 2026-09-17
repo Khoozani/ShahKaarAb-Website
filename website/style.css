@@ -75,13 +75,6 @@ body {
 
 .game-area {
 
-    /*
-       اندازه اصلی صفحه
-
-       نسبت تصویر:
-       16 / 9
-    */
-
     width: 900px;
 
     aspect-ratio: 16 / 9;
@@ -89,11 +82,6 @@ body {
     position: relative;
 
     flex: 0 0 auto;
-
-    /*
-       جلوگیری از کوچک شدن
-       یا تغییر نسبت توسط flex
-    */
 
     max-width: 90vw;
 }
@@ -117,10 +105,6 @@ body {
 
     pointer-events: none;
 
-    /*
-       تصویر اصلی اولین عنصر بصری صفحه است.
-    */
-
     max-width: 100%;
 }
 
@@ -135,19 +119,9 @@ body {
 
     display: block;
 
-    /*
-       مختصات left/top
-       مرکز دکمه را مشخص می‌کنند.
-    */
-
     transform: translate(-50%, -50%);
 
     z-index: 10;
-
-    /*
-       جلوگیری از رفتار ناخواسته لینک
-       در اندازه‌های مختلف
-    */
 
     line-height: 0;
 
@@ -190,9 +164,9 @@ body {
 }
 
 
-/*
-   Keyboard accessibility
-*/
+/* ========================================
+   KEYBOARD ACCESSIBILITY
+======================================== */
 
 .button:focus-visible {
 
@@ -205,11 +179,6 @@ body {
    BUTTON POSITIONS & SIZES
 ======================================== */
 
-
-/*
-   BUTTON 1
-*/
-
 .button-1 {
 
     left: 20%;
@@ -218,10 +187,6 @@ body {
     width: 7%;
 }
 
-
-/*
-   BUTTON 2
-*/
 
 .button-2 {
 
@@ -232,10 +197,6 @@ body {
 }
 
 
-/*
-   BUTTON 3
-*/
-
 .button-3 {
 
     left: 66%;
@@ -245,10 +206,6 @@ body {
 }
 
 
-/*
-   BUTTON 4
-*/
-
 .button-4 {
 
     left: 75%;
@@ -256,6 +213,8 @@ body {
 
     width: 10%;
 }
+
+
 .button-5 {
 
     left: 10%;
@@ -280,11 +239,6 @@ body {
 
     max-width: none;
 
-    /*
-       JavaScript مقدار left و top
-       را تعیین می‌کند.
-    */
-
     transform: translate(-50%, -50%);
 
     z-index: 5;
@@ -294,16 +248,12 @@ body {
 
     pointer-events: none;
 
-    /*
-       جلوگیری از فاصله اضافی inline image
-    */
-
     line-height: 0;
 }
 
 
 /* ========================================
-   MOVING IMAGE 1
+   MOVING IMAGE SIZES
 ======================================== */
 
 .moving-image-1 {
@@ -312,29 +262,17 @@ body {
 }
 
 
-/* ========================================
-   MOVING IMAGE 2
-======================================== */
-
 .moving-image-2 {
 
     width: 89.5%;
 }
 
 
-/* ========================================
-   MOVING IMAGE 3
-======================================== */
-
 .moving-image-3 {
 
     width: 30%;
 }
 
-
-/* ========================================
-   MOVING IMAGE 4
-======================================== */
 
 .moving-image-4 {
 
@@ -343,41 +281,10 @@ body {
 
 
 /* ========================================
-   TEXT BLOCK
+   TEXT BLOCK BASE
 ======================================== */
 
-.text-block {
-
-    position: absolute;
-
-    transform: translate(-50%, -50%);
-
-    width: 55%;
-
-    z-index: 12;
-
-    font-family: "Unixel", sans-serif;
-
-    direction: rtl;
-
-    text-align: center;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    line-height: 1.6;
-
-    margin: 0;
-    padding: 0;
-
-    /*
-       متن نباید باعث ایجاد
-       اسکرول افقی شود.
-    */
-
-    max-width: 55%;
-}
-
+.text-block,
 .text-block2 {
 
     position: absolute;
@@ -385,14 +292,11 @@ body {
     transform: translate(-50%, -50%);
 
     width: 55%;
+    max-width: 55%;
 
     z-index: 12;
 
     font-family: "Unixel", sans-serif;
-
-    direction: rtl;
-
-    text-align: left;
 
     user-select: none;
     -webkit-user-select: none;
@@ -401,13 +305,32 @@ body {
 
     margin: 0;
     padding: 0;
+}
 
-    /*
-       متن نباید باعث ایجاد
-       اسکرول افقی شود.
-    */
 
-    max-width: 55%;
+/* ========================================
+   TEXT BLOCK 1
+======================================== */
+
+.text-block {
+
+    direction: rtl;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   TEXT BLOCK 2
+======================================== */
+
+.text-block2 {
+
+    direction: rtl;
+
+    text-align: left;
+
+    color: #655B0F;
 }
 
 
@@ -449,13 +372,14 @@ body {
 
     padding: 0;
 
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+
     word-break: normal;
 }
 
 
 /* ========================================
-   TEXT BLOCK POSITION
+   DESKTOP TEXT POSITIONS
 ======================================== */
 
 .text-block-1 {
@@ -464,41 +388,19 @@ body {
 
     top: 110%;
 }
+
+
 .text-block-2 {
 
     left: 46%;
 
     top: 89%;
-	color: #655B0F;
 }
+
 
 /* ========================================
    SEMANTIC / SEO CONTENT
 ======================================== */
-
-/*
-   اگر در index.html یک بخش معنایی مانند:
-
-   <header class="seo-header">
-   ...
-   </header>
-
-   یا:
-
-   <section class="seo-content">
-   ...
-   </section>
-
-   وجود داشته باشد، این قوانین آن را
-   از طراحی تصویری صفحه خارج می‌کنند،
-   بدون اینکه از display:none استفاده شود.
-
-   توجه:
-   این بخش برای پنهان‌کردن محتوای فریبنده
-   یا keyword stuffing نیست؛ فقط برای عناصر
-   معنایی/دسترسی است که در طراحی تصویری
-   صفحه جای بصری مستقلی ندارند.
-*/
 
 .seo-header,
 .seo-content {
@@ -565,11 +467,6 @@ body {
 
     .game-area {
 
-        /*
-           صفحه در موبایل حداکثر
-           90 درصد عرض را می‌گیرد.
-        */
-
         width: 90vw;
 
         max-width: 90vw;
@@ -604,12 +501,15 @@ body {
     orientation: landscape
 ) {
 
-    .game-area {
+    .screen {
 
-        /*
-           در حالت Landscape ارتفاع
-           محدودکننده اصلی است.
-        */
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    .game-area {
 
         width: auto;
 
@@ -618,6 +518,18 @@ body {
         max-width: 90vw;
 
         aspect-ratio: 16 / 9;
+    }
+
+
+    /*
+       در Landscape همان ساختار
+       دسکتاپ حفظ می‌شود.
+    */
+
+    .text-block,
+    .text-block2 {
+
+        position: absolute;
     }
 
 }
@@ -633,15 +545,265 @@ body {
     orientation: portrait
 ) {
 
+    /*
+       صفحه دیگر overflow را مخفی نمی‌کند،
+       چون متن‌ها اکنون بخشی از ارتفاع
+       واقعی صفحه هستند.
+    */
+
+    html,
+    body {
+
+        overflow-x: hidden;
+
+        overflow-y: auto;
+    }
+
+
+    .screen {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        height: auto;
+
+        display: block;
+
+        overflow: visible;
+
+        padding: 20px 0 40px 0;
+    }
+
+
+    /*
+       GAME AREA
+       در Portrait به جای canvas ثابت
+       تبدیل به container عمودی می‌شود.
+    */
+
     .game-area {
 
         width: 90vw;
 
-        height: auto;
-
         max-width: 90vw;
 
+        height: auto;
+
+        min-height: 0;
+
+        aspect-ratio: auto;
+
+        margin: 0 auto;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        position: relative;
+    }
+
+
+    /*
+       MAIN IMAGE
+       نسبت اصلی تصویر حفظ می‌شود.
+    */
+
+    .main-image {
+
+        width: 100%;
+
+        height: auto;
+
         aspect-ratio: 16 / 9;
+
+        object-fit: contain;
+
+        flex: 0 0 auto;
+    }
+
+
+    /*
+       تمام عناصر absolute
+       هنوز نسبت به تصویر اصلی
+       روی همان composition قرار می‌گیرند.
+    */
+
+    .button,
+    .moving-image {
+
+        position: absolute;
+    }
+
+
+    /*
+       TEXT BLOCKS
+       از حالت absolute خارج می‌شوند.
+       بنابراین دیگر روی تصویر نمی‌افتند.
+    */
+
+    .text-block,
+    .text-block2 {
+
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        transform: none;
+
+        width: 92%;
+
+        max-width: 92%;
+
+        height: auto;
+
+        flex: 0 0 auto;
+
+        z-index: 20;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        padding: 0;
+    }
+
+
+    /*
+       فاصله متن اول از تصویر
+    */
+
+    .text-block-1 {
+
+        margin-top: 28px;
+
+        margin-bottom: 34px;
+    }
+
+
+    /*
+       متن دوم بعد از متن اول
+    */
+
+    .text-block-2 {
+
+        margin-top: 0;
+
+        margin-bottom: 20px;
+    }
+
+
+    /*
+       TITLE
+    */
+
+    .text-title {
+
+        font-size: clamp(11px, 3.2vw, 14px);
+
+        line-height: 1.5;
+
+        margin-bottom: 10px;
+
+        overflow-wrap: anywhere;
+    }
+
+
+    /*
+       CONTENT
+    */
+
+    .text-content {
+
+        font-size: clamp(8px, 2.5vw, 10px);
+
+        line-height: 1.9;
+
+        overflow-wrap: anywhere;
+
+        word-break: normal;
+
+        white-space: normal;
+    }
+
+
+    /*
+       جلوگیری از بزرگ شدن غیرطبیعی
+       عناصر تصویری
+    */
+
+    .button img {
+
+        max-width: 100%;
+    }
+
+}
+
+
+/* ========================================
+   PORTRAIT — VERY SMALL PHONES
+======================================== */
+
+@media (
+    max-width: 600px
+) and (
+    orientation: portrait
+) {
+
+    .screen {
+
+        padding-top: 12px;
+
+        padding-bottom: 30px;
+    }
+
+
+    .game-area {
+
+        width: 94vw;
+
+        max-width: 94vw;
+    }
+
+
+    .text-block,
+    .text-block2 {
+
+        width: 94%;
+
+        max-width: 94%;
+    }
+
+
+    .text-block-1 {
+
+        margin-top: 24px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .text-block-2 {
+
+        margin-bottom: 20px;
+    }
+
+
+    .text-title {
+
+        font-size: clamp(10px, 3.5vw, 13px);
+
+        line-height: 1.5;
+    }
+
+
+    .text-content {
+
+        font-size: clamp(8px, 2.7vw, 10px);
+
+        line-height: 1.85;
     }
 
 }
@@ -650,11 +812,6 @@ body {
 /* ========================================
    REDUCED MOTION
 ======================================== */
-
-/*
-   برای کاربرانی که در سیستم‌عامل خود
-   حرکت‌های تصویری را محدود کرده‌اند.
-*/
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -687,4 +844,3 @@ body {
     }
 
 }
-
