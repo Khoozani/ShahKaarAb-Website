@@ -1,26 +1,267 @@
 /* ========================================
-   BUTTON HOVER IMAGES
+   BASIC
 ======================================== */
 
-var hoverImages = document.querySelectorAll(
-    "[data-normal][data-hover]"
-);
+* {
+    box-sizing: border-box;
+}
 
-for (var i = 0; i < hoverImages.length; i++) {
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-    hoverImages[i].addEventListener("mouseenter", function () {
+html {
+    overflow: hidden;
+}
 
-        this.src = this.getAttribute("data-hover");
+body {
+    overflow: hidden;
 
-    });
+    background-image: url("./Home/Background_Pattern.png");
+    background-color: aliceblue;
+
+    background-repeat: repeat;
+    background-position: 0 0;
+
+    animation: moveBackground 20s linear infinite;
+}
 
 
-    hoverImages[i].addEventListener("mouseleave", function () {
+/* ========================================
+   FONT
+======================================== */
 
-        this.src = this.getAttribute("data-normal");
+@font-face {
+    font-family: "Unixel";
 
-    });
+    src: url("Home/Fonts/unixel-Regular.ttf")
+         format("truetype");
 
+    font-weight: normal;
+    font-style: normal;
+
+    font-display: swap;
+}
+
+
+/* ========================================
+   SCREEN
+======================================== */
+
+.screen {
+
+    width: 100vw;
+    height: 100vh;
+
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   MAIN GAME AREA
+======================================== */
+
+.game-area {
+
+    /*
+       اندازه اصلی صفحه
+
+       نسبت تصویر:
+       16 / 9
+    */
+
+    width: 900px;
+
+    aspect-ratio: 16 / 9;
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    /*
+       جلوگیری از کوچک شدن
+       یا تغییر نسبت توسط flex
+    */
+
+    max-width: 90vw;
+}
+
+
+/* ========================================
+   MAIN IMAGE
+======================================== */
+
+.main-image {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    pointer-events: none;
+
+    /*
+       تصویر اصلی اولین عنصر بصری صفحه است.
+    */
+
+    max-width: 100%;
+}
+
+
+/* ========================================
+   BUTTON BASE
+======================================== */
+
+.button {
+
+    position: absolute;
+
+    display: block;
+
+    /*
+       مختصات left/top
+       مرکز دکمه را مشخص می‌کنند.
+    */
+
+    transform: translate(-50%, -50%);
+
+    z-index: 10;
+
+    /*
+       جلوگیری از رفتار ناخواسته لینک
+       در اندازه‌های مختلف
+    */
+
+    line-height: 0;
+
+    text-decoration: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   BUTTON IMAGES
+======================================== */
+
+.button img {
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+
+    cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* ========================================
+   BUTTON HOVER
+======================================== */
+
+.button:hover img {
+
+    transform: scale(1.05);
+}
+
+
+/*
+   Keyboard accessibility
+*/
+
+.button:focus-visible {
+
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+
+/* ========================================
+   BUTTON POSITIONS & SIZES
+======================================== */
+
+
+/*
+   BUTTON 1
+*/
+
+.button-1 {
+
+    left: 20%;
+    top: 23%;
+
+    width: 7%;
+}
+
+
+/*
+   BUTTON 2
+*/
+
+.button-2 {
+
+    left: 32%;
+    top: 23%;
+
+    width: 17%;
+}
+
+
+/*
+   BUTTON 3
+*/
+
+.button-3 {
+
+    left: 66%;
+    top: 23%;
+
+    width: 7%;
+}
+
+
+/*
+   BUTTON 4
+*/
+
+.button-4 {
+
+    left: 75%;
+    top: 23%;
+
+    width: 10%;
+}
+.button-5 {
+
+    left: 10%;
+    top: 2%;
+
+    width: 15%;
 }
 
 
@@ -28,220 +269,422 @@ for (var i = 0; i < hoverImages.length; i++) {
    MOVING IMAGES
 ======================================== */
 
-var movingImages = document.querySelectorAll(
-    ".moving-image"
-);
+.moving-image {
+
+    position: absolute;
+
+    display: block;
+
+    width: 10%;
+    height: auto;
+
+    max-width: none;
+
+    /*
+       JavaScript مقدار left و top
+       را تعیین می‌کند.
+    */
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    pointer-events: none;
+
+    /*
+       جلوگیری از فاصله اضافی inline image
+    */
+
+    line-height: 0;
+}
 
 
-for (var j = 0; j < movingImages.length; j++) {
+/* ========================================
+   MOVING IMAGE 1
+======================================== */
 
-    startMovingImage(movingImages[j]);
+.moving-image-1 {
+
+    width: 30%;
+}
+
+
+/* ========================================
+   MOVING IMAGE 2
+======================================== */
+
+.moving-image-2 {
+
+    width: 89.5%;
+}
+
+
+/* ========================================
+   MOVING IMAGE 3
+======================================== */
+
+.moving-image-3 {
+
+    width: 30%;
+}
+
+
+/* ========================================
+   MOVING IMAGE 4
+======================================== */
+
+.moving-image-4 {
+
+    width: 20%;
+}
+
+
+/* ========================================
+   TEXT BLOCK
+======================================== */
+
+.text-block {
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+
+    z-index: 12;
+
+    font-family: "Unixel", sans-serif;
+
+    direction: rtl;
+
+    text-align: center;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+
+    /*
+       متن نباید باعث ایجاد
+       اسکرول افقی شود.
+    */
+
+    max-width: 55%;
+}
+
+.text-block2 {
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+
+    z-index: 12;
+
+    font-family: "Unixel", sans-serif;
+
+    direction: rtl;
+
+    text-align: left;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+
+    /*
+       متن نباید باعث ایجاد
+       اسکرول افقی شود.
+    */
+
+    max-width: 55%;
+}
+
+
+/* ========================================
+   TEXT TITLE
+======================================== */
+
+.text-title {
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 1.2;
+
+    margin: 0 0 12px 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   TEXT CONTENT
+======================================== */
+
+.text-content {
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: normal;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+
+/* ========================================
+   TEXT BLOCK POSITION
+======================================== */
+
+.text-block-1 {
+
+    left: 45%;
+
+    top: 110%;
+}
+.text-block-2 {
+
+    left: 46%;
+
+    top: 89%;
+	color: #655B0F;
+}
+
+/* ========================================
+   SEMANTIC / SEO CONTENT
+======================================== */
+
+/*
+   اگر در index.html یک بخش معنایی مانند:
+
+   <header class="seo-header">
+   ...
+   </header>
+
+   یا:
+
+   <section class="seo-content">
+   ...
+   </section>
+
+   وجود داشته باشد، این قوانین آن را
+   از طراحی تصویری صفحه خارج می‌کنند،
+   بدون اینکه از display:none استفاده شود.
+
+   توجه:
+   این بخش برای پنهان‌کردن محتوای فریبنده
+   یا keyword stuffing نیست؛ فقط برای عناصر
+   معنایی/دسترسی است که در طراحی تصویری
+   صفحه جای بصری مستقلی ندارند.
+*/
+
+.seo-header,
+.seo-content {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+
+/* ========================================
+   SEO TYPOGRAPHY RESET
+======================================== */
+
+.seo-header h1,
+.seo-header h2,
+.seo-header p,
+.seo-content h1,
+.seo-content h2,
+.seo-content h3,
+.seo-content p {
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   LANGUAGE LINKS
+======================================== */
+
+.language-selector {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   MOBILE / SMALL SCREENS
+======================================== */
+
+@media (max-width: 900px) {
+
+    .game-area {
+
+        /*
+           صفحه در موبایل حداکثر
+           90 درصد عرض را می‌گیرد.
+        */
+
+        width: 90vw;
+
+        max-width: 90vw;
+    }
 
 }
 
 
 /* ========================================
-   MOVING IMAGE FUNCTION
+   VERY SMALL SCREENS
 ======================================== */
 
-function startMovingImage(image) {
+@media (max-width: 600px) {
 
+    .game-area {
 
-    /* =====================================
-       START POSITION
-    ====================================== */
+        width: 90vw;
 
-    var startX = parseFloat(
-        image.getAttribute("data-start-x")
-    );
-
-    var startY = parseFloat(
-        image.getAttribute("data-start-y")
-    );
-
-
-    /* =====================================
-       END POSITION
-    ====================================== */
-
-    var endX = parseFloat(
-        image.getAttribute("data-end-x")
-    );
-
-    var endY = parseFloat(
-        image.getAttribute("data-end-y")
-    );
-
-
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
-
-    var mode = image.getAttribute("data-mode");
-
-    if (!mode) {
-        mode = "pingpong";
+        max-width: 90vw;
     }
-
-
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
-
-    var speed = parseFloat(
-        image.getAttribute("data-speed")
-    );
-
-    if (!speed) {
-        speed = 5;
-    }
-
-
-    /* =====================================
-       MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
-    ====================================== */
-
-    var progress = 0;
-
-
-    /* =====================================
-       MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
-    ====================================== */
-
-    var direction = 1;
-
-
-    /* =====================================
-       UPDATE POSITION
-    ====================================== */
-
-    function updatePosition() {
-
-
-        /* Calculate X */
-
-        var x =
-            startX +
-            (endX - startX) *
-            progress;
-
-
-        /* Calculate Y */
-
-        var y =
-            startY +
-            (endY - startY) *
-            progress;
-
-
-        /* Apply position */
-
-        image.style.left = x + "%";
-        image.style.top = y + "%";
-
-
-        /* =================================
-           STATIC
-        ================================= */
-
-        if (mode === "static") {
-
-            return;
-
-        }
-
-
-        /* =================================
-           ONCE
-
-           START → END
-           THEN STOP
-        ================================= */
-
-        if (mode === "once") {
-
-            progress =
-                progress +
-                speed *
-                0.0001;
-
-
-            if (progress >= 1) {
-
-                progress = 1;
-
-                return;
-
-            }
-
-
-            requestAnimationFrame(
-                updatePosition
-            );
-
-            return;
-
-        }
-
-
-        /* =================================
-           PINGPONG
-
-           START → END → START → END...
-        ================================= */
-
-        if (mode === "pingpong") {
-
-            progress =
-                progress +
-                direction *
-                speed *
-                0.0001;
-
-
-            /* Reached END */
-
-            if (progress >= 1) {
-
-                progress = 1;
-
-                direction = -1;
-
-            }
-
-
-            /* Reached START */
-
-            if (progress <= 0) {
-
-                progress = 0;
-
-                direction = 1;
-
-            }
-
-        }
-
-
-        /* Continue animation */
-
-        requestAnimationFrame(
-            updatePosition
-        );
-
-    }
-
-
-    /* =====================================
-       START
-    ====================================== */
-
-    updatePosition();
 
 }
+
+
+/* ========================================
+   LANDSCAPE MOBILE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: landscape
+) {
+
+    .game-area {
+
+        /*
+           در حالت Landscape ارتفاع
+           محدودکننده اصلی است.
+        */
+
+        width: auto;
+
+        height: 90vh;
+
+        max-width: 90vw;
+
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+/* ========================================
+   PORTRAIT MOBILE
+======================================== */
+
+@media (
+    max-width: 900px
+) and (
+    orientation: portrait
+) {
+
+    .game-area {
+
+        width: 90vw;
+
+        height: auto;
+
+        max-width: 90vw;
+
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+/*
+   برای کاربرانی که در سیستم‌عامل خود
+   حرکت‌های تصویری را محدود کرده‌اند.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    body {
+
+        animation: none;
+    }
+
+    .button img {
+
+        transition: none;
+    }
+}
+
+
+/* ========================================
+   MOVING BACKGROUND
+======================================== */
+
+@keyframes moveBackground {
+
+    from {
+
+        background-position: 0 0;
+    }
+
+    to {
+
+        background-position: 500px 500px;
+    }
+
+}
+
