@@ -43,21 +43,25 @@ body {
 }
 
 
+
 /* ========================================
    FONT
 ======================================== */
 
 @font-face {
     font-family: "Unixel";
-
-    src: url("Fonts/unixel-Regular.ttf")
-         format("truetype");
-
+    src: url("../Fonts/unixel-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
-
     font-display: swap;
 }
+
+html,
+body,
+* {
+    font-family: "Unixel", sans-serif;
+}
+
 
 
 /* ========================================
@@ -678,7 +682,7 @@ body.loaded .screen {
 
     direction: rtl;
 
-    text-align: right;
+    text-align: center;
 
     user-select: none;
 
