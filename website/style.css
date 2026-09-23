@@ -9,7 +9,7 @@
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -53,9 +53,14 @@ body {
 ======================================== */
 
 .screen {
-
     width: 100vw;
     height: 100vh;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    min-width: 0;
+    min-height: 0;
 
     display: flex;
 
@@ -63,6 +68,8 @@ body {
     justify-content: center;
 
     overflow: hidden;
+
+    position: relative;
 }
 
 
@@ -71,6 +78,12 @@ body {
 ======================================== */
 
 .game-area {
+    /*
+       Original design canvas.
+
+       All internal elements are positioned
+       relative to this 16:9 composition.
+    */
 
     width: 900px;
 
@@ -81,6 +94,13 @@ body {
     flex: 0 0 auto;
 
     max-width: 90vw;
+
+    /*
+       Prevent accidental shrinking
+       inside the flex container.
+    */
+
+    min-width: 0;
 }
 
 
@@ -89,11 +109,10 @@ body {
 ======================================== */
 
 .main-image {
-
-    display: block;
-
     width: 100%;
     height: 100%;
+
+    display: block;
 
     object-fit: contain;
 
@@ -111,10 +130,14 @@ body {
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
+
+    /*
+       left / top define the center
+       of each button.
+    */
 
     transform: translate(-50%, -50%);
 
@@ -134,7 +157,6 @@ body {
 ======================================== */
 
 .button img {
-
     display: block;
 
     width: 100%;
@@ -156,7 +178,6 @@ body {
 ======================================== */
 
 .button:hover img {
-
     transform: scale(1.05);
 }
 
@@ -166,19 +187,21 @@ body {
 ======================================== */
 
 .button:focus-visible {
-
     outline: 2px solid currentColor;
-
     outline-offset: 4px;
 }
 
 
 /* ========================================
-   BUTTON POSITIONS
+   BUTTON POSITIONS & SIZES
 ======================================== */
 
-.button-1 {
 
+/* ----------------------------------------
+   BUTTON 1 — ENGLISH ARROW
+---------------------------------------- */
+
+.button-1 {
     left: 20%;
     top: 23%;
 
@@ -186,8 +209,11 @@ body {
 }
 
 
-.button-2 {
+/* ----------------------------------------
+   BUTTON 2 — ENGLISH FRAME
+---------------------------------------- */
 
+.button-2 {
     left: 32%;
     top: 23%;
 
@@ -195,8 +221,11 @@ body {
 }
 
 
-.button-3 {
+/* ----------------------------------------
+   BUTTON 3 — PERSIAN ARROW
+---------------------------------------- */
 
+.button-3 {
     left: 66%;
     top: 23%;
 
@@ -204,8 +233,11 @@ body {
 }
 
 
-.button-4 {
+/* ----------------------------------------
+   BUTTON 4 — PERSIAN FRAME
+---------------------------------------- */
 
+.button-4 {
     left: 75%;
     top: 23%;
 
@@ -213,8 +245,11 @@ body {
 }
 
 
-.button-5 {
+/* ----------------------------------------
+   BUTTON 5 — CONTACT
+---------------------------------------- */
 
+.button-5 {
     left: 10%;
     top: 2%;
 
@@ -227,7 +262,6 @@ body {
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
@@ -236,6 +270,10 @@ body {
     height: auto;
 
     max-width: none;
+
+    /*
+       JavaScript controls left/top.
+    */
 
     transform: translate(-50%, -50%);
 
@@ -251,20 +289,35 @@ body {
 
 
 /* ========================================
-   MOVING IMAGE SIZES
+   MOVING IMAGE 1
 ======================================== */
 
 .moving-image-1 {
     width: 30%;
 }
 
+
+/* ========================================
+   MOVING IMAGE 2
+======================================== */
+
 .moving-image-2 {
     width: 89.5%;
 }
 
+
+/* ========================================
+   MOVING IMAGE 3
+======================================== */
+
 .moving-image-3 {
     width: 30%;
 }
+
+
+/* ========================================
+   MOVING IMAGE 4
+======================================== */
 
 .moving-image-4 {
     width: 20%;
@@ -272,12 +325,10 @@ body {
 
 
 /* ========================================
-   TEXT BLOCK BASE
+   TEXT BLOCK
 ======================================== */
 
-.text-block,
-.text-block2 {
-
+.text-block {
     position: absolute;
 
     transform: translate(-50%, -50%);
@@ -288,6 +339,10 @@ body {
     z-index: 12;
 
     font-family: "Unixel", sans-serif;
+
+    direction: rtl;
+
+    text-align: center;
 
     user-select: none;
     -webkit-user-select: none;
@@ -300,28 +355,32 @@ body {
 
 
 /* ========================================
-   TEXT BLOCK 1
-======================================== */
-
-.text-block {
-
-    direction: rtl;
-
-    text-align: center;
-}
-
-
-/* ========================================
    TEXT BLOCK 2
 ======================================== */
 
 .text-block2 {
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+    max-width: 55%;
+
+    z-index: 12;
+
+    font-family: "Unixel", sans-serif;
 
     direction: rtl;
 
     text-align: left;
 
-    color: #655B0F;
+    user-select: none;
+    -webkit-user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -330,16 +389,15 @@ body {
 ======================================== */
 
 .text-title {
-
     font-family: "Unixel", sans-serif;
 
     font-size: 14px;
 
     font-weight: bold;
 
-    line-height: 1.35;
+    line-height: 1.2;
 
-    margin: 0 0 12px;
+    margin: 0 0 12px 0;
 
     padding: 0;
 }
@@ -350,52 +408,47 @@ body {
 ======================================== */
 
 .text-content {
-
     font-family: "Unixel", sans-serif;
 
     font-size: 10px;
 
     font-weight: normal;
 
-    line-height: 1.75;
+    line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
 
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 
     word-break: normal;
 }
 
 
 /* ========================================
-   DESKTOP TEXT POSITIONS
+   TEXT BLOCK POSITIONS
 ======================================== */
 
 .text-block-1 {
-
     left: 45%;
-
     top: 110%;
 }
 
 
 .text-block-2 {
-
     left: 46%;
-
     top: 89%;
+
+    color: #655B0F;
 }
 
 
 /* ========================================
-   SEO CONTENT
+   SEMANTIC / SEO CONTENT
 ======================================== */
 
 .seo-header,
 .seo-content {
-
     position: absolute;
 
     width: 1px;
@@ -426,7 +479,6 @@ body {
 .seo-content h2,
 .seo-content h3,
 .seo-content p {
-
     margin: 0;
     padding: 0;
 }
@@ -437,7 +489,6 @@ body {
 ======================================== */
 
 .language-selector {
-
     display: flex;
 
     align-items: center;
@@ -451,16 +502,38 @@ body {
 
 
 /* ========================================
-   TABLET / SMALL DESKTOP
+   MOBILE — GENERAL
 ======================================== */
 
 @media (max-width: 900px) {
 
     .game-area {
-
-        width: min(90vw, 900px);
+        width: 90vw;
 
         max-width: 90vw;
+
+        height: auto;
+
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+/* ========================================
+   VERY SMALL SCREENS
+======================================== */
+
+@media (max-width: 600px) {
+
+    .game-area {
+        width: 90vw;
+
+        max-width: 90vw;
+
+        height: auto;
+
+        aspect-ratio: 16 / 9;
     }
 
 }
@@ -476,41 +549,28 @@ body {
     orientation: landscape
 ) {
 
-    .screen {
-
-        width: 100vw;
-        height: 100vh;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        overflow: hidden;
-    }
-
-
     .game-area {
+        /*
+           Height becomes the limiting dimension
+           in landscape orientation.
+        */
 
         width: auto;
 
-        height: min(90vh, 506px);
+        height: 90vh;
 
         max-width: 90vw;
 
         aspect-ratio: 16 / 9;
-    }
 
+        /*
+           No additional translation here.
 
-    /*
-       Landscape همچنان composition
-       اصلی را حفظ می‌کند.
-    */
+           The existing composition remains centered
+           exactly as before.
+        */
 
-    .text-block,
-    .text-block2 {
-
-        position: absolute;
+        transform: none;
     }
 
 }
@@ -526,309 +586,58 @@ body {
     orientation: portrait
 ) {
 
-    html {
-
-        overflow-x: hidden;
-
-        overflow-y: auto;
-    }
-
-
-    body {
-
-        overflow-x: hidden;
-
-        overflow-y: auto;
-    }
-
-
-    /* ------------------------------------
-       SCREEN
-    ------------------------------------ */
-
     .screen {
+        /*
+           Keep the entire composition inside
+           the actual visible viewport.
+        */
 
         width: 100%;
+        width: 100dvw;
 
-        min-height: 100vh;
-
-        height: auto;
-
-        display: block;
-
-        overflow: visible;
-
-        padding-top: clamp(12px, 3vh, 24px);
-
-        padding-bottom: clamp(30px, 6vh, 60px);
-    }
-
-
-    /* ------------------------------------
-       GAME AREA
-    ------------------------------------ */
-
-    .game-area {
-
-        width: min(92vw, 520px);
-
-        max-width: 92vw;
-
-        height: auto;
-
-        aspect-ratio: auto;
-
-        margin: 0 auto;
-
-        position: relative;
+        height: 100%;
+        height: 100dvh;
 
         display: flex;
 
-        flex-direction: column;
-
         align-items: center;
+        justify-content: center;
 
-        flex: none;
+        overflow: hidden;
     }
 
 
-    /* ------------------------------------
-       MAIN IMAGE
-    ------------------------------------ */
+    .game-area {
+        /*
+           Keep the original 16:9 design canvas.
 
-    .main-image {
+           IMPORTANT:
+           Internal elements are NOT repositioned.
 
-        width: 100%;
+           The entire composition is moved as one unit.
+        */
+
+        width: 90vw;
+
+        max-width: 90vw;
 
         height: auto;
 
         aspect-ratio: 16 / 9;
 
-        object-fit: contain;
-
-        flex: none;
-    }
-
-
-    /* ------------------------------------
-       PRESERVE IMAGE COMPOSITION
-    ------------------------------------ */
-
-    .button,
-    .moving-image {
-
-        position: absolute;
-    }
-
-
-    /* ------------------------------------
-       TEXT BLOCKS
-    ------------------------------------ */
-
-    .text-block,
-    .text-block2 {
-
-        position: relative;
-
-        left: auto;
-        top: auto;
-
-        transform: none;
-
-        width: min(92%, 480px);
-
-        max-width: 92%;
-
-        height: auto;
-
-        flex: none;
-
-        margin-left: auto;
-        margin-right: auto;
-
-        z-index: 20;
-
-        padding: 0;
-
-        overflow: visible;
-    }
-
-
-    /* ------------------------------------
-       FIRST TEXT BLOCK
-    ------------------------------------ */
-
-    .text-block-1 {
-
-        margin-top: clamp(24px, 5vw, 36px);
-
-        margin-bottom: clamp(30px, 6vw, 48px);
-    }
-
-
-    /* ------------------------------------
-       SECOND TEXT BLOCK
-    ------------------------------------ */
-
-    .text-block-2 {
-
-        margin-top: 0;
-
-        margin-bottom: clamp(20px, 5vw, 36px);
-    }
-
-
-    /* ------------------------------------
-       TITLES
-    ------------------------------------ */
-
-    .text-title {
-
-        font-size: clamp(11px, 3.2vw, 14px);
-
-        line-height: 1.55;
-
-        margin-bottom: clamp(8px, 2vw, 12px);
-
-        overflow-wrap: anywhere;
-    }
-
-
-    /* ------------------------------------
-       CONTENT
-    ------------------------------------ */
-
-    .text-content {
-
-        font-size: clamp(8.5px, 2.5vw, 11px);
-
-        line-height: 1.9;
-
-        overflow-wrap: anywhere;
-
-        word-break: normal;
-
-        white-space: normal;
-    }
-
-}
-
-
-/* ========================================
-   SMALL PORTRAIT PHONES
-======================================== */
-
-@media (
-    max-width: 600px
-) and (
-    orientation: portrait
-) {
-
-    .screen {
-
-        padding-top: 10px;
-
-        padding-bottom: 32px;
-    }
-
-
-    .game-area {
-
-        width: 94vw;
-
-        max-width: 94vw;
-    }
-
-
-    .text-block,
-    .text-block2 {
-
-        width: 94%;
-
-        max-width: 94%;
-    }
-
-
-    .text-block-1 {
-
-        margin-top: clamp(20px, 5vw, 28px);
-
-        margin-bottom: clamp(28px, 7vw, 40px);
-    }
-
-
-    .text-block-2 {
-
-        margin-bottom: clamp(18px, 5vw, 30px);
-    }
-
-
-    .text-title {
-
-        font-size: clamp(10px, 3.4vw, 13px);
-
-        line-height: 1.55;
-    }
-
-
-    .text-content {
-
-        font-size: clamp(8px, 2.65vw, 10px);
-
-        line-height: 1.9;
-    }
-
-}
-
-
-/* ========================================
-   EXTRA SMALL PHONES
-======================================== */
-
-@media (
-    max-width: 380px
-) and (
-    orientation: portrait
-) {
-
-    .game-area {
-
-        width: 95vw;
-
-        max-width: 95vw;
-    }
-
-
-    .text-block,
-    .text-block2 {
-
-        width: 95%;
-
-        max-width: 95%;
-    }
-
-
-    .text-title {
-
-        font-size: 10px;
-
-        line-height: 1.6;
-    }
-
-
-    .text-content {
-
-        font-size: 8px;
-
-        line-height: 1.95;
-    }
-
-
-    .text-block-1 {
-
-        margin-top: 18px;
-
-        margin-bottom: 26px;
+        /*
+           The text layers extend below the
+           original 16:9 canvas (89% and 110%).
+
+           Therefore the visual center of the
+           complete composition is lower than
+           the geometric center of .game-area.
+
+           Move the complete composition upward
+           without changing any internal coordinates.
+        */
+
+        transform: translateY(-5%);
     }
 
 }
@@ -841,13 +650,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
 
     body {
-
         animation: none;
     }
 
-
     .button img {
-
         transition: none;
     }
 }
@@ -860,13 +666,10 @@ body {
 @keyframes moveBackground {
 
     from {
-
         background-position: 0 0;
     }
 
-
     to {
-
         background-position: 500px 500px;
     }
 
