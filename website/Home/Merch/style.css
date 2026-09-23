@@ -571,7 +571,7 @@ body.loaded {
 .text-title {
     font-family: "Unixel", sans-serif;
 
-    font-size: 20px;
+    font-size: 14px;
 
     font-weight: bold;
 
@@ -592,7 +592,7 @@ body.loaded {
 .text-content {
     font-family: "Unixel", sans-serif;
 
-    font-size: 16px;
+    font-size: 10px;
 
     font-weight: normal;
 
