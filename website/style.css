@@ -49,6 +49,106 @@ body {
 
 
 /* ========================================
+   LOADER
+======================================== */
+
+#loader {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: aliceblue;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+}
+
+
+#loader-content {
+    width: min(
+        260px,
+        calc(100vw - 40px)
+    );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    font-family: "Unixel", sans-serif;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+#loader-percent {
+    margin: 0 0 16px 0;
+    padding: 0;
+
+    font-family: "Unixel", sans-serif;
+
+    font-size: 28px;
+    font-weight: normal;
+
+    line-height: 1;
+
+    direction: ltr;
+    text-align: center;
+}
+
+
+#loader-bar {
+    position: relative;
+
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    background-color: rgba(0, 0, 0, 0.12);
+
+    border-radius: 2px;
+}
+
+
+#loader-progress {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 0%;
+    height: 100%;
+
+    background-color: #000000;
+
+    border-radius: 2px;
+
+    transition: width 0.2s ease;
+}
+
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* ========================================
    SCREEN
 ======================================== */
 
@@ -70,6 +170,13 @@ body {
     overflow: hidden;
 
     position: relative;
+
+    visibility: hidden;
+}
+
+
+body.loaded .screen {
+    visibility: visible;
 }
 
 
@@ -78,6 +185,7 @@ body {
 ======================================== */
 
 .game-area {
+
     /*
        Original design canvas.
 
@@ -550,6 +658,7 @@ body {
 ) {
 
     .game-area {
+
         /*
            Height becomes the limiting dimension
            in landscape orientation.
@@ -562,13 +671,6 @@ body {
         max-width: 90vw;
 
         aspect-ratio: 16 / 9;
-
-        /*
-           No additional translation here.
-
-           The existing composition remains centered
-           exactly as before.
-        */
 
         transform: none;
     }
@@ -587,6 +689,7 @@ body {
 ) {
 
     .screen {
+
         /*
            Keep the entire composition inside
            the actual visible viewport.
@@ -608,10 +711,10 @@ body {
 
 
     .game-area {
+
         /*
            Keep the original 16:9 design canvas.
 
-           IMPORTANT:
            Internal elements are NOT repositioned.
 
            The entire composition is moved as one unit.
@@ -627,14 +730,10 @@ body {
 
         /*
            The text layers extend below the
-           original 16:9 canvas (89% and 110%).
-
-           Therefore the visual center of the
-           complete composition is lower than
-           the geometric center of .game-area.
+           original 16:9 canvas.
 
            Move the complete composition upward
-           without changing any internal coordinates.
+           without changing internal coordinates.
         */
 
         transform: translateY(-5%);

@@ -1,25 +1,305 @@
 /* ========================================
+   WEBSITE LOADER
+======================================== */
+
+var loader = document.getElementById("loader");
+var loaderPercent = document.getElementById("loader-percent");
+var loaderProgress = document.getElementById("loader-progress");
+
+var imagesLoaded = 0;
+var totalImages = 0;
+
+var websiteStarted = false;
+
+var resources = [];
+
+
+/* ========================================
+   ADD RESOURCE
+======================================== */
+
+function addResource(src) {
+
+    if (!src) {
+        return;
+    }
+
+    if (resources.indexOf(src) === -1) {
+        resources.push(src);
+    }
+
+}
+
+
+/* ========================================
+   COLLECT IMAGE RESOURCES
+======================================== */
+
+var allImages = document.querySelectorAll("img");
+
+
+for (var i = 0; i < allImages.length; i++) {
+
+    addResource(
+        allImages[i].getAttribute("src")
+    );
+
+    addResource(
+        allImages[i].getAttribute("data-normal")
+    );
+
+    addResource(
+        allImages[i].getAttribute("data-hover")
+    );
+
+}
+
+
+/* ========================================
+   BACKGROUND RESOURCE
+======================================== */
+
+addResource(
+    "./Home/Background_Pattern.png"
+);
+
+
+totalImages = resources.length;
+
+
+/* ========================================
+   UPDATE LOADER PROGRESS
+======================================== */
+
+function updateProgress() {
+
+    var percent = 0;
+
+
+    if (totalImages > 0) {
+
+        percent = Math.round(
+            (imagesLoaded / totalImages) * 100
+        );
+
+    } else {
+
+        percent = 100;
+
+    }
+
+
+    if (percent > 100) {
+        percent = 100;
+    }
+
+
+    loaderPercent.textContent =
+        percent + "%";
+
+
+    loaderProgress.style.width =
+        percent + "%";
+
+}
+
+
+/* ========================================
+   RESOURCE LOADED
+======================================== */
+
+function resourceLoaded() {
+
+    imagesLoaded++;
+
+    updateProgress();
+
+
+    if (imagesLoaded >= totalImages) {
+
+        waitForFont();
+
+    }
+
+}
+
+
+/* ========================================
+   WAIT FOR FONT
+======================================== */
+
+function waitForFont() {
+
+    if (
+        document.fonts &&
+        document.fonts.ready
+    ) {
+
+        document.fonts.ready.then(
+            function () {
+
+                startWebsite();
+
+            }
+        );
+
+    } else {
+
+        startWebsite();
+
+    }
+
+}
+
+
+/* ========================================
+   START WEBSITE
+======================================== */
+
+function startWebsite() {
+
+    if (websiteStarted) {
+        return;
+    }
+
+    websiteStarted = true;
+
+
+    loaderPercent.textContent =
+        "100%";
+
+    loaderProgress.style.width =
+        "100%";
+
+
+    /*
+       Small delay keeps the completed
+       progress state visible before
+       the loader disappears.
+    */
+
+    setTimeout(
+        function () {
+
+            document.body.classList.add(
+                "loaded"
+            );
+
+
+            loader.classList.add(
+                "hidden"
+            );
+
+
+            startWebsiteInteractions();
+
+        },
+        400
+    );
+
+}
+
+
+/* ========================================
+   PRELOAD ALL RESOURCES
+======================================== */
+
+function preloadResources() {
+
+    if (totalImages === 0) {
+
+        updateProgress();
+
+        waitForFont();
+
+        return;
+
+    }
+
+
+    for (
+        var j = 0;
+        j < resources.length;
+        j++
+    ) {
+
+        var preloadImage =
+            new Image();
+
+
+        preloadImage.onload =
+            resourceLoaded;
+
+
+        preloadImage.onerror =
+            resourceLoaded;
+
+
+        preloadImage.src =
+            resources[j];
+
+    }
+
+}
+
+
+/* ========================================
+   START WEBSITE INTERACTIONS
+======================================== */
+
+function startWebsiteInteractions() {
+
+    startButtonHover();
+
+    startMovingImages();
+
+}
+
+
+/* ========================================
    BUTTON HOVER IMAGES
 ======================================== */
 
-var hoverImages = document.querySelectorAll(
-    "[data-normal][data-hover]"
-);
+function startButtonHover() {
 
-for (var i = 0; i < hoverImages.length; i++) {
-
-    hoverImages[i].addEventListener("mouseenter", function () {
-
-        this.src = this.getAttribute("data-hover");
-
-    });
+    var hoverImages =
+        document.querySelectorAll(
+            "[data-normal][data-hover]"
+        );
 
 
-    hoverImages[i].addEventListener("mouseleave", function () {
+    for (
+        var i = 0;
+        i < hoverImages.length;
+        i++
+    ) {
 
-        this.src = this.getAttribute("data-normal");
+        hoverImages[i].addEventListener(
+            "mouseenter",
+            function () {
 
-    });
+                this.src =
+                    this.getAttribute(
+                        "data-hover"
+                    );
+
+            }
+        );
+
+
+        hoverImages[i].addEventListener(
+            "mouseleave",
+            function () {
+
+                this.src =
+                    this.getAttribute(
+                        "data-normal"
+                    );
+
+            }
+        );
+
+    }
 
 }
 
@@ -28,14 +308,25 @@ for (var i = 0; i < hoverImages.length; i++) {
    MOVING IMAGES
 ======================================== */
 
-var movingImages = document.querySelectorAll(
-    ".moving-image"
-);
+function startMovingImages() {
+
+    var movingImages =
+        document.querySelectorAll(
+            ".moving-image"
+        );
 
 
-for (var j = 0; j < movingImages.length; j++) {
+    for (
+        var j = 0;
+        j < movingImages.length;
+        j++
+    ) {
 
-    startMovingImage(movingImages[j]);
+        startMovingImage(
+            movingImages[j]
+        );
+
+    }
 
 }
 
@@ -52,11 +343,16 @@ function startMovingImage(image) {
     ====================================== */
 
     var startX = parseFloat(
-        image.getAttribute("data-start-x")
+        image.getAttribute(
+            "data-start-x"
+        )
     );
 
+
     var startY = parseFloat(
-        image.getAttribute("data-start-y")
+        image.getAttribute(
+            "data-start-y"
+        )
     );
 
 
@@ -65,11 +361,16 @@ function startMovingImage(image) {
     ====================================== */
 
     var endX = parseFloat(
-        image.getAttribute("data-end-x")
+        image.getAttribute(
+            "data-end-x"
+        )
     );
 
+
     var endY = parseFloat(
-        image.getAttribute("data-end-y")
+        image.getAttribute(
+            "data-end-y"
+        )
     );
 
 
@@ -77,7 +378,11 @@ function startMovingImage(image) {
        MOVEMENT MODE
     ====================================== */
 
-    var mode = image.getAttribute("data-mode");
+    var mode =
+        image.getAttribute(
+            "data-mode"
+        );
+
 
     if (!mode) {
         mode = "pingpong";
@@ -89,8 +394,11 @@ function startMovingImage(image) {
     ====================================== */
 
     var speed = parseFloat(
-        image.getAttribute("data-speed")
+        image.getAttribute(
+            "data-speed"
+        )
     );
+
 
     if (!speed) {
         speed = 5;
@@ -124,7 +432,9 @@ function startMovingImage(image) {
     function updatePosition() {
 
 
-        /* Calculate X */
+        /* =================================
+           CALCULATE X
+        ================================= */
 
         var x =
             startX +
@@ -132,7 +442,9 @@ function startMovingImage(image) {
             progress;
 
 
-        /* Calculate Y */
+        /* =================================
+           CALCULATE Y
+        ================================= */
 
         var y =
             startY +
@@ -140,10 +452,16 @@ function startMovingImage(image) {
             progress;
 
 
-        /* Apply position */
+        /* =================================
+           APPLY POSITION
+        ================================= */
 
-        image.style.left = x + "%";
-        image.style.top = y + "%";
+        image.style.left =
+            x + "%";
+
+
+        image.style.top =
+            y + "%";
 
 
         /* =================================
@@ -205,7 +523,9 @@ function startMovingImage(image) {
                 0.0001;
 
 
-            /* Reached END */
+            /* =============================
+               REACHED END
+            ============================== */
 
             if (progress >= 1) {
 
@@ -216,7 +536,9 @@ function startMovingImage(image) {
             }
 
 
-            /* Reached START */
+            /* =============================
+               REACHED START
+            ============================== */
 
             if (progress <= 0) {
 
@@ -229,7 +551,9 @@ function startMovingImage(image) {
         }
 
 
-        /* Continue animation */
+        /* =================================
+           CONTINUE ANIMATION
+        ================================= */
 
         requestAnimationFrame(
             updatePosition
@@ -245,3 +569,12 @@ function startMovingImage(image) {
     updatePosition();
 
 }
+
+
+/* ========================================
+   START LOADING
+======================================== */
+
+updateProgress();
+
+preloadResources();
