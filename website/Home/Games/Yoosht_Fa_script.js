@@ -8,35 +8,76 @@ var gameArea = document.querySelector(".game-area");
 
 function setGameAreaSize() {
 
+    if (!mainImage || !gameArea) {
+        return;
+    }
+
+
+    /*
+        If image dimensions are not available yet,
+        wait for the image load event.
+    */
+
     if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+
+    /*
+        Get the ACTUAL displayed width.
+
+        On desktop:
+        approximately 900px
+
+        On mobile:
+        viewport width minus available space
+    */
+
+    var width = gameArea.getBoundingClientRect().width;
+
+
+    /*
+        Prevent invalid dimensions.
+    */
+
+    if (!width || width <= 0) {
+        return;
+    }
+
+
+    /*
+        Calculate proportional height from
+        the original main image aspect ratio.
+    */
 
     var height =
         width *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
+
     gameArea.style.height = height + "px";
 }
 
 
 /* ========================================
-   IMAGE LOADED
+   INITIAL IMAGE LOAD
 ======================================== */
 
-if (mainImage.complete) {
+if (mainImage) {
 
-    setGameAreaSize();
+    if (mainImage.complete && mainImage.naturalWidth) {
 
-} else {
+        setGameAreaSize();
 
-    mainImage.addEventListener(
-        "load",
-        setGameAreaSize
-    );
+    } else {
+
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
 
 }
 
@@ -45,10 +86,53 @@ if (mainImage.complete) {
    WINDOW RESIZE
 ======================================== */
 
+var resizeTimer = null;
+
 window.addEventListener(
     "resize",
-    setGameAreaSize
+    function () {
+
+        /*
+            Avoid calculating hundreds of times
+            during continuous mobile rotation
+            or browser resizing.
+        */
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            50
+        );
+
+    }
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        setTimeout(
+            function () {
+
+                setGameAreaSize();
+
+            },
+            100
+        );
+
+    }
+);
+
 
 /* ========================================
    BUTTON HOVER IMAGES
@@ -65,8 +149,14 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseenter",
         function () {
 
-            this.src =
+            var hoverSource =
                 this.getAttribute("data-hover");
+
+            if (hoverSource) {
+
+                this.src = hoverSource;
+
+            }
 
         }
     );
@@ -76,14 +166,19 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseleave",
         function () {
 
-            this.src =
+            var normalSource =
                 this.getAttribute("data-normal");
+
+            if (normalSource) {
+
+                this.src = normalSource;
+
+            }
 
         }
     );
 
 }
-
 
 
 /* ========================================
@@ -102,7 +197,6 @@ for (var j = 0; j < movingImages.length; j++) {
     );
 
 }
-
 
 
 /* ========================================
@@ -145,6 +239,7 @@ function startMovingImage(image) {
     var mode =
         image.getAttribute("data-mode");
 
+
     if (!mode) {
 
         mode = "pingpong";
@@ -159,6 +254,7 @@ function startMovingImage(image) {
     var speed = parseFloat(
         image.getAttribute("data-speed")
     );
+
 
     if (!speed || speed <= 0) {
 
@@ -227,8 +323,6 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
@@ -246,7 +340,6 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -285,7 +378,6 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -341,32 +433,75 @@ function startMovingImage(image) {
 
 }
 
+
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages = document.querySelectorAll(
+    ".image-slider img"
+);
 
 var currentImage = 0;
 
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
+    /*
+        Safety check.
+    */
 
-    /* رفتن به تصویر بعدی */
-    currentImage++;
-
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+    if (!sliderImages.length) {
+        return;
     }
 
-    /* نمایش تصویر بعدی */
+
+    /* =====================================
+       HIDE CURRENT IMAGE
+    ====================================== */
+
+    sliderImages[currentImage].style.opacity = "0";
+
+
+    /* =====================================
+       NEXT IMAGE
+    ====================================== */
+
+    currentImage++;
+
+
+    /* =====================================
+       LOOP BACK TO FIRST IMAGE
+    ====================================== */
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
+        currentImage = 0;
+
+    }
+
+
+    /* =====================================
+       SHOW NEXT IMAGE
+    ====================================== */
+
     sliderImages[currentImage].style.opacity = "1";
+
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   START SLIDER
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+
+}
