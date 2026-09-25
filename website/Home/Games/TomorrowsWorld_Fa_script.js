@@ -1,25 +1,61 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
 
+/* ========================================
+   SET GAME AREA SIZE
+======================================== */
+
 function setGameAreaSize() {
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+    if (!mainImage || !gameArea) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+
+    if (
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
+        return;
+    }
+
+
+    /*
+       عرض واقعی Game Area
+       توسط CSS تعیین می‌شود.
+
+       روی Desktop:
+       حداکثر 900px
+
+       روی Mobile:
+       برابر عرض صفحه منهای حاشیه
+    */
+
+    var width = gameArea.getBoundingClientRect().width;
+
+
+    if (!width || width <= 0) {
+        return;
+    }
+
+
+    /*
+       محاسبه ارتفاع بر اساس نسبت تصویر اصلی
+    */
 
     var height =
         width *
         mainImage.naturalHeight /
         mainImage.naturalWidth;
 
-    gameArea.style.height = height + "px";
+
+    gameArea.style.height =
+        height + "px";
 }
 
 
@@ -27,16 +63,20 @@ function setGameAreaSize() {
    IMAGE LOADED
 ======================================== */
 
-if (mainImage.complete) {
+if (mainImage) {
 
-    setGameAreaSize();
+    if (mainImage.complete) {
 
-} else {
+        setGameAreaSize();
 
-    mainImage.addEventListener(
-        "load",
-        setGameAreaSize
-    );
+    } else {
+
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
 
 }
 
@@ -49,6 +89,30 @@ window.addEventListener(
     "resize",
     setGameAreaSize
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        /*
+           بعد از چرخش گوشی،
+           مرورگر ممکن است هنوز ابعاد جدید
+           را کامل اعمال نکرده باشد.
+        */
+
+        setTimeout(
+            setGameAreaSize,
+            100
+        );
+
+    }
+);
+
 
 /* ========================================
    BUTTON HOVER IMAGES
@@ -85,7 +149,6 @@ for (var i = 0; i < hoverImages.length; i++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
@@ -102,7 +165,6 @@ for (var j = 0; j < movingImages.length; j++) {
     );
 
 }
-
 
 
 /* ========================================
@@ -145,6 +207,7 @@ function startMovingImage(image) {
     var mode =
         image.getAttribute("data-mode");
 
+
     if (!mode) {
 
         mode = "pingpong";
@@ -160,6 +223,7 @@ function startMovingImage(image) {
         image.getAttribute("data-speed")
     );
 
+
     if (!speed || speed <= 0) {
 
         speed = 5;
@@ -169,9 +233,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
     ====================================== */
 
     var progress = 0;
@@ -179,9 +240,6 @@ function startMovingImage(image) {
 
     /* =====================================
        MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
     ====================================== */
 
     var direction = 1;
@@ -227,8 +285,6 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
@@ -240,13 +296,9 @@ function startMovingImage(image) {
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -280,12 +332,9 @@ function startMovingImage(image) {
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -293,10 +342,6 @@ function startMovingImage(image) {
                 speed *
                 0.0001;
 
-
-            /* =============================
-               REACHED END
-            ============================= */
 
             if (progress >= 1) {
 
@@ -306,10 +351,6 @@ function startMovingImage(image) {
 
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
@@ -321,10 +362,6 @@ function startMovingImage(image) {
 
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
@@ -341,32 +378,62 @@ function startMovingImage(image) {
 
 }
 
+
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
+
+/* ========================================
+   CHECK SLIDER
+======================================== */
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
-
-    /* رفتن به تصویر بعدی */
-    currentImage++;
-
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
-        currentImage = 0;
+    if (!sliderImages.length) {
+        return;
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    sliderImages[currentImage]
+        .style.opacity = "0";
+
+
+    currentImage++;
+
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
+        currentImage = 0;
+
+    }
+
+
+    sliderImages[currentImage]
+        .style.opacity = "1";
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   NEXT SLIDE
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+
+}

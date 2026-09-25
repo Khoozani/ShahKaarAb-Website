@@ -1,18 +1,30 @@
 /* ========================================
-   MAIN IMAGE SIZE
+   MAIN IMAGE / GAME AREA
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
 
+/* ========================================
+   SET GAME AREA SIZE
+======================================== */
+
 function setGameAreaSize() {
+
+    if (!mainImage || !gameArea) {
+        return;
+    }
 
     if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
         return;
     }
 
-    var width = gameArea.offsetWidth;
+    var width = gameArea.getBoundingClientRect().width;
+
+    if (!width || width <= 0) {
+        return;
+    }
 
     var height =
         width *
@@ -27,17 +39,20 @@ function setGameAreaSize() {
    IMAGE LOADED
 ======================================== */
 
-if (mainImage.complete) {
+if (mainImage) {
 
-    setGameAreaSize();
+    if (mainImage.complete) {
 
-} else {
+        setGameAreaSize();
 
-    mainImage.addEventListener(
-        "load",
-        setGameAreaSize
-    );
+    } else {
 
+        mainImage.addEventListener(
+            "load",
+            setGameAreaSize
+        );
+
+    }
 }
 
 
@@ -49,6 +64,24 @@ window.addEventListener(
     "resize",
     setGameAreaSize
 );
+
+
+/* ========================================
+   ORIENTATION CHANGE
+======================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function () {
+
+        setTimeout(
+            setGameAreaSize,
+            100
+        );
+
+    }
+);
+
 
 /* ========================================
    BUTTON HOVER IMAGES
@@ -85,7 +118,6 @@ for (var i = 0; i < hoverImages.length; i++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGES
 ======================================== */
@@ -104,17 +136,11 @@ for (var j = 0; j < movingImages.length; j++) {
 }
 
 
-
 /* ========================================
    MOVING IMAGE FUNCTION
 ======================================== */
 
 function startMovingImage(image) {
-
-
-    /* =====================================
-       START POSITION
-    ====================================== */
 
     var startX = parseFloat(
         image.getAttribute("data-start-x")
@@ -123,11 +149,6 @@ function startMovingImage(image) {
     var startY = parseFloat(
         image.getAttribute("data-start-y")
     );
-
-
-    /* =====================================
-       END POSITION
-    ====================================== */
 
     var endX = parseFloat(
         image.getAttribute("data-end-x")
@@ -138,51 +159,26 @@ function startMovingImage(image) {
     );
 
 
-    /* =====================================
-       MOVEMENT MODE
-    ====================================== */
-
     var mode =
         image.getAttribute("data-mode");
 
+
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
-
-    /* =====================================
-       MOVEMENT SPEED
-    ====================================== */
 
     var speed = parseFloat(
         image.getAttribute("data-speed")
     );
 
+
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
-    /* =====================================
-       MOVEMENT PROGRESS
-
-       0 = START
-       1 = END
-    ====================================== */
-
     var progress = 0;
-
-
-    /* =====================================
-       MOVEMENT DIRECTION
-
-       1  = FORWARD
-       -1 = BACKWARD
-    ====================================== */
 
     var direction = 1;
 
@@ -193,20 +189,11 @@ function startMovingImage(image) {
 
     function updatePosition() {
 
-
-        /* =================================
-           CALCULATE X
-        ================================= */
-
         var x =
             startX +
             (endX - startX) *
             progress;
 
-
-        /* =================================
-           CALCULATE Y
-        ================================= */
 
         var y =
             startY +
@@ -214,12 +201,9 @@ function startMovingImage(image) {
             progress;
 
 
-        /* =================================
-           APPLY POSITION
-        ================================= */
-
         image.style.left =
             x + "%";
+
 
         image.style.top =
             y + "%";
@@ -227,26 +211,18 @@ function startMovingImage(image) {
 
         /* =================================
            STATIC
-
-           تصویر در نقطه شروع ثابت می‌ماند
         ================================= */
 
         if (mode === "static") {
-
             return;
-
         }
 
 
         /* =================================
            ONCE
-
-           START → END
-           سپس توقف
         ================================= */
 
         if (mode === "once") {
-
 
             progress =
                 progress +
@@ -265,7 +241,6 @@ function startMovingImage(image) {
                     endY + "%";
 
                 return;
-
             }
 
 
@@ -274,18 +249,14 @@ function startMovingImage(image) {
             );
 
             return;
-
         }
 
 
         /* =================================
            PINGPONG
-
-           START → END → START → END...
         ================================= */
 
         if (mode === "pingpong") {
-
 
             progress =
                 progress +
@@ -294,42 +265,26 @@ function startMovingImage(image) {
                 0.0001;
 
 
-            /* =============================
-               REACHED END
-            ============================= */
-
             if (progress >= 1) {
 
                 progress = 1;
 
                 direction = -1;
-
             }
 
-
-            /* =============================
-               REACHED START
-            ============================= */
 
             if (progress <= 0) {
 
                 progress = 0;
 
                 direction = 1;
-
             }
-
         }
 
-
-        /* =================================
-           CONTINUE ANIMATION
-        ================================= */
 
         requestAnimationFrame(
             updatePosition
         );
-
     }
 
 
@@ -338,35 +293,62 @@ function startMovingImage(image) {
     ====================================== */
 
     updatePosition();
-
 }
+
 
 /* ========================================
    IMAGE FADE SLIDER
 ======================================== */
 
-var sliderImages = document.querySelectorAll(".image-slider img");
+var sliderImages =
+    document.querySelectorAll(
+        ".image-slider img"
+    );
+
 
 var currentImage = 0;
 
+
+/* ========================================
+   SLIDER
+======================================== */
+
 function showNextImage() {
 
-    /* محو کردن تصویر فعلی */
-    sliderImages[currentImage].style.opacity = "0";
+    if (!sliderImages.length) {
+        return;
+    }
 
-    /* رفتن به تصویر بعدی */
+
+    sliderImages[currentImage].style.opacity =
+        "0";
+
+
     currentImage++;
 
-    /* بعد از تصویر هشتم، برگشت به تصویر اول */
-    if (currentImage >= sliderImages.length) {
+
+    if (
+        currentImage >=
+        sliderImages.length
+    ) {
+
         currentImage = 0;
     }
 
-    /* نمایش تصویر بعدی */
-    sliderImages[currentImage].style.opacity = "1";
+
+    sliderImages[currentImage].style.opacity =
+        "1";
 }
 
 
-/* هر ۴ ثانیه تصویر بعدی */
+/* ========================================
+   NEXT IMAGE EVERY 4 SECONDS
+======================================== */
 
-setInterval(showNextImage, 4000);
+if (sliderImages.length > 1) {
+
+    setInterval(
+        showNextImage,
+        4000
+    );
+}
