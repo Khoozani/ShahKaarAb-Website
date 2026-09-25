@@ -563,6 +563,30 @@ body.loaded {
     padding: 0;
 }
 
+.text-block2 {
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+    max-width: 55%;
+
+    z-index: 25;
+
+    font-family: "Unixel", sans-serif;
+
+    direction: rtl;
+
+    text-align: left;
+
+    user-select: none;
+
+    line-height: 1.6;
+
+    margin: 0;
+    padding: 0;
+}
+
 
 /* ========================================
    TEXT TITLE
@@ -571,11 +595,11 @@ body.loaded {
 .text-title {
     font-family: "Unixel", sans-serif;
 
-    font-size: 14px;
+    font-size: 18px;
 
     font-weight: bold;
 
-    color: black;
+    color: white;
 
     line-height: 1;
 
@@ -584,6 +608,21 @@ body.loaded {
     padding: 0;
 }
 
+.text-title2 {
+    font-family: "Unixel", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: white;
+
+    line-height: 1;
+
+    margin: 0 0 12px 0;
+
+    padding: 0;
+}
 
 /* ========================================
    TEXT CONTENT
@@ -592,11 +631,11 @@ body.loaded {
 .text-content {
     font-family: "Unixel", sans-serif;
 
-    font-size: 10px;
+    font-size: 16px;
 
     font-weight: normal;
 
-    color: black;
+    color: white;
 
     line-height: 1.3;
 
@@ -605,13 +644,28 @@ body.loaded {
     padding: 0;
 }
 
+.text-content2 {
+    font-family: "Unixel", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: normal;
+
+    color: white;
+
+    line-height: 1.3;
+
+    margin: 0;
+
+    padding: 0;
+}
 
 /* ========================================
    TEXT BLOCK POSITION
 ======================================== */
 
 .text-block-1 {
-    left: 73%;
+    left: 83%;
     top: 76%;
 }
 
