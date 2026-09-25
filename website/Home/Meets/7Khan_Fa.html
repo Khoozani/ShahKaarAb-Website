@@ -7,7 +7,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0"
     >
 
     <title>
@@ -15,16 +15,8 @@
     </title>
 
     <link
-        rel="preload"
-        href="../Fonts/unixel-Regular.ttf"
-        as="font"
-        type="font/ttf"
-        crossorigin
-    >
-
-    <link
         rel="stylesheet"
-        href="style.css"
+        href="7Khan_style_Fa.css"
     >
 
 </head>
@@ -33,20 +25,29 @@
 <body>
 
     <!-- =====================================
-         LOADER
+         PAGE LOADER
     ====================================== -->
 
-    <div id="loader">
+    <div
+        id="page-loader"
+        aria-live="polite"
+    >
 
-        <div id="loader-content">
+        <div class="loader-box">
 
-            <div id="loader-percent">
+            <div
+                id="loader-percent"
+                class="loader-percent"
+            >
                 0%
             </div>
 
-            <div id="loader-bar">
+            <div class="loader-progress">
 
-                <div id="loader-progress"></div>
+                <div
+                    id="loader-progress-bar"
+                    class="loader-progress-bar"
+                ></div>
 
             </div>
 
@@ -62,6 +63,22 @@
     <main class="screen">
 
         <div class="game-area">
+
+
+            <!-- =====================================
+                 APARAT VIDEO
+            ====================================== -->
+
+            <div class="video-box">
+
+                <iframe
+                    src="https://www.aparat.com/video/video/embed/videohash/ero87eh/vt/frame"
+                    title="Aparat Video"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
 
 
             <!-- =====================================
@@ -93,7 +110,7 @@
 
 
             <!-- =====================================
-                 STAR 1
+                 MOVING IMAGE 7 Stars 1
             ====================================== -->
 
             <img
@@ -110,7 +127,7 @@
 
 
             <!-- =====================================
-                 STAR 2
+                 MOVING IMAGE 7 Stars 2
             ====================================== -->
 
             <img
@@ -161,7 +178,7 @@
 
 
             <!-- =====================================
-                 STAR 3
+                 MOVING IMAGE 7 Stars 3
             ====================================== -->
 
             <img
@@ -178,7 +195,7 @@
 
 
             <!-- =====================================
-                 STAR 4
+                 MOVING IMAGE 7 Stars 4
             ====================================== -->
 
             <img
@@ -195,7 +212,7 @@
 
 
             <!-- =====================================
-                 STAR 7
+                 MOVING IMAGE 7 Stars 7
             ====================================== -->
 
             <img
@@ -246,7 +263,7 @@
 
 
             <!-- =====================================
-                 STAR 5
+                 MOVING IMAGE 7 Stars 5
             ====================================== -->
 
             <img
@@ -263,7 +280,7 @@
 
 
             <!-- =====================================
-                 STAR 6
+                 MOVING IMAGE 7 Stars 6
             ====================================== -->
 
             <img
@@ -292,7 +309,7 @@
                 data-end-y="70"
                 data-mode="pingpong"
                 data-speed="70"
-                alt="Games"
+                alt="Independent Game Auteur"
             >
 
 
@@ -304,12 +321,14 @@
                 href="../Museum/Museum_Fa.html"
                 class="button button-1"
             >
+
                 <img
                     src="../Buttons/A_Up.png"
                     data-normal="../Buttons/A_Up.png"
                     data-hover="../Buttons/A_Down.png"
                     alt="Persian Museum"
                 >
+
             </a>
 
 
@@ -321,10 +340,12 @@
                 href="../Museum/Museum_Fa.html"
                 class="button button-2"
             >
+
                 <img
                     src="../Frames/Frame_Museum_Fa.png"
                     alt="Persian Museum"
                 >
+
             </a>
 
 
@@ -336,12 +357,14 @@
                 class="button button-3"
                 href="../ArticlesAndBooks/ArticlesAndBooks_Fa.html"
             >
+
                 <img
                     src="../Buttons/B_Up.png"
                     data-normal="../Buttons/B_Up.png"
                     data-hover="../Buttons/B_Down.png"
                     alt="صفحه اصلی فارسی"
                 >
+
             </a>
 
 
@@ -350,13 +373,15 @@
             ====================================== -->
 
             <a
-                href="../ArticlesAndBooks/ArticlesAndBooks_Fa.html"
                 class="button button-4"
+                href="../ArticlesAndBooks/ArticlesAndBooks_Fa.html"
             >
+
                 <img
                     src="../Frames/Frame_Articles_Fa.png"
                     alt="فارسی"
                 >
+
             </a>
 
 
@@ -365,15 +390,17 @@
             ====================================== -->
 
             <a
-                href="../Meets/Meets_Fa.html"
                 class="button button-5"
+                href="../Meets/Meets_Fa.html"
             >
+
                 <img
                     src="../Buttons/Circle_Up.png"
                     data-normal="../Buttons/Circle_Up.png"
                     data-hover="../Buttons/Circle_Down.png"
                     alt="Persian Meets"
                 >
+
             </a>
 
 
@@ -382,13 +409,15 @@
             ====================================== -->
 
             <a
-                href="../Meets/Meets_Fa.html"
                 class="button button-6"
+                href="../Meets/Meets_Fa.html"
             >
+
                 <img
                     src="../Frames/Frame_MeetsAndExhibitions_Fa.png"
-                    alt="دیدارها و نمایشگاه ها"
+                    alt="فارسی"
                 >
+
             </a>
 
 
@@ -397,15 +426,17 @@
             ====================================== -->
 
             <a
-                href="../Lectures/Lectures_Fa.html"
                 class="button button-7"
+                href="../Lectures/Lectures_Fa.html"
             >
+
                 <img
                     src="../Buttons/Triangle_Up.png"
                     data-normal="../Buttons/Triangle_Up.png"
                     data-hover="../Buttons/Triangle_Down.png"
-                    alt="سخنرانی ها"
+                    alt="Persian Lectures"
                 >
+
             </a>
 
 
@@ -414,13 +445,15 @@
             ====================================== -->
 
             <a
-                href="../Lectures/Lectures_Fa.html"
                 class="button button-8"
+                href="../Lectures/Lectures_Fa.html"
             >
+
                 <img
                     src="../Frames/Frame_Lecture_Fa.png"
-                    alt="سخنرانی ها"
+                    alt="فارسی"
                 >
+
             </a>
 
 
@@ -432,12 +465,14 @@
                 href="../Merch/Merch_Fa.html"
                 class="button button-9"
             >
+
                 <img
                     src="../Buttons/Square_Up.png"
                     data-normal="../Buttons/Square_Up.png"
                     data-hover="../Buttons/Square_Down.png"
-                    alt="مرچ"
+                    alt="Persian Merch"
                 >
+
             </a>
 
 
@@ -449,10 +484,12 @@
                 href="../Merch/Merch_Fa.html"
                 class="button button-10"
             >
+
                 <img
                     src="../Frames/Frame_Merch_Fa.png"
-                    alt="مرچ"
+                    alt="فارسی"
                 >
+
             </a>
 
 
@@ -464,12 +501,14 @@
                 href="../NewsAgencies/NewsAgencies_Fa.html"
                 class="button button-11"
             >
+
                 <img
                     src="../Buttons/x_Up.png"
                     data-normal="../Buttons/x_Up.png"
                     data-hover="../Buttons/x_Down.png"
-                    alt="خبرگزاری ها"
+                    alt="Persian games"
                 >
+
             </a>
 
 
@@ -481,49 +520,39 @@
                 href="../NewsAgencies/NewsAgencies_Fa.html"
                 class="button button-12"
             >
+
                 <img
                     src="../Frames/Frame_NewsAgencies_Fa.png"
-                    alt="خبرگزاری ها"
+                    alt="فارسی"
                 >
+
             </a>
+
+
+            <!-- =====================================
+                 BUTTON 13
+            ====================================== -->
+
+            <img
+                class="button button-13"
+                src="../Sprites/Game_Icon_Small.png"
+                data-normal="../Sprites/Game_Icon_Small.png"
+                data-hover="../Sprites/Game_Icon_Small.png"
+                alt="Games"
+            >
 
 
             <!-- =====================================
                  BUTTON 14
             ====================================== -->
 
-            <a
-                href="../Meets/SialkNight_Fa.html"
-                class="button button-13"
-            >
-                <img
-                    src="SialkNight_Icon.png"
-                    data-normal="SialkNight_Icon.png"
-                    data-hover="SialkNight_Icon.png"
-                    alt="Meets"
-                >
-            </a>
-			<!-- =====================================
-                 BUTTON 13
-            ====================================== -->
-
-            <a
-                href="../Meets/7Khan_Fa.html"
+            <img
                 class="button button-14"
+                src="../Sprites/Game_Icon_Big.png"
+                data-normal="../Sprites/Game_Icon_Big.png"
+                data-hover="../Sprites/Game_Icon_Big.png"
+                alt="Games 1"
             >
-                <img
-                    src="7Khan_Icon.png"
-                    data-normal="7Khan_Icon.png"
-                    data-hover="7Khan_Icon.png"
-                    alt="Meets"
-                >
-            </a>
-
-
-            <!-- =====================================
-                 BUTTON 14 / 15
-                 Disabled in original version
-            ====================================== -->
 
 
             <!-- =====================================
@@ -531,7 +560,7 @@
             ====================================== -->
 
             <a
-                href="../Home_Fa.html"
+                href="./Meets_Fa.html"
                 class="button button-20"
             >
 
@@ -549,26 +578,49 @@
                  TEXT BLOCK
             ====================================== -->
 
-            <div class="text-block text-block-1">
+            <div class="text-block2 text-block-1">
+
+                <div class="text-title2">
+                    دیدارها در رویداد ۷ خان
+                </div>
+
+                <div class="text-content2">
+
+                   با آقای محمد دلخواه (استودیوی فان)
+                   <br>
+				   با آقای فرشید عبداللهی (استودیوی بلوط پرنده)
+                   <br>
+				   با آقای محمد پولکی (کرایسیس)
+				   <br> 
+                </div>
+
+            </div>
+			<!-- =====================================
+                 COPYRIGHT / INTELLECTUAL PROPERTY
+            ====================================== -->
+
+            <div
+                class="text-block text-block-2"
+                lang="fa"
+            >
 
                 <div class="text-title">
-                  © مالکیت مادی و معنوی
+                 © مالکیت مادی و معنوی 
                 </div>
 
                 <div class="text-content">
-                    از حق نشر، عرضه، اجرا، بهره‌برداری
-                    با تکیه بر<br>
-                    «قانون حمایت از حقوق پدیدآورندگان نرم‌افزارهای رایانه‌ای»
-                    و «قانون حمایت از حقوق مؤلفان و مصنفان و هنرمندان»
-                    <br>
-                    حفاظت می شود.
+					از حق نشر، عرضه، اجرا، بهره‌برداری
+					با تکیه بر</br>
+					«قانون حمایت از حقوق پدیدآورندگان نرم‌افزارهای رایانه‌ای»
+                    و «قانون حمایت از حقوق مؤلفان و مصنفان و هنرمندان» 
+				</br>حفاظت می شود.		
                 </div>
-
             </div>
 
 
             <!-- =====================================
                  IMAGE FADE SLIDER
+                 4 IMAGES
             ====================================== -->
 
             <div class="image-slider">
@@ -596,12 +648,38 @@
             </div>
 
 
+            <!-- =====================================
+                 IMAGE FADE SLIDER 2
+                 3 IMAGES
+            ====================================== -->
+
+            <div class="image-slider2">
+
+             
+                <img
+                    src="./7Khan_Pictures/7Khan_1.jpg"
+                    alt="Slide 1"
+                >
+				
+				 <img
+                    src="./7Khan_Pictures/7Khan_2.jpg"
+                    alt="Slide 2"
+                >
+				<img
+                    src="./7Khan_Pictures/7Khan_3.jpg"
+                    alt="Slide 3"
+                >
+
+                
+
+            </div>
+
         </div>
 
     </main>
 
 
-    <script src="script.js"></script>
+    <script src="7Khan_script.js"></script>
 
 </body>
 
