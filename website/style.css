@@ -364,6 +364,15 @@ body.loaded .screen {
     width: 15%;
 }
 
+/* ----------------------------------------
+   BUTTON 6 — ESRA
+---------------------------------------- */
+
+.button-6 {
+    left: 90%;
+    top: 4%;
+    width: 7%;
+}
 
 /* ========================================
    MOVING IMAGES
@@ -548,6 +557,11 @@ body.loaded .screen {
     top: 89%;
 
     color: #655B0F;
+}
+
+.text-block-3 {
+    left: 75%;
+    top: 10%;
 }
 
 
