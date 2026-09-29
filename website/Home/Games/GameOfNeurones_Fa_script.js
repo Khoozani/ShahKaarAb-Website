@@ -1,14 +1,10 @@
 /* ========================================
-   MAIN IMAGE / GAME AREA
+   MAIN IMAGE SIZE
 ======================================== */
 
 var mainImage = document.querySelector(".main-image");
 var gameArea = document.querySelector(".game-area");
 
-
-/* ========================================
-   SET GAME AREA SIZE
-======================================== */
 
 function setGameAreaSize() {
 
@@ -16,37 +12,21 @@ function setGameAreaSize() {
         return;
     }
 
-
-    if (
-        !mainImage.naturalWidth ||
-        !mainImage.naturalHeight
-    ) {
+    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
         return;
     }
 
 
-    /*
-       عرض واقعی Game Area
-       توسط CSS تعیین می‌شود.
-
-       روی Desktop:
-       حداکثر 900px
-
-       روی Mobile:
-       برابر عرض صفحه منهای حاشیه
-    */
+    /* =====================================
+       GAME AREA WIDTH
+    ===================================== */
 
     var width = gameArea.getBoundingClientRect().width;
 
 
-    if (!width || width <= 0) {
-        return;
-    }
-
-
-    /*
-       محاسبه ارتفاع بر اساس نسبت تصویر اصلی
-    */
+    /* =====================================
+       CALCULATE IMAGE HEIGHT
+    ===================================== */
 
     var height =
         width *
@@ -54,8 +34,7 @@ function setGameAreaSize() {
         mainImage.naturalWidth;
 
 
-    gameArea.style.height =
-        height + "px";
+    gameArea.style.height = height + "px";
 }
 
 
@@ -87,7 +66,18 @@ if (mainImage) {
 
 window.addEventListener(
     "resize",
-    setGameAreaSize
+    function () {
+
+        /*
+           requestAnimationFrame باعث می‌شود
+           بعد از تغییر واقعی viewport اندازه‌گیری شود.
+        */
+
+        requestAnimationFrame(
+            setGameAreaSize
+        );
+
+    }
 );
 
 
@@ -100,14 +90,21 @@ window.addEventListener(
     function () {
 
         /*
-           بعد از چرخش گوشی،
-           مرورگر ممکن است هنوز ابعاد جدید
-           را کامل اعمال نکرده باشد.
+           در بعضی موبایل‌ها بعد از
+           orientationchange هنوز viewport
+           اندازه جدید را نگرفته است.
+
+           بنابراین کمی بعد دوباره اندازه‌گیری می‌کنیم.
         */
 
         setTimeout(
             setGameAreaSize,
             100
+        );
+
+        setTimeout(
+            setGameAreaSize,
+            400
         );
 
     }
@@ -207,11 +204,8 @@ function startMovingImage(image) {
     var mode =
         image.getAttribute("data-mode");
 
-
     if (!mode) {
-
         mode = "pingpong";
-
     }
 
 
@@ -223,11 +217,8 @@ function startMovingImage(image) {
         image.getAttribute("data-speed")
     );
 
-
     if (!speed || speed <= 0) {
-
         speed = 5;
-
     }
 
 
@@ -288,9 +279,7 @@ function startMovingImage(image) {
         ================================= */
 
         if (mode === "static") {
-
             return;
-
         }
 
 
@@ -317,7 +306,6 @@ function startMovingImage(image) {
                     endY + "%";
 
                 return;
-
             }
 
 
@@ -326,7 +314,6 @@ function startMovingImage(image) {
             );
 
             return;
-
         }
 
 
@@ -372,7 +359,7 @@ function startMovingImage(image) {
 
     /* =====================================
        START
-    ====================================== */
+    ===================================== */
 
     updatePosition();
 
@@ -388,13 +375,8 @@ var sliderImages =
         ".image-slider img"
     );
 
-
 var currentImage = 0;
 
-
-/* ========================================
-   CHECK SLIDER
-======================================== */
 
 function showNextImage() {
 
@@ -403,12 +385,24 @@ function showNextImage() {
     }
 
 
-    sliderImages[currentImage]
-        .style.opacity = "0";
+    /* =====================================
+       HIDE CURRENT IMAGE
+    ===================================== */
 
+    sliderImages[currentImage].style.opacity =
+        "0";
+
+
+    /* =====================================
+       NEXT IMAGE
+    ===================================== */
 
     currentImage++;
 
+
+    /* =====================================
+       LOOP
+    ===================================== */
 
     if (
         currentImage >=
@@ -420,13 +414,18 @@ function showNextImage() {
     }
 
 
-    sliderImages[currentImage]
-        .style.opacity = "1";
+    /* =====================================
+       SHOW NEXT IMAGE
+    ===================================== */
+
+    sliderImages[currentImage].style.opacity =
+        "1";
+
 }
 
 
 /* ========================================
-   NEXT SLIDE
+   SLIDER TIMER
 ======================================== */
 
 if (sliderImages.length > 1) {
