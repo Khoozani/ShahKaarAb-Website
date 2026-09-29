@@ -431,7 +431,7 @@ body,
        Small mobile = about 28px
     */
 
-    font-size: clamp(28px, 5.56vw, 50px);
+    font-size: clamp(11px, 5.56vw, 50px);
 
     font-weight: bold;
 
@@ -456,7 +456,7 @@ body,
        Scales down on very small screens
     */
 
-    font-size: clamp(11px, 1.78vw, 16px);
+    font-size: clamp(4px, 1.78vw, 16px);
 
     font-weight: normal;
 
