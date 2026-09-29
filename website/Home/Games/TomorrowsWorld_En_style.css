@@ -9,7 +9,6 @@
 html,
 body {
     width: 100%;
-    min-width: 0;
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -58,18 +57,16 @@ body,
 
 .screen {
     width: 100%;
-    max-width: 100%;
     min-height: 100vh;
 
     display: flex;
-
     justify-content: center;
     align-items: flex-start;
 
     padding-top: 30px;
     padding-bottom: 30px;
 
-    margin: 0;
+    overflow: visible;
 }
 
 
@@ -77,30 +74,27 @@ body,
    MAIN GAME AREA
 ======================================== */
 
+/*
+   Desktop:
+   maximum width = 900px
+
+   Mobile:
+   automatically shrinks to available width.
+
+   IMPORTANT:
+   All internal coordinates remain percentage-based.
+*/
+
 .game-area {
-
-    /*
-       Desktop:
-       maximum original design width = 900px
-
-       Mobile:
-       automatically shrinks to viewport width
-    */
-
     width: min(900px, 100%);
-    max-width: 900px;
+    max-width: 100%;
 
     height: auto;
 
     position: relative;
 
-    /*
-       IMPORTANT:
-       Allow flex item to shrink on mobile
-    */
-
     flex: 0 1 900px;
-    min-width: 0;
+    flex-shrink: 1;
 
     overflow: visible;
 
@@ -115,12 +109,10 @@ body,
 ======================================== */
 
 .main-image {
-
     display: block;
 
     width: 100%;
     max-width: 100%;
-
     height: auto;
 
     object-fit: contain;
@@ -129,7 +121,6 @@ body,
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 }
 
@@ -139,7 +130,6 @@ body,
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
@@ -162,12 +152,10 @@ body,
 ======================================== */
 
 .button img {
-
     display: block;
 
     width: 100%;
     max-width: 100%;
-
     height: auto;
 
     margin: 0;
@@ -279,32 +267,32 @@ body,
 
 .button-14 {
     left: 73%;
-    top: 62%;
+    top: 56%;
     width: 37%;
 }
 
 .button-15 {
-    left: 65%;
-    top: 75%;
-    width: 20%;
+    left: 63.5%;
+    top: 89%;
+    width: 10%;
 }
 
 .button-16 {
-    left: 84%;
+    left: 82%;
     top: 75%;
     width: 15%;
 }
 
 .button-17 {
-    left: 65%;
-    top: 81%;
+    left: 80%;
+    top: 89%;
     width: 20%;
 }
 
 .button-18 {
-    left: 84%;
-    top: 81%;
-    width: 10%;
+    left: 73%;
+    top: 74%;
+    width: 36%;
 }
 
 .button-19 {
@@ -315,7 +303,7 @@ body,
 
 .button-20 {
     left: 73%;
-    top: 89%;
+    top: 94%;
     width: 5%;
 }
 
@@ -325,13 +313,12 @@ body,
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
 
     height: auto;
-    max-width: none;
+    max-width: 100%;
 
     transform: translate(-50%, -50%);
 
@@ -409,13 +396,11 @@ body,
 ======================================== */
 
 .text-block {
-
     position: absolute;
 
     transform: translate(-50%, -50%);
 
     width: 55%;
-    max-width: 100%;
 
     z-index: 25;
 
@@ -438,15 +423,15 @@ body,
 ======================================== */
 
 .text-title {
-
     font-family: "Unixel", sans-serif;
 
     /*
-       Scales with Game Area.
-       Prevents huge title on small screens.
+       Responsive:
+       Desktop = 50px
+       Small mobile = about 28px
     */
 
-    font-size: clamp(20px, 5.55vw, 50px);
+    font-size: clamp(28px, 5.56vw, 50px);
 
     font-weight: bold;
 
@@ -465,10 +450,13 @@ body,
 ======================================== */
 
 .text-content {
-
     font-family: "Unixel", sans-serif;
 
-    font-size: clamp(8px, 1.78vw, 16px);
+    /*
+       Scales down on very small screens
+    */
+
+    font-size: clamp(11px, 1.78vw, 16px);
 
     font-weight: normal;
 
@@ -477,7 +465,6 @@ body,
     line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
 }
 
@@ -487,7 +474,6 @@ body,
 ======================================== */
 
 .text-block-1 {
-
     left: 30%;
     top: 70%;
 }
@@ -498,15 +484,12 @@ body,
 ======================================== */
 
 .image-slider {
-
     position: absolute;
 
     left: 62%;
     top: 16%;
 
     width: 70%;
-    max-width: 70%;
-
     height: auto;
 
     transform: translate(-50%, -50%);
@@ -522,7 +505,6 @@ body,
 ======================================== */
 
 .image-slider img {
-
     position: absolute;
 
     left: 0;
@@ -532,7 +514,6 @@ body,
 
     width: 100%;
     max-width: 100%;
-
     height: auto;
 
     margin: 0;
@@ -548,13 +529,11 @@ body,
 
 
 /* ========================================
-   FIRST SLIDER IMAGE
+   FIRST SLIDE
 ======================================== */
 
 .image-slider img:first-child {
-
     position: relative;
-
     opacity: 1;
 }
 
@@ -564,14 +543,12 @@ body,
 ======================================== */
 
 .video-box {
-
     position: absolute;
 
     left: 73%;
-    top: 62%;
+    top: 56%;
 
     width: 33%;
-    max-width: 33%;
 
     aspect-ratio: 16 / 9;
 
@@ -580,14 +557,27 @@ body,
     z-index: 11;
 
     overflow: hidden;
+}
 
-    margin: 0;
-    padding: 0;
+.video-box2 {
+    position: absolute;
+
+    left: 73%;
+    top: 75%;
+
+    width: 33%;
+
+    aspect-ratio: 16 / 9;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 11;
+
+    overflow: hidden;
 }
 
 
 .video-box iframe {
-
     width: 100%;
     height: 100%;
 
@@ -598,7 +588,7 @@ body,
 
 
 /* ========================================
-   MOBILE
+   MOBILE / SMALL SCREENS
 ======================================== */
 
 @media (max-width: 900px) {
@@ -606,78 +596,49 @@ body,
     html,
     body {
         width: 100%;
-        min-width: 0;
         max-width: 100%;
-
-        overflow-x: hidden;
     }
 
-
     .screen {
-
         width: 100%;
-        max-width: 100%;
+        min-height: 0;
 
         justify-content: center;
         align-items: flex-start;
 
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
 
-        margin: 0;
+        overflow: visible;
     }
 
-
     .game-area {
-
         width: 100%;
         max-width: 100%;
 
         flex: 0 1 100%;
 
-        min-width: 0;
-
         margin: 0 auto;
     }
 
-
-    .main-image {
-
-        width: 100%;
-        max-width: 100%;
-    }
-
-
-    /*
-       Prevent hover enlargement from
-       producing unwanted visual overflow
-    */
-
-    .button:hover img {
-        transform: none;
-    }
 }
 
 
 /* ========================================
-   VERY SMALL PHONES
+   VERY SMALL PORTRAIT SCREENS
 ======================================== */
 
 @media (max-width: 480px) {
 
     .screen {
-        padding: 0;
-    }
-
-    .text-title {
-        font-size: clamp(18px, 5.5vw, 28px);
-        margin-bottom: 5px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
     .text-content {
-        font-size: clamp(7px, 1.75vw, 11px);
-        line-height: 1.45;
+        line-height: 1.55;
     }
+
 }
 
 
@@ -688,19 +649,15 @@ body,
 @media (max-width: 900px) and (orientation: landscape) {
 
     .screen {
-
-        padding: 0;
-
-        width: 100%;
-        max-width: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
-
 
     .game-area {
-
         width: 100%;
         max-width: 100%;
     }
+
 }
 
 
@@ -717,4 +674,5 @@ body,
     to {
         background-position: 500px 500px;
     }
+
 }

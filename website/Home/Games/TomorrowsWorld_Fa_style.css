@@ -31,8 +31,7 @@ body {
 
     animation: moveBackground 20s linear infinite;
 
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+    font-family: "Unixel", sans-serif;
 }
 
 
@@ -61,6 +60,7 @@ body,
 
 .screen {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
 
     display: flex;
@@ -68,10 +68,9 @@ body,
     justify-content: center;
     align-items: flex-start;
 
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
 
-    overflow: hidden;
+    overflow: visible;
 }
 
 
@@ -79,37 +78,34 @@ body,
    MAIN GAME AREA
 ======================================== */
 
+/*
+   DESKTOP:
+   حداکثر عرض = 900px
+
+   MOBILE:
+   عرض = 100% viewport
+
+   بنابراین دیگر یک Game Area
+   با عرض 900px روی موبایل ساخته نمی‌شود.
+*/
+
 .game-area {
+    position: relative;
 
-    /*
-       Desktop:
-       حداکثر عرض طراحی اصلی = 900px
-
-       Mobile:
-       به اندازه عرض واقعی صفحه کوچک می‌شود.
-    */
-
-    width: min(900px, calc(100vw - 20px));
-
-    max-width: 900px;
+    width: min(900px, 100vw);
+    max-width: 100vw;
 
     height: auto;
 
-    position: relative;
-
     flex: 0 1 auto;
-
-    /*
-       اجازه نمی‌دهیم game-area از صفحه بیرون بزند.
-    */
-
-    min-width: 0;
+    flex-shrink: 1;
 
     overflow: visible;
 
     line-height: 0;
 
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -118,7 +114,6 @@ body,
 ======================================== */
 
 .main-image {
-
     display: block;
 
     width: 100%;
@@ -132,7 +127,6 @@ body,
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 }
 
@@ -142,7 +136,6 @@ body,
 ======================================== */
 
 .button {
-
     position: absolute;
 
     display: block;
@@ -165,7 +158,6 @@ body,
 ======================================== */
 
 .button img {
-
     display: block;
 
     width: 100%;
@@ -282,14 +274,14 @@ body,
 
 .button-14 {
     left: 73%;
-    top: 62%;
+    top: 56%;
     width: 37%;
 }
 
 .button-15 {
-    left: 65%;
-    top: 75%;
-    width: 20%;
+    left: 63.5%;
+    top: 89%;
+    width: 10%;
 }
 
 .button-16 {
@@ -299,15 +291,15 @@ body,
 }
 
 .button-17 {
-    left: 65%;
-    top: 81%;
+    left: 80%;
+    top: 89%;
     width: 20%;
 }
 
 .button-18 {
-    left: 84%;
-    top: 81%;
-    width: 10%;
+    left: 73%;
+    top: 74%;
+    width: 36%;
 }
 
 .button-19 {
@@ -318,7 +310,7 @@ body,
 
 .button-20 {
     left: 73%;
-    top: 89%;
+    top: 94%;
     width: 5%;
 }
 
@@ -328,14 +320,12 @@ body,
 ======================================== */
 
 .moving-image {
-
     position: absolute;
 
     display: block;
 
     height: auto;
-
-    max-width: none;
+    max-width: 100%;
 
     transform: translate(-50%, -50%);
 
@@ -345,7 +335,6 @@ body,
     padding: 0;
 
     user-select: none;
-
     pointer-events: none;
 
     line-height: 0;
@@ -414,21 +403,18 @@ body,
 ======================================== */
 
 .text-block {
-
     position: absolute;
 
     transform: translate(-50%, -50%);
 
     width: 55%;
-
-    max-width: 100%;
+    max-width: 55%;
 
     z-index: 25;
 
     font-family: "Unixel", sans-serif;
 
-    direction: rtl;
-
+    direction: ltr;
     text-align: center;
 
     user-select: none;
@@ -445,16 +431,14 @@ body,
 ======================================== */
 
 .text-title {
-
     font-family: "Unixel", sans-serif;
 
     /*
-       Responsive font:
-       Desktop = 50px
-       Mobile = smaller
+       روی Desktop همان 50px باقی می‌ماند.
+       روی موبایل به صورت متناسب کوچک می‌شود.
     */
 
-    font-size: clamp(20px, 5.55vw, 50px);
+    font-size: clamp(22px, 5.55vw, 50px);
 
     font-weight: bold;
 
@@ -463,7 +447,6 @@ body,
     line-height: 1;
 
     margin: 0 0 12px 0;
-
     padding: 0;
 }
 
@@ -473,10 +456,14 @@ body,
 ======================================== */
 
 .text-content {
-
     font-family: "Unixel", sans-serif;
 
-    font-size: clamp(9px, 1.78vw, 16px);
+    /*
+       Desktop = 16px
+       Mobile = حدود 12px
+    */
+
+    font-size: clamp(11px, 1.78vw, 16px);
 
     font-weight: normal;
 
@@ -485,10 +472,7 @@ body,
     line-height: 1.7;
 
     margin: 0;
-
     padding: 0;
-
-    white-space: normal;
 }
 
 
@@ -497,7 +481,6 @@ body,
 ======================================== */
 
 .text-block-1 {
-
     left: 30%;
     top: 70%;
 }
@@ -508,31 +491,33 @@ body,
 ======================================== */
 
 .image-slider {
-
     position: absolute;
 
     left: 62%;
     top: 16%;
 
     width: 70%;
-    max-width: 100%;
-
-    height: auto;
+    height: 0;
 
     transform: translate(-50%, -50%);
 
     z-index: 1;
 
-    overflow: hidden;
+    overflow: visible;
+
+    margin: 0;
+    padding: 0;
 }
 
 
-/* ========================================
-   SLIDER IMAGES
-======================================== */
+/*
+   چون تصاویر absolute هستند،
+   ارتفاع خود Slider از تصاویر گرفته نمی‌شود.
+   بنابراین ارتفاع را با aspect-ratio تصاویر
+   کنترل نمی‌کنیم و خود تصاویر آزاد هستند.
+*/
 
 .image-slider img {
-
     position: absolute;
 
     left: 0;
@@ -545,12 +530,14 @@ body,
 
     height: auto;
 
+    margin: 0;
+    padding: 0;
+
     opacity: 0;
 
     transition: opacity 1s ease-in-out;
 
     user-select: none;
-
     pointer-events: none;
 }
 
@@ -560,9 +547,7 @@ body,
 ======================================== */
 
 .image-slider img:first-child {
-
-    position: relative;
-
+    position: absolute;
     opacity: 1;
 }
 
@@ -572,14 +557,13 @@ body,
 ======================================== */
 
 .video-box {
-
     position: absolute;
 
     left: 73%;
-    top: 62%;
+    top: 56%;
 
     width: 33%;
-    max-width: 100%;
+    max-width: 33%;
 
     aspect-ratio: 16 / 9;
 
@@ -588,17 +572,42 @@ body,
     z-index: 11;
 
     overflow: hidden;
+
+    margin: 0;
+    padding: 0;
 }
 
+.video-box2 {
+    position: absolute;
+
+    left: 73%;
+    top: 75%;
+
+    width: 33%;
+    max-width: 33%;
+
+    aspect-ratio: 16 / 9;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 11;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+}
 
 .video-box iframe {
-
     width: 100%;
     height: 100%;
 
     display: block;
 
     border: 0;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -606,49 +615,61 @@ body,
    MOBILE
 ======================================== */
 
+/*
+   دیگر width:900px نداریم.
+   Game Area خودش با viewport کوچک می‌شود.
+*/
+
 @media (max-width: 900px) {
 
-    .screen {
-
+    html,
+    body {
         width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow-x: hidden;
+    }
+
+    .screen {
+        width: 100%;
+        max-width: 100%;
 
         justify-content: center;
         align-items: flex-start;
 
-        padding-top: 10px;
-        padding-bottom: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
 
-        overflow: hidden;
+        overflow: visible;
     }
-
 
     .game-area {
+        width: 100vw;
+        max-width: 100vw;
 
-        /*
-           مهم‌ترین Fix:
-           دیگر 900px ثابت نیست.
-        */
-
-        width: calc(100vw - 20px);
-
-        max-width: 900px;
-
-        min-width: 0;
-
-        margin-left: auto;
-        margin-right: auto;
+        flex: 0 1 100vw;
     }
 
-
-    .text-block {
-
-        width: 55%;
+    .main-image {
+        width: 100%;
+        max-width: 100%;
     }
 
+    /*
+       کمی کاهش فاصلهٔ عنوان در موبایل
+    */
 
-    .video-box {
+    .text-title {
+        margin-bottom: 6px;
+    }
 
-        width: 33%;
+    /*
+       جلوگیری از بزرگ شدن Hover در موبایل
+    */
+
+    .button:hover img {
+        transform: none;
     }
 }
 
@@ -657,35 +678,17 @@ body,
    VERY SMALL PHONES
 ======================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
     .screen {
-
-        padding-top: 5px;
-        padding-bottom: 10px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
-
-
-    .game-area {
-
-        width: calc(100vw - 10px);
-    }
-
-
-    .text-title {
-
-        font-size: clamp(17px, 5.5vw, 30px);
-
-        margin-bottom: 6px;
-    }
-
 
     .text-content {
-
-        font-size: clamp(8px, 1.75vw, 13px);
-
         line-height: 1.5;
     }
+
 }
 
 
@@ -696,31 +699,15 @@ body,
 @media (max-height: 600px) and (orientation: landscape) {
 
     .screen {
-
-        padding-top: 5px;
-        padding-bottom: 10px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
-
 
     .game-area {
-
-        /*
-           در Landscape نیز عرض صفحه معیار Scale است.
-        */
-
-        width: min(900px, calc(100vw - 10px));
+        width: min(900px, 100vw);
+        max-width: 100vw;
     }
-}
 
-
-/* ========================================
-   PREVENT MEDIA OVERFLOW
-======================================== */
-
-img,
-iframe {
-
-    max-width: 100%;
 }
 
 
@@ -737,4 +724,6 @@ iframe {
     to {
         background-position: 500px 500px;
     }
+
 }
+```

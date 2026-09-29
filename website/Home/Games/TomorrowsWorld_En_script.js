@@ -16,9 +16,17 @@ function setGameAreaSize() {
         return;
     }
 
-    if (!mainImage.naturalWidth || !mainImage.naturalHeight) {
+    if (
+        !mainImage.naturalWidth ||
+        !mainImage.naturalHeight
+    ) {
         return;
     }
+
+    /*
+       Always use the CURRENT responsive width
+       of the game area.
+    */
 
     var width = gameArea.getBoundingClientRect().width;
 
@@ -36,7 +44,7 @@ function setGameAreaSize() {
 
 
 /* ========================================
-   IMAGE LOADED
+   INITIAL IMAGE LOAD
 ======================================== */
 
 if (mainImage) {
@@ -53,6 +61,7 @@ if (mainImage) {
         );
 
     }
+
 }
 
 
@@ -74,6 +83,11 @@ window.addEventListener(
     "orientationchange",
     function () {
 
+        /*
+           Wait until browser finishes
+           changing viewport dimensions.
+        */
+
         setTimeout(
             setGameAreaSize,
             100
@@ -81,6 +95,20 @@ window.addEventListener(
 
     }
 );
+
+
+/* ========================================
+   VISUAL VIEWPORT RESIZE
+======================================== */
+
+if (window.visualViewport) {
+
+    window.visualViewport.addEventListener(
+        "resize",
+        setGameAreaSize
+    );
+
+}
 
 
 /* ========================================
@@ -98,8 +126,12 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseenter",
         function () {
 
-            this.src =
+            var hover =
                 this.getAttribute("data-hover");
+
+            if (hover) {
+                this.src = hover;
+            }
 
         }
     );
@@ -109,8 +141,12 @@ for (var i = 0; i < hoverImages.length; i++) {
         "mouseleave",
         function () {
 
-            this.src =
+            var normal =
                 this.getAttribute("data-normal");
+
+            if (normal) {
+                this.src = normal;
+            }
 
         }
     );
@@ -142,6 +178,15 @@ for (var j = 0; j < movingImages.length; j++) {
 
 function startMovingImage(image) {
 
+    if (!image) {
+        return;
+    }
+
+
+    /* =====================================
+       START POSITION
+    ====================================== */
+
     var startX = parseFloat(
         image.getAttribute("data-start-x")
     );
@@ -149,6 +194,11 @@ function startMovingImage(image) {
     var startY = parseFloat(
         image.getAttribute("data-start-y")
     );
+
+
+    /* =====================================
+       END POSITION
+    ====================================== */
 
     var endX = parseFloat(
         image.getAttribute("data-end-x")
@@ -159,26 +209,47 @@ function startMovingImage(image) {
     );
 
 
+    /* =====================================
+       MOVEMENT MODE
+    ====================================== */
+
     var mode =
         image.getAttribute("data-mode");
-
 
     if (!mode) {
         mode = "pingpong";
     }
 
 
+    /* =====================================
+       MOVEMENT SPEED
+    ====================================== */
+
     var speed = parseFloat(
         image.getAttribute("data-speed")
     );
-
 
     if (!speed || speed <= 0) {
         speed = 5;
     }
 
 
+    /* =====================================
+       MOVEMENT PROGRESS
+       
+       0 = START
+       1 = END
+    ====================================== */
+
     var progress = 0;
+
+
+    /* =====================================
+       MOVEMENT DIRECTION
+
+       1  = FORWARD
+       -1 = BACKWARD
+    ====================================== */
 
     var direction = 1;
 
@@ -201,9 +272,12 @@ function startMovingImage(image) {
             progress;
 
 
+        /* =================================
+           APPLY POSITION
+        ================================= */
+
         image.style.left =
             x + "%";
-
 
         image.style.top =
             y + "%";
@@ -279,12 +353,14 @@ function startMovingImage(image) {
 
                 direction = 1;
             }
+
         }
 
 
         requestAnimationFrame(
             updatePosition
         );
+
     }
 
 
@@ -293,6 +369,7 @@ function startMovingImage(image) {
     ====================================== */
 
     updatePosition();
+
 }
 
 
@@ -309,10 +386,6 @@ var sliderImages =
 var currentImage = 0;
 
 
-/* ========================================
-   SLIDER
-======================================== */
-
 function showNextImage() {
 
     if (!sliderImages.length) {
@@ -320,9 +393,17 @@ function showNextImage() {
     }
 
 
+    /* =====================================
+       HIDE CURRENT IMAGE
+    ====================================== */
+
     sliderImages[currentImage].style.opacity =
         "0";
 
+
+    /* =====================================
+       NEXT IMAGE
+    ====================================== */
 
     currentImage++;
 
@@ -333,16 +414,22 @@ function showNextImage() {
     ) {
 
         currentImage = 0;
+
     }
 
 
+    /* =====================================
+       SHOW NEXT IMAGE
+    ====================================== */
+
     sliderImages[currentImage].style.opacity =
         "1";
+
 }
 
 
 /* ========================================
-   NEXT IMAGE EVERY 4 SECONDS
+   SLIDER TIMER
 ======================================== */
 
 if (sliderImages.length > 1) {
@@ -351,4 +438,5 @@ if (sliderImages.length > 1) {
         showNextImage,
         4000
     );
+
 }
