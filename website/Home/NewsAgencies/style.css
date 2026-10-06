@@ -422,77 +422,101 @@ body.loaded .screen {
 
 .button-13 {
     left: 15%;
-    top: 55%;
-    width: 20%;
+    top: 65%;
+    width: 15%;
 }
 
 .button-14 {
     left: 35%;
-    top: 55%;
-    width: 20%;
+    top: 65%;
+    width: 15%;
 }
 
 .button-15 {
     left: 55%;
-    top: 55%;
-    width: 20%;
+    top: 65%;
+    width: 15%;
 }
 
 
 .button-16 {
     left: 75%;
-    top: 55%;
-    width: 20%;
+    top: 65%;
+    width: 15%;
 }
 
 .button-17 {
     left: 15%;
-    top: 71.5%;
-    width: 20%;
+    top: 77.5%;
+    width: 15%;
 }
 
 .button-18 {
     left: 35%;
-    top: 71.5%;
-    width: 20%;
+    top: 77.5%;
+    width: 15%;
 }
 
 .button-19 {
     left: 55%;
-    top: 71.5%;
-    width: 20%;
+    top: 77.5%;
+    width: 15%;
 }
 
 .button-20 {
     left: 75%;
-    top: 71.5%;
-    width: 20%;
+    top: 77.5%;
+    width: 15%;
 }
 
 .button-21 {
     left: 15%;
-    top: 88%;
-    width: 20%;
+    top: 90%;
+    width: 15%;
 }
 
 .button-22 {
     left: 35%;
-    top: 88%;
-    width: 20%;
+    top: 90%;
+    width: 15%;
 }
 
 .button-23 {
     left: 55%;
-    top: 88%;
-    width: 20%;
+    top: 90%;
+    width: 15%;
 }
 
 .button-24 {
     left: 75%;
-    top: 88%;
-    width: 20%;
+    top: 90%;
+    width: 15%;
 }
 
+.button-40 {
+    left: 15%;
+    top: 52.5%;
+    width: 15%;
+}
+
+.button-41 {
+    left: 35%;
+    top:52.5%;
+    width: 15%;
+}
+
+.button-42 {
+    left: 55%;
+    top: 52.5%;
+    width: 15%;
+}
+
+.button-43 {
+    left: 75%;
+    top: 52.5%;
+    width: 15%;
+
+}
 .button-25 {
       left: 90%;
     top: 89%;
