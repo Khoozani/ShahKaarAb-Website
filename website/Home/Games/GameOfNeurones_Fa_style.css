@@ -309,7 +309,7 @@ body,
 }
 
 .button-20 {
-    left: 79%;
+    left: 90%;
     top: 94%;
     width: 5%;
 }
@@ -320,6 +320,11 @@ body,
     width: 10%;
 }
 
+.button-22 {
+    left: 78%;
+    top: 94%;
+    width: 15%;
+}
 
 /* ========================================
    MOVING IMAGES
