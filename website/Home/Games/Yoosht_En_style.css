@@ -298,8 +298,13 @@ body,
 
 .button-20 {
     left: 73%;
-    top: 89%;
+    top: 94%;
     width: 5%;
+}
+.button-21 {
+    left: 65%;
+    top: 87%;
+    width: 20%;
 }
 
 
