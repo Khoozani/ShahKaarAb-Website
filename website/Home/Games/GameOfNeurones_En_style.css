@@ -309,9 +309,15 @@ body,
 }
 
 .button-20 {
-    left: 73%;
+    left: 79%;
     top: 94%;
     width: 5%;
+}
+
+.button-21 {
+    left: 65%;
+    top: 94%;
+    width: 10%;
 }
 
 
