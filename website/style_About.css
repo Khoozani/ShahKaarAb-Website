@@ -339,7 +339,7 @@ body.loaded .screen {
 
 
 /* ----------------------------------------
-   BUTTON 3 — Back ARROW
+   BUTTON 3 — PERSIAN ARROW
 ---------------------------------------- */
 
 .button-3 {
@@ -351,11 +351,11 @@ body.loaded .screen {
 
 
 /* ----------------------------------------
-   BUTTON 4 — Back FRAME
+   BUTTON 4 — PERSIAN FRAME
 ---------------------------------------- */
 
 .button-4 {
-    left: 80%;
+    left: 79%;
     top: 23%;
 
     width: 20%;
@@ -378,7 +378,7 @@ body.loaded .screen {
 ---------------------------------------- */
 
 .button-6 {
-    left: 90%;
+    left: 85%;
     top: 4%;
     width: 7%;
 }
@@ -387,7 +387,7 @@ body.loaded .screen {
 ---------------------------------------- */
 
 .button-7 {
-    left: 80%;
+    left: 76%;
     top: 4%;
     width: 14%;
 }
@@ -396,7 +396,7 @@ body.loaded .screen {
 ---------------------------------------- */
 
 .button-8 {
-    left: 70%;
+    left: 65%;
     top: 4%;
     width: 14%;
 }
@@ -432,18 +432,28 @@ body.loaded .screen {
 ---------------------------------------- */
 
 .button-12 {
-    left: 104.5%;
-    top: 31.5%;
-    width: 5%;
+    left: 25%;
+    top: 31%;
+    width: 4%;
 }
 /* ----------------------------------------
    BUTTON 13 — AboutName-Box
 ---------------------------------------- */
 
 .button-13 {
-    left: 104.5%;
-    top: 40%;
-    width: 18%;
+    left: 16%;
+    top: 32%;
+    width: 13%;
+}
+
+/* ----------------------------------------
+   BUTTON 14 — DIREC
+---------------------------------------- */
+
+.button-14 {
+    left: 94%;
+    top: 5%;
+    width: 13%;
 }
 /* ========================================
    MOVING IMAGES
@@ -635,10 +645,9 @@ body.loaded .screen {
 }
 
 .text-block-3 {
-    left: 65%;
-    top: 52%;
-	font-size: 80%;
-	color: #165c80;
+    left: 80%;
+    top: 10%;
+	font-size: 5%;
 }
 
 
