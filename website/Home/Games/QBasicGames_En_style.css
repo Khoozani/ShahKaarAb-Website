@@ -277,10 +277,18 @@ body,
     width: 47%;
 }
 
+/* === Type 1
 .button-14 {
     left: 73%;
     top: 62%;
     width: 37%;
+}
+=== */
+
+.button-14 {
+    left: 73%;
+    top: 62%;
+    width: 24%;
 }
 
 .button-15 {
